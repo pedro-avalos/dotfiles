@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "bashrc": "bash",
+        "bash_profile": "bash",
+        "*.bashrc": "bash"
+    }
+}
