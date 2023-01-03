@@ -2,6 +2,7 @@
     "files.associations": {
         "bashrc": "bash",
         "bash_profile": "bash",
-        "*.bashrc": "bash"
+        "*.bashrc": "bash",
+        "bash_logout": "bash"
     }
 }
