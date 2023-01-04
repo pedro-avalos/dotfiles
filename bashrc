@@ -9,6 +9,7 @@ fi
 export HISTSIZE=10000
 export HISTFILESIZE=${HISTSIZE}
 export HISTCONTROL=ignoreboth
+export GPG_TTY=$(tty)
 
 # If not running interactively, don't do anything
 if [[ $- != *i* ]] ; then
