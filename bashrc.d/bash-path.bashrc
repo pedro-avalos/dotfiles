@@ -7,7 +7,7 @@ if [[ -d ${HOME}/bin ]] ; then
 fi
 
 if [[ -d ${HOME}/.bin ]] ; then
-  PATH="${PATH}:${HOME}/bin"
+  PATH="${PATH}:${HOME}/.bin"
 fi
 
 if [[ -d ${HOME}/.local/bin ]] ; then
