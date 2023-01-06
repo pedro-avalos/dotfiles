@@ -1,8 +1,8 @@
 {
-    "files.associations": {
-        "bashrc": "bash",
-        "bash_profile": "bash",
-        "*.bashrc": "bash",
-        "bash_logout": "bash"
-    }
+  "files.associations": {
+    "bashrc": "bash",
+    "bash_profile": "bash",
+    "*.bashrc": "bash",
+    "bash_logout": "bash"
+  }
 }
