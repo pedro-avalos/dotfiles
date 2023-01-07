@@ -14,6 +14,11 @@ if [[ -d ${HOME}/.local/bin ]] ; then
   PATH="${PATH}:${HOME}/.local/bin"
 fi
 
+# Neovim executables, e.g. updating repository
+if [[ -d ${HOME}/.config/nvim/bin ]] ; then
+  PATH="${PATH}:${HOME}/.config/nvim/bin"
+fi
+
 # Doom Emacs
 if [[ -d ${HOME}/.emacs.d/bin ]] ; then
   PATH="${PATH}:${HOME}/.emacs.d/bin"
