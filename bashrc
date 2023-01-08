@@ -17,8 +17,7 @@ export HISTFILESIZE=10000             # History file length
 export HISTCONTROL=ignoreboth         # Don't put duplicate lines in history
 export GPG_TTY                        # Makes GPG passphrase prompts work
 
-# Change some shell settings
-set   -o vi           # Use vi-like keybindings
+# Change some shell options
 shopt -s histappend   # Append to history file
 shopt -s autocd       # When given just a path/directory, cd into it
 shopt -s checkwinsize # Check window size after each command
