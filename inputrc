@@ -1,3 +1,5 @@
+# File: .inputrc
+
 set editing-mode vi
 
 $if mode=vi
@@ -7,3 +9,5 @@ $if mode=vi
   set keymap vi-insert
   Control-l: clear-screen
 $endif
+
+# vim: ft=readline
