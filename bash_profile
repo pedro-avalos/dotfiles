@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # File: .bash_profile
 
-if [[ -e ~/.bashrc ]] ; then
-  source ~/.bashrc
-fi
+# shellcheck source=/dev/null
+[[ -e ~/.bashrc ]] && source ~/.bashrc
 
 # vim: ft=bash
