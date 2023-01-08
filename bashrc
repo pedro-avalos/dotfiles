@@ -5,7 +5,7 @@
 [[ $- != *i* ]] && return
 
 # Ensure essential directories and files exist
-[[ ! -d ~/.cache/bash ]] && mkdir -p ~/.cache/bash
+[[ ! -d ~/.cache/bash ]]         && mkdir -p ~/.cache/bash
 [[ ! -f ~/.cache/bash/history ]] && touch ~/.cache/bash/history
 
 GPG_TTY=$(tty)
