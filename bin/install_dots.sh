@@ -8,17 +8,17 @@ git -C ~/.dotfiles pull
 [ ! -d ~/.config ] && mkdir ~/.config
 
 # Install dotfiles executables and scripts
-ln -sf ~/.dotfiles/bin ~/.bin
+ln -Tsf ~/.dotfiles/bin ~/.bin
 
 # Install keybindings
-ln -sf ~/.dotfiles/inputrc ~/.inputrc
+ln -Tsf ~/.dotfiles/inputrc ~/.inputrc
 
 # Install bash dotfiles
-ln -sf ~/.dotfiles/bashrc       ~/.bashrc
-ln -sf ~/.dotfiles/bashrc.d     ~/.bashrc.d
-ln -sf ~/.dotfiles/bash_profile ~/.bash_profile
-ln -sf ~/.dotfiles/bash_logout  ~/.bash_logout
+ln -Tsf ~/.dotfiles/bashrc       ~/.bashrc
+ln -Tsf ~/.dotfiles/bashrc.d     ~/.bashrc.d
+ln -Tsf ~/.dotfiles/bash_profile ~/.bash_profile
+ln -Tsf ~/.dotfiles/bash_logout  ~/.bash_logout
 
 # Install tmux dotfiles
-ln -sf ~/.dotfiles/config/tmux  ~/.config/tmux
-ln -sf ~/.dotfiles/config/tmuxp ~/.config/tmuxp
+ln -Tsf ~/.dotfiles/config/tmux  ~/.config/tmux
+ln -Tsf ~/.dotfiles/config/tmuxp ~/.config/tmuxp
