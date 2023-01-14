@@ -1,5 +1,6 @@
 [wallpaper]
 path = "~/.config/qtile/wallpaper/"
+mode = "fill"
 
 [fonts]
 default = "Source Sans Pro"

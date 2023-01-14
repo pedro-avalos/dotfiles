@@ -1,7 +1,6 @@
 """Provides theming settings."""
 
 from typing import Optional
-from pathlib import Path
 import toml
 
 from . import paths
@@ -27,10 +26,11 @@ class WallpaperTheme:
     """Wallpaper-related theming."""
 
     def __init__(self, theme: Optional[dict] = None) -> None:
-        self.path: Optional[Path] = None
+        self.path: Optional[str] = None
+        self.mode: Optional[str] = None
 
         if theme and "path" in theme:
-            for s in ["path"]:
+            for s in ["path", "mode"]:
                 setattr(self, s, theme["wallpaper"][s])
 
 

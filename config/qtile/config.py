@@ -10,6 +10,7 @@ from src.hooks import (
 )
 from src.groups import qtile_groups
 from src.bindings import keyboard_bindings, mouse_bindings
+from src.screens import make_screens
 
 # Create theme
 t = theme.load_theme("oxocarbon")
@@ -21,6 +22,11 @@ widgets_theme = theme.WidgetsTheme(theme=t)
 groups = qtile_groups
 keys = keyboard_bindings
 mouse = mouse_bindings
+screens = make_screens(
+    wallpaper_theme=wallpaper_theme,
+    fonts_theme=fonts_theme,
+    widgets_theme=widgets_theme,
+)
 
 # Other settings
 dgroups_key_binder = None

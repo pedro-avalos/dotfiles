@@ -30,13 +30,26 @@ from . import apps, mouse, theme
 
 
 class WidgetsMaker:
+    """Creates the lists of widgets to be used by the bar(s).
+
+    Args:
+        fonts_theme (theme.FontsTheme): Theming for the fonts.
+        widgets_theme (theme.WidgetsTheme): Theming for the widgets.
+
+    Attributes:
+        main_widgets (list): Widgets for main screen.
+        other_widgets (list): Widgets for all other screens.
+    """
+
     def __init__(
-        self, fonts_theme: theme.FontsTheme, widgets_theme: theme.WidgetsTheme
+        self,
+        fonts_theme: theme.FontsTheme,
+        widgets_theme: theme.WidgetsTheme,
     ) -> None:
 
         self.fonts_theme: theme.FontsTheme = fonts_theme
         self.widgets_theme: theme.WidgetsTheme = widgets_theme
-        self.create_settings()
+        self._create_settings()
         self.main_widgets = [
             Spacer(**self._spacer),
             TextBox(**self._launcher),
@@ -69,7 +82,9 @@ class WidgetsMaker:
             CurrentScreen(**self._current_screen),
         ]
 
-    def create_settings(self) -> None:
+    def _create_settings(self) -> None:
+        """Creates the settings to be used by the widgets."""
+
         self._spacer_stretch = {**self.widgets_theme.default}
         self._spacer = {**self.widgets_theme.default, "length": 6}
         self._launcher = {
