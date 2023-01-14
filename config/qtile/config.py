@@ -1,6 +1,13 @@
 """Qtile configuration entrypoint."""
 
 from src.util import theme
+
+from src.hooks import (
+    autostart,  # pyright: ignore
+    float_firefox,  # pyright: ignore
+    float_pycharm,  # pyright: ignore
+    float_steam,  # pyright: ignore
+)
 from src import bindings
 
 # Create theme
