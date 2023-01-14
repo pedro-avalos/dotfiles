@@ -7,71 +7,64 @@ import toml
 from . import paths
 
 
-__THEME_TOML: Optional[dict] = None
+def load_theme(theme_name: str) -> dict:
+    """Creates a dictionary out of the theme's toml file.
 
+    theme_name: The name of the theme, without the `.toml` file extension.
+    """
 
-def load_theme(theme: str) -> None:
-    """Loads theme."""
+    theme: dict = dict()
+    if theme_name:
+        theme_path = paths.theme_dir / f"{theme_name}.toml"
+        assert theme_path.exists()
+        with open(theme_path, "r") as f:
+            theme = toml.load(f)
 
-    global __THEME_TOML
-
-    theme_path: Path = paths.theme_dir / f"{theme}.toml"
-    assert theme_path.exists()
-
-    with open(theme_path, "r") as f:
-        __THEME_TOML = toml.load(f)
+    return theme
 
 
 class WallpaperTheme:
     """Wallpaper-related theming."""
 
-    def __init__(self) -> None:
-        global __THEME_TOML
-
+    def __init__(self, theme: Optional[dict] = None) -> None:
         self.path: Optional[Path] = None
 
-        if __THEME_TOML:
+        if theme and "path" in theme:
             for s in ["path"]:
-                setattr(self, s, __THEME_TOML["wallpaper"][s])
+                setattr(self, s, theme["wallpaper"][s])
 
 
 class FontsTheme:
     """Font-related theming."""
 
-    def __init__(self) -> None:
-        global __THEME_TOML
-
+    def __init__(self, theme: Optional[dict] = None) -> None:
         self.default: str = "sans"
         self.symbols: str = "sans"
 
-        if __THEME_TOML and "fonts" in __THEME_TOML:
+        if theme and "fonts" in theme:
             for s in ["default", "symbols"]:
-                if s in __THEME_TOML["layouts"]:
-                    setattr(self, s, __THEME_TOML["fonts"][s])
+                if s in theme["layouts"]:
+                    setattr(self, s, theme["fonts"][s])
 
 
 class LayoutsTheme:
     """Layouts-related theming."""
 
-    def __init__(self) -> None:
-        global __THEME_TOML
-
+    def __init__(self, theme: Optional[dict] = None) -> None:
         self.default: dict = dict()
         self.columns: dict = dict()
         self.floating: dict = dict()
 
-        if __THEME_TOML and "layouts" in __THEME_TOML:
+        if theme and "layouts" in theme:
             for s in ["default", "columns", "floating"]:
-                if s in __THEME_TOML["layouts"]:
-                    setattr(self, s, __THEME_TOML["layouts"][s])
+                if s in theme["layouts"]:
+                    setattr(self, s, theme["layouts"][s])
 
 
 class WidgetsTheme:
     """Widgets-related theming."""
 
-    def __init__(self) -> None:
-        global __THEME_TOML
-
+    def __init__(self, theme: Optional[dict] = None) -> None:
         self.show_battery: bool = False
 
         self.default: dict = dict()
@@ -86,7 +79,7 @@ class WidgetsTheme:
         self.groupbox: dict = dict()
         self.current_screen: dict = dict()
 
-        if __THEME_TOML and "layouts" in __THEME_TOML:
+        if theme and "layouts" in theme:
             for s in [
                 "show_battery",
                 "default",
@@ -101,5 +94,5 @@ class WidgetsTheme:
                 "groupbox",
                 "current_screen",
             ]:
-                if s in __THEME_TOML["layouts"]:
-                    setattr(self, s, __THEME_TOML["layouts"][s])
+                if s in theme["layouts"]:
+                    setattr(self, s, theme["layouts"][s])

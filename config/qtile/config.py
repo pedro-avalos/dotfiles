@@ -12,11 +12,11 @@ from src.groups import qtile_groups
 from src.bindings import keyboard_bindings, mouse_bindings
 
 # Create theme
-theme.load_theme("oxocarbon")
-wallpaper_theme = theme.WallpaperTheme()
-fonts_theme = theme.FontsTheme()
-layouts_theme = theme.LayoutsTheme()
-widgets_theme = theme.WidgetsTheme()
+t = theme.load_theme("oxocarbon")
+wallpaper_theme = theme.WallpaperTheme(theme=t)
+fonts_theme = theme.FontsTheme(theme=t)
+layouts_theme = theme.LayoutsTheme(theme=t)
+widgets_theme = theme.WidgetsTheme(theme=t)
 
 groups = qtile_groups
 keys = keyboard_bindings
