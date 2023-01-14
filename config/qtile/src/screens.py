@@ -27,7 +27,7 @@ def make_screens(
 
     screens: list[Screen] = [
         Screen(
-            wallpaper=wallpaper_theme.path,
+            wallpaper=wallpaper_theme.wallpaper,
             wallpaper_mode=wallpaper_theme.mode,
             top=Bar(
                 widgets_maker.main_widgets,
@@ -46,7 +46,7 @@ def make_screens(
     # for _ in range(1, len(monitors)):
     #     screens.append(
     #         Screen(
-    #             wallpaper=wallpaper_theme.path,
+    #             wallpaper=wallpaper_theme.wallpaper,
     #             wallpaper_mode=wallpaper_theme.mode,
     #             top=Bar(
     #                 widgets_maker.other_widgets,

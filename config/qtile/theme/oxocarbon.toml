@@ -1,10 +1,10 @@
 [wallpaper]
-path = "~/.config/qtile/wallpaper/"
+wallpaper = "~/.config/qtile/wallpaper/oxocarbon.png"
 mode = "fill"
 
 [fonts]
-default = "Source Sans Pro"
-symbols = "Sauce Code Pro Nerd Font"
+default = "Source Code Pro"
+symbols = "SauceCodePro Nerd Font Mono"
 
 [layouts]
 
@@ -23,7 +23,7 @@ border_width = 0
 
 [widgets]
 
-show_battery = true
+show_battery = false
 
 [widgets.default]
 fontsize   = 16
@@ -60,13 +60,13 @@ scale             = 0.6
 pading                      = 8
 foreground                  = "#82CFFF"
 borderwidth                 = 0
-active                      = "#33B1FF"
+active                      = "#DDE1E6"
 inactive                    = "#525252"
 highlight_method            = "text"
-highlight_color             = "#82CFFF"
-this_current_screen_border  = "#82CFFF"
+highlight_color             = "#BE95FF"
+this_current_screen_border  = "#33B1FF"
 other_current_screen_border = "#82CFFF"
-this_screen_border          = "#82CFFF"
+this_screen_border          = "#33B1FF"
 other_screen_border         = "#82CFFF"
 urgent_alert_method         = "text"
 urgent_text                 = "#EE5396"

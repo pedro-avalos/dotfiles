@@ -26,11 +26,11 @@ class WallpaperTheme:
     """Wallpaper-related theming."""
 
     def __init__(self, theme: Optional[dict] = None) -> None:
-        self.path: Optional[str] = None
+        self.wallpaper: Optional[str] = None
         self.mode: Optional[str] = None
 
         if theme and "path" in theme:
-            for s in ["path", "mode"]:
+            for s in ["wallpaper", "mode"]:
                 setattr(self, s, theme["wallpaper"][s])
 
 
@@ -79,7 +79,7 @@ class WidgetsTheme:
         self.groupbox: dict = dict()
         self.current_screen: dict = dict()
 
-        if theme and "layouts" in theme:
+        if theme and "widgets" in theme:
             for s in [
                 "show_battery",
                 "default",
@@ -94,5 +94,5 @@ class WidgetsTheme:
                 "groupbox",
                 "current_screen",
             ]:
-                if s in theme["layouts"]:
-                    setattr(self, s, theme["layouts"][s])
+                if s in theme["widgets"]:
+                    setattr(self, s, theme["widgets"][s])
