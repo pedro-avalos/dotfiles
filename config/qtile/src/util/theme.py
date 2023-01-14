@@ -26,6 +26,8 @@ class WallpaperTheme:
     """Wallpaper-related theming."""
 
     def __init__(self) -> None:
+        global __THEME_TOML
+
         self.path: Optional[Path] = None
 
         if __THEME_TOML:
@@ -37,6 +39,8 @@ class FontsTheme:
     """Font-related theming."""
 
     def __init__(self) -> None:
+        global __THEME_TOML
+
         self.default: str = "sans"
         self.symbols: str = "sans"
 
@@ -50,6 +54,8 @@ class LayoutsTheme:
     """Layouts-related theming."""
 
     def __init__(self) -> None:
+        global __THEME_TOML
+
         self.default: dict = dict()
         self.columns: dict = dict()
         self.floating: dict = dict()
@@ -64,6 +70,8 @@ class WidgetsTheme:
     """Widgets-related theming."""
 
     def __init__(self) -> None:
+        global __THEME_TOML
+
         self.show_battery: bool = False
 
         self.default: dict = dict()
