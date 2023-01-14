@@ -2,13 +2,13 @@
 
 from libqtile import qtile
 
-BROWSER: str = "firefox"
-CALENDAR: str = "xdg-open https://calendar.google.com/"
-EDITOR: str = "kitty nvim"
-LAUNCHER: str = "rofi -show drun"
-LOCKER: str = "xscreensaver-command -l"
-TERMINAL: str = "kitty"
-VOLUME_CONTROL: str = "pamixer"
+BROWSER = "firefox"
+CALENDAR = "xdg-open https://calendar.google.com/"
+EDITOR = "kitty nvim"
+LAUNCHER = "rofi -show drun" if qtile.core.name == "x11" else "wofi --show drun"
+LOCKER = "xscreensaver-command -l"
+TERMINAL = "kitty"
+VOLUME_CONTROL = "pamixer"
 
 
 def kill_window() -> None:
