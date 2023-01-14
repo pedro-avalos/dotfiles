@@ -22,3 +22,10 @@ ln -Tsf ~/.dotfiles/bash_logout  ~/.bash_logout
 # Install tmux dotfiles
 ln -Tsf ~/.dotfiles/config/tmux  ~/.config/tmux
 ln -Tsf ~/.dotfiles/config/tmuxp ~/.config/tmuxp
+
+# Install redshift dotfiles
+ln -Tsf ~/.dotfiles/config/redshift.conf ~/.config/redshift.conf
+
+# Install qtile dotfiles
+ln -Tsf ~/.dotfiles/config/qtile ~/.config/qtile
+
