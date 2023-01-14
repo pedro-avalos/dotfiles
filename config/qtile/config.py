@@ -8,7 +8,8 @@ from src.hooks import (
     float_pycharm,  # pyright: ignore
     float_steam,  # pyright: ignore
 )
-from src import bindings
+from src.groups import qtile_groups
+from src.bindings import keyboard_bindings, mouse_bindings
 
 # Create theme
 theme.load_theme("oxocarbon")
@@ -17,8 +18,9 @@ fonts_theme = theme.FontsTheme()
 layouts_theme = theme.LayoutsTheme()
 widgets_theme = theme.WidgetsTheme()
 
-keys = bindings.keyboard_bindings
-mouse = bindings.mouse_bindings
+groups = qtile_groups
+keys = keyboard_bindings
+mouse = mouse_bindings
 
 # Other settings
 dgroups_key_binder = None
