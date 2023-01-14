@@ -23,6 +23,9 @@ ln -Tsf ~/.dotfiles/bash_logout  ~/.bash_logout
 ln -Tsf ~/.dotfiles/config/tmux  ~/.config/tmux
 ln -Tsf ~/.dotfiles/config/tmuxp ~/.config/tmuxp
 
+# Install gtk dotfiles
+ln -Tsf ~/.dotfiles/config/gtk-3.0 ~/.config/gtk-3.0
+
 # Install redshift dotfiles
 ln -Tsf ~/.dotfiles/config/redshift.conf ~/.config/redshift.conf
 
