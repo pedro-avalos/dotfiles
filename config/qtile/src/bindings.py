@@ -1,0 +1,272 @@
+"""Provides the bindings (mouse and keyboard) used by qtile."""
+
+from libqtile.config import Click, Drag, Key
+from libqtile.lazy import lazy
+
+from .util import apps, mouse, keyboard, lazy_functions, groups, scripts
+
+
+keyboard_bindings = [
+    # Layout controls
+    Key(
+        [keyboard.SUPER],
+        keyboard.TAB,
+        lazy.next_layout(),
+        desc="Toggle between layouts",
+    ),
+    # Change focus
+    Key(
+        [keyboard.SUPER],
+        keyboard.SPACE,
+        lazy.layout.next(),
+        desc="Switch window focus to other pane(s) of stack",
+    ),
+    Key(
+        [keyboard.SUPER],
+        "K",
+        lazy.layout.up(),
+        desc="Move focus up in stack pane",
+    ),
+    Key(
+        [keyboard.SUPER],
+        "J",
+        lazy.layout.down(),
+        desc="Move focus down in stack pane",
+    ),
+    Key(
+        [keyboard.SUPER],
+        "H",
+        lazy.layout.left(),
+        desc="Move focus left in stack pane",
+    ),
+    Key(
+        [keyboard.SUPER],
+        "L",
+        lazy.layout.right(),
+        desc="Move focus right in stack pane",
+    ),
+    # Move window
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        keyboard.SPACE,
+        lazy.layout.rotate(),
+        lazy.layout.flip(),
+        desc="Swap panes of split stack",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        "K",
+        lazy.layout.shuffle_up(),
+        lazy.layout.section_up(),
+        desc="Move window up in current stack",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        "J",
+        lazy.layout.shuffle_down(),
+        lazy.layout.section_down(),
+        desc="Move window down in current stack",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        "H",
+        lazy.layout.shuffle_left(),
+        desc="Move window left in current stack",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        "L",
+        lazy.layout.shuffle_right(),
+        desc="Move window right in current stack",
+    ),
+    # Resize window or increase number in master (tile)
+    Key(
+        [keyboard.SUPER],
+        "M",
+        lazy.layout.maximize(),
+        desc="Toggle between min and max sizes",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        "M",
+        lazy.layout.toggle_fullscreen(),
+        desc="Toggle fullscreen",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.CTRL],
+        "K",
+        lazy.layout.grow(),
+        lazy.layout.increase_nmaster(),
+        desc="Expand window (monadtall), increase number in master pane (tile)",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.CTRL],
+        "J",
+        lazy.layout.shrink(),
+        lazy.layout.decrease_nmaster(),
+        desc="Shrink window (monadtall), decrease number in master pane (tile)",
+    ),
+    # Toggle floating
+    Key(
+        [keyboard.SUPER],
+        "F",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating mode on focused window",
+    ),
+    # Move floating windows to front
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        "F",
+        lazy_functions.float_to_front,
+        desc="Move floating windows to front",
+    ),
+    # Toggle split
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        keyboard.RETURN,
+        lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack",
+    ),
+    # Reset windows/layout
+    Key(
+        [keyboard.SUPER],
+        "N",
+        lazy.layout.normalize(),
+        desc="Normalize window size ratios",
+    ),
+    # Close window
+    Key(
+        [keyboard.SUPER],
+        "W",
+        lazy.window.kill(),
+        desc="Close focused window",
+    ),
+    # Apps
+    Key(
+        [keyboard.SUPER],
+        "R",
+        lazy.spawn(apps.LAUNCHER),
+        desc="Open default launcher",
+    ),
+    Key(
+        [keyboard.SUPER],
+        keyboard.RETURN,
+        lazy.spawn(apps.TERMINAL),
+        desc="Open default terminal",
+    ),
+    Key(
+        [keyboard.SUPER],
+        "B",
+        lazy.spawn(apps.BROWSER),
+        desc="Open default browser",
+    ),
+    Key(
+        [keyboard.SUPER],
+        "E",
+        lazy.spawn(apps.EDITOR),
+        desc="Open default editor",
+    ),
+    # Screenshots
+    Key(
+        [],
+        keyboard.PRINT,
+        lazy.spawn(scripts.select_shot_clip),
+        desc="Clip selected area screenshot",
+    ),
+    Key(
+        [keyboard.SUPER],
+        keyboard.PRINT,
+        lazy.spawn(scripts.select_shot),
+        desc="Save selected area screenshot",
+    ),
+    Key(
+        [keyboard.SUPER, keyboard.SHIFT],
+        keyboard.PRINT,
+        lazy.spawn(scripts.full_shot),
+        desc="Save fullscreen screenshot",
+    ),
+    # Volume controls
+    Key(
+        [],
+        keyboard.AUDIO_RAISE_VOLUME,
+        lazy.spawn("pamixer -i 2"),
+        desc="Raise volume",
+    ),
+    Key(
+        [],
+        keyboard.AUDIO_LOWER_VOLUME,
+        lazy.spawn("pamixer -d 2"),
+        desc="Lower volume",
+    ),
+    Key(
+        [],
+        keyboard.AUDIO_MUTE,
+        lazy.spawn("pamixer -t"),
+        desc="Toggle mute",
+    ),
+    # Brightness
+    Key(
+        [],
+        keyboard.BRIGHTNESS_UP,
+        lazy.spawn("brightnessctl set +5%"),
+        desc="Increase monitor brightness",
+    ),
+    Key(
+        [],
+        keyboard.BRIGHTNESS_DOWN,
+        lazy.spawn("brightnessctl set 5%-"),
+        desc="Decrease monitor brightness",
+    ),
+    # Restart qtile
+    Key(
+        [keyboard.SUPER, keyboard.CTRL],
+        "R",
+        lazy.restart(),
+        desc="Restart qtile config",
+    ),
+    # Quit qtile
+    Key(
+        [keyboard.SUPER, keyboard.CTRL],
+        "Q",
+        lazy.shutdown(),
+        desc="Exit qtile",
+    ),
+]
+
+for group in groups.groups:
+    keyboard_bindings.extend(
+        [
+            # super + num = switch to group
+            Key(
+                [keyboard.SUPER],
+                group.num,
+                lazy.group[group.num].toscreen(),
+                desc=f"Switch to group {group.name}",
+            ),
+            # super + shift + name = move focused window to group
+            Key(
+                [keyboard.SUPER, keyboard.SHIFT],
+                group.num,
+                lazy.window.togroup(group.num),
+                desc=f"Move focused window to group {group.name}",
+            ),
+        ]
+    )
+
+
+mouse_bindings = [
+    # Drag windows (turns into a floating mode)
+    Drag([keyboard.SUPER], mouse.LEFT, lazy.window.set_position_floating()),
+    # Resize windows (turns into a floating window)
+    Drag(
+        [keyboard.SUPER],
+        mouse.RIGHT,
+        lazy.window.set_size_floating(),
+        start=lazy.window.get_size(),
+    ),
+    # Bring a floating window to the front
+    Click([keyboard.SUPER], mouse.MIDDLE, lazy.window.bring_to_front()),
+    # Change group
+    Click([keyboard.SUPER], mouse.WHEEL_UP, lazy.screen.next_group()),
+    Click([keyboard.SUPER], mouse.WHEEL_DOWN, lazy.screen.prev_group()),
+]

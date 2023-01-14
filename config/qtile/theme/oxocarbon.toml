@@ -1,0 +1,77 @@
+[wallpaper]
+path = "~/.config/qtile/wallpaper/"
+
+[fonts]
+default = "Source Sans Pro"
+symbols = "Sauce Code Pro Nerd Font"
+
+[layouts]
+
+[layouts.default]
+margin        = 6
+border_width  = 3
+border_focus  = "#BE95FF"
+border_normal = "#262626"
+grow_amount   = 3
+
+[layouts.columns]
+num_columns = 3
+
+[layouts.floating]
+border_width = 0
+
+[widgets]
+
+show_battery = true
+
+[widgets.default]
+fontsize   = 16
+padding    = 6
+foreground = "#DDE1E6"
+background = "#161616"
+
+[widgets.battery]
+low_foreground = "#EE5396"
+
+[widgets.calendar]
+foreground = "#08BDBA"
+
+[widgets.clock]
+foreground = "#3DDBD9"
+
+[widgets.launcher]
+foreground = "#BE95FF"
+
+[widgets.windowname]
+foreground = "#82CFFF"
+
+[widgets.quickexit]
+foreground = "EE5396"
+
+[widgets.volume]
+foreground = "BE95FF"
+
+[widgets.current_layout_icon]
+#custom_icon_paths = ["~/.config/qtile/icons/oxocarbon"]
+scale             = 0.6
+
+[widgets.groupbox]
+pading                      = 8
+foreground                  = "#82CFFF"
+borderwidth                 = 0
+active                      = "#33B1FF"
+inactive                    = "#525252"
+highlight_method            = "text"
+highlight_color             = "#82CFFF"
+this_current_screen_border  = "#82CFFF"
+other_current_screen_border = "#82CFFF"
+this_screen_border          = "#82CFFF"
+other_screen_border         = "#82CFFF"
+urgent_alert_method         = "text"
+urgent_text                 = "#EE5396"
+
+[widgets.current_screen]
+active_color   = "#42BE65"
+active_text    = "Α"
+inactive_color = "#525252"
+inactive_text  = "ι"
