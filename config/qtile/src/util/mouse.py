@@ -1,13 +1,13 @@
 """Provides helpful variables for mouse buttons."""
 
-LEFT: str = "Button1"
-MIDDLE: str = "Button2"
-RIGHT: str = "Button3"
+LEFT = "Button1"
+MIDDLE = "Button2"
+RIGHT = "Button3"
 
-WHEEL_UP: str = "Button4"
-WHEEL_DOWN: str = "Button5"
-WHEEL_LEFT: str = "Button6"
-WHEEL_RIGHT: str = "Button7"
+WHEEL_UP = "Button4"
+WHEEL_DOWN = "Button5"
+WHEEL_LEFT = "Button6"
+WHEEL_RIGHT = "Button7"
 
-PREVIOUS: str = "Button8"
-NEXT: str = "Button9"
+PREVIOUS = "Button8"
+NEXT = "Button9"
