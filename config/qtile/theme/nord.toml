@@ -1,0 +1,74 @@
+[wallpaper]
+wallpaper = "~/.config/qtile/wallpaper/nord.png"
+mode      = "fill"
+
+[fonts]
+default = "Source Code Pro"
+symbols = "SauceCodePro Nerd Font Mono"
+
+[layouts]
+[layouts.default]
+margin        = 6
+border_width  = 3
+border_focus  = "#88C0D0"
+border_normal = "#2E3440"
+grow_amount   = 3
+
+[layouts.columns]
+num_columns = 3
+
+[layouts.floating]
+border_width = 0
+
+[widgets]
+[widgets.default]
+fontsize   = 16
+padding    = 6
+foreground = "#D8DEE9"
+background = "#2E3440"
+
+[widgets.battery]
+low_foreground = "#BF616A"
+
+[widgets.calendar]
+foreground = "#EBCB8B"
+
+[widgets.clock]
+foreground = "#A3BE8C"
+
+[widgets.launcher]
+foreground = "#81A1C1"
+
+[widgets.windowname]
+foreground = "#8FBCBB"
+
+[widgets.quickexit]
+foreground = "#5E81AC"
+
+[widgets.volume]
+foreground = "#B48EAD"
+
+[widgets.current_layout_icon]
+# custom_icon_paths = ["~/.config/qtile/icons/nord"]
+scale             = 0.6
+
+[widgets.groupbox]
+pading                      = 8
+foreground                  = "#88C0D0"
+borderwidth                 = 0
+active                      = "#D8DEE9"
+inactive                    = "#4C566A"
+highlight_method            = "text"
+highlight_color             = "#434C5E"
+this_current_screen_border  = "#8FBCBB"
+other_current_screen_border = "#88C0D0"
+this_screen_border          = "#81A1C1"
+other_screen_border         = "#5E81AC"
+urgent_alert_method         = "text"
+urgent_text                 = "#BF616A"
+
+[widgets.current_screen]
+active_color   = "#A3BE8C"
+active_text    = "Α"
+inactive_color = "#BF616A"
+inactive_text  = "ι"

@@ -1,9 +1,14 @@
 """Provides screen-related code."""
 
 import subprocess
+
 from libqtile.bar import Bar
 from libqtile.config import Screen
-from .util import theme, widgets
+
+from .util import widgets
+from .util.apps import Apps
+from .util.settings import WidgetsSettings
+from .util.theme import FontsTheme, WallpaperTheme, WidgetsTheme
 
 
 def get_monitors() -> list[str]:
@@ -15,14 +20,19 @@ def get_monitors() -> list[str]:
 
 
 def make_screens(
-    wallpaper_theme: theme.WallpaperTheme,
-    fonts_theme: theme.FontsTheme,
-    widgets_theme: theme.WidgetsTheme,
+    wallpaper_theme: WallpaperTheme,
+    fonts_theme: FontsTheme,
+    widgets_theme: WidgetsTheme,
+    widgets_settings: WidgetsSettings,
+    apps: Apps,
 ) -> list[Screen]:
     """Creates the screen(s) with bars to be used by qtile."""
 
     widgets_maker = widgets.WidgetsMaker(
-        fonts_theme=fonts_theme, widgets_theme=widgets_theme
+        fonts_theme=fonts_theme,
+        widgets_theme=widgets_theme,
+        widgets_settings=widgets_settings,
+        apps=apps,
     )
 
     screens: list[Screen] = [

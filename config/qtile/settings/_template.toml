@@ -1,0 +1,79 @@
+[theme]
+name = "oxocarbon"
+
+[apps]
+[apps.x11]
+TERMINAL       = "kitty"
+BROWSER        = "firefox"
+LAUNCHER       = "rofi -show drun"
+CALENDAR       = "xdg-open https://calendar.google.com"
+EDITOR         = "kitty nvim"
+VOLUME_CONTROL = "pavucontrol"
+KILL_WINDOW    = "xdotool getwindowfocus windowkill"
+
+[apps.wayland]
+TERMINAL       = "kitty"
+BROWSER        = "firefox"
+LAUNCHER       = "wofi --show drun"
+CALENDAR       = "xdg-open https://calendar.google.com"
+EDITOR         = "kitty nvim"
+VOLUME_CONTROL = "pavucontrol"
+KILL_WINDOW    = "wtype getwindowfocus windowkill"
+
+[widgets]
+show_battery = false
+
+[groups]
+[groups.web]
+num = 1
+icon = "爵"
+layout = "columns"
+matches = []
+
+[groups.dev]
+num = 2
+icon = ""
+layout = "columns"
+matches = ["code"]
+
+[groups.doc]
+num = 3
+icon = ""
+layout = "columns"
+matches = []
+
+[groups.chat]
+num = 4
+icon = ""
+layout = "columns"
+matches = ["discord", "zoom", "skype"]
+
+[groups.music]
+num = 5
+icon = ""
+layout = "columns"
+matches = ["spotify"]
+
+[groups.video]
+num = 6
+icon = ""
+layout = "max"
+matches = ["vlc", "mpv"]
+
+[groups.games]
+num = 7
+icon = ""
+layout = "monadtall"
+matches = ["Steam", "lutris", "supertuxkart", "xonotic-sdl"]
+
+[groups.sys]
+num = 8
+icon = ""
+layout = "columns"
+matches = []
+
+[groups.virt]
+num = 9
+icon = ""
+layout = "columns"
+matches = ["virt-manager", "remote-viewer"]

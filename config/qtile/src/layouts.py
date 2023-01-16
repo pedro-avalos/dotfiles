@@ -1,21 +1,7 @@
 """Provides the layouts (and settings for them) that qtile will use."""
 
-from libqtile.layout import (
-    # Bsp,  # pyright: ignore
-    Columns,  # pyright: ignore
-    Floating,  # pyright: ignore
-    Max,  # pyright: ignore
-    # Matrix,  # pyright: ignore
-    MonadTall,  # pyright: ignore
-    # MonadThreeCol,  # pyright: ignore
-    # MonadWide,  # pyright: ignore
-    # RatioTile,  # pyright: ignore
-    Stack,  # pyright: ignore
-    Tile,  # pyright: ignore
-    # TreeTab,  # pyright: ignore
-    # VerticalTile,  # pyright: ignore
-    # Zoomy,  # pyright: ignore
-)
+from libqtile import layout
+
 from .util import theme
 
 
@@ -23,27 +9,27 @@ def make_layouts(layouts_theme: theme.LayoutsTheme) -> list:
     """Creates the layouts used."""
 
     return [
-        # Bsp(**layouts_theme.default),
-        Columns(**{**layouts_theme.default, **layouts_theme.columns}),
-        Floating(**layouts_theme.floating),
-        Max(**layouts_theme.default),
-        # Matrix(**layouts_theme.default),
-        MonadTall(**layouts_theme.default),
-        # MonadThreeCol(**layouts_theme.default),
-        # MonadWide(**layouts_theme.default),
-        # RatioTile(**layouts_theme.default),
-        Stack(**layouts_theme.default),
-        Tile(**layouts_theme.default),
-        # TreeTab(**layouts_theme.default),
-        # VerticalTile(**layouts_theme.default),
-        # Zoomy(**layouts_theme.default),
+        # layout.Bsp(**layouts_theme.default),
+        layout.Columns(**{**layouts_theme.default, **layouts_theme.columns}),
+        layout.Floating(**layouts_theme.floating),
+        layout.Max(**layouts_theme.default),
+        # layout.Matrix(**layouts_theme.default),
+        layout.MonadTall(**layouts_theme.default),
+        # layout.MonadThreeCol(**layouts_theme.default),
+        # layout.MonadWide(**layouts_theme.default),
+        # layout.RatioTile(**layouts_theme.default),
+        layout.Stack(**layouts_theme.default),
+        layout.Tile(**layouts_theme.default),
+        # layout.TreeTab(**layouts_theme.default),
+        # layout.VerticalTile(**layouts_theme.default),
+        # layout.Zoomy(**layouts_theme.default),
     ]
 
 
-def make_floating_layout(layouts_theme: theme.LayoutsTheme) -> Floating:
+def make_floating_layout(layouts_theme: theme.LayoutsTheme) -> layout.Floating:
     """Creates the floating layout used."""
 
-    return Floating(
+    return layout.Floating(
         auto_float_typesR=[
             # Run the utility `xprop` to see the wm class and name of an X client
             {"wmclass": "confirm"},
@@ -65,3 +51,6 @@ def make_floating_layout(layouts_theme: theme.LayoutsTheme) -> Floating:
         ],
         **layouts_theme.floating,
     )
+
+
+# pyright: reportPrivateImportUsage=false

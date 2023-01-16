@@ -1,6 +1,7 @@
 """Provides theming settings."""
 
 from typing import Optional
+
 import toml
 
 from . import paths
@@ -65,8 +66,6 @@ class WidgetsTheme:
     """Widgets-related theming."""
 
     def __init__(self, theme: Optional[dict] = None) -> None:
-        self.show_battery: bool = False
-
         self.default: dict = dict()
         self.battery: dict = dict()
         self.calendar: dict = dict()
@@ -81,7 +80,6 @@ class WidgetsTheme:
 
         if theme and "widgets" in theme:
             for s in [
-                "show_battery",
                 "default",
                 "battery",
                 "calendar",

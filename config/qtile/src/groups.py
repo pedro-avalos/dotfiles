@@ -1,14 +1,16 @@
 """Provides qtile's groups."""
 
 from libqtile.config import Group, Match
-from .util.groups import groups
 
-qtile_groups = [
-    Group(
-        f"{group.num}",
-        layout=group.layout,
-        label=group.icon,
-        matches=[Match(wm_class=m) for m in group.matches],
-    )
-    for group in groups
-]
+
+def make_groups(settings: dict) -> list[Group]:
+    assert "groups" in settings
+    return [
+        Group(
+            f"{v['num']}",
+            layout=v["layout"],
+            label=v["icon"],
+            matches=[Match(wm_class=m) for m in v["matches"]],
+        )
+        for v in settings["groups"].values()
+    ]

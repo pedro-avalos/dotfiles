@@ -2,43 +2,38 @@
 
 from libqtile import qtile
 
-BROWSER = "firefox"
-CALENDAR = "xdg-open https://calendar.google.com/"
-EDITOR = "kitty nvim"
-LAUNCHER = "rofi -show drun" if qtile.core.name == "x11" else "wofi --show drun"
-LOCKER = "xscreensaver-command -l"
-TERMINAL = "kitty"
-VOLUME_CONTROL = "pamixer"
 
+class Apps:
+    """Holds app-related functions"""
 
-def kill_window() -> None:
-    """Kills focused window."""
+    def __init__(self, settings: dict) -> None:
+        assert "apps" in settings
+        assert qtile.core.name in settings["apps"]
+        self.settings: dict = settings["apps"][qtile.core.name]
 
-    if qtile.core.name == "x11":
-        qtile.cmd_spawn("xdotool getwindowfocus windowkill")
-    elif qtile.core.name == "wayland":
-        qtile.cmd_spawn("wtype getwindowfocus windowkill")
+    def kill_window(self) -> None:
+        """Kills the focused window."""
 
+        qtile.cmd_spawn(self.settings["KILL_WINDOW"])
 
-def open_browser() -> None:
-    """Spawns the default browser."""
+    def open_browser(self) -> None:
+        qtile.cmd_spawn(self.settings["BROWSER"])
 
-    qtile.cmd_spawn(BROWSER)
+    def open_calendar(self) -> None:
+        qtile.cmd_spawn(self.settings["CALENDAR"])
 
+    def open_launcher(self) -> None:
+        qtile.cmd_spawn(self.settings["LAUNCHER"])
 
-def open_calendar() -> None:
-    """Spawns the default calendar."""
+    def open_volume_control(self) -> None:
+        qtile.cmd_spawn(self.settings["VOLUME_CONTROL"])
 
-    qtile.cmd_spawn(CALENDAR)
+    def open_app(self, appname: str) -> None:
+        if appname in self.settings:
+            qtile.cmd_spawn(self.settings[appname])
 
+    def get_app(self, appname: str) -> None:
+        """Retrieves specific name of app."""
 
-def open_launcher() -> None:
-    """Spawns the default launcher."""
-
-    qtile.cmd_spawn(LAUNCHER)
-
-
-def open_volume_control() -> None:
-    """Spawns the default volume control."""
-
-    qtile.cmd_spawn(VOLUME_CONTROL)
+        if appname in self.settings:
+            return self.settings[appname]

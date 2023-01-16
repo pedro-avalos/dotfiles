@@ -1,34 +1,39 @@
 """Qtile configuration entrypoint."""
 
-from src.util import theme
-
-from src.hooks import (
-    autostart,  # pyright: ignore
-    float_firefox,  # pyright: ignore
-    float_pycharm,  # pyright: ignore
-    float_steam,  # pyright: ignore
-)
-from src.groups import qtile_groups
-from src.bindings import keyboard_bindings, mouse_bindings
+from src.bindings import make_keys, make_mouse
+from src.groups import make_groups
+from src.hooks import autostart  # pyright: ignore
+from src.hooks import float_firefox  # pyright: ignore
+from src.hooks import float_pycharm  # pyright: ignore
+from src.hooks import float_steam  # pyright: ignore
+from src.layouts import make_floating_layout, make_layouts
 from src.screens import make_screens
-from src.layouts import make_layouts, make_floating_layout
+from src.util import settings, theme
+from src.util.apps import Apps
+
+# Create settings
+s = settings.load_settings()
+a = Apps(settings=s)
+widgets_settings = settings.WidgetsSettings(settings=s)
 
 # Create theme
-t = theme.load_theme("oxocarbon")
+t = theme.load_theme(theme_name=s["theme"]["name"])
 wallpaper_theme = theme.WallpaperTheme(theme=t)
 fonts_theme = theme.FontsTheme(theme=t)
 layouts_theme = theme.LayoutsTheme(theme=t)
 widgets_theme = theme.WidgetsTheme(theme=t)
 
-groups = qtile_groups
-keys = keyboard_bindings
-mouse = mouse_bindings
+groups = make_groups(settings=s)
+keys = make_keys(groups=groups, apps=a)
+mouse = make_mouse()
 layouts = make_layouts(layouts_theme=layouts_theme)
 floating_layout = make_floating_layout(layouts_theme=layouts_theme)
 screens = make_screens(
     wallpaper_theme=wallpaper_theme,
     fonts_theme=fonts_theme,
     widgets_theme=widgets_theme,
+    widgets_settings=widgets_settings,
+    apps=a,
 )
 
 # Other settings

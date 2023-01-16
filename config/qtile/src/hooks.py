@@ -1,7 +1,9 @@
 """Provides the hooks to be used by qtile."""
 
 import subprocess
+
 from libqtile import hook
+
 from .util import paths
 
 
@@ -10,6 +12,9 @@ def autostart() -> None:
     """Executes startup programs."""
 
     subprocess.call([paths.scripts_dir / "autostart.sh"])
+
+
+# TODO: Fix these to work with wayland, they seem to bring up exceptions
 
 
 @hook.subscribe.client_new
