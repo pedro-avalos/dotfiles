@@ -2,26 +2,22 @@
 # File: bash-prompt.bashrc
 
 # Needed for git repo status
-if [[ -e ~/.bashrc.d/git-prompt.sh ]] ; then # {{{
-  source ~/.bashrc.d/git-prompt.sh
-else
-  return
-fi # }}}
+# shellcheck source=./git-prompt.sh
+[[ -e ~/.bashrc.d/git-prompt.sh ]] && source ~/.bashrc.d/git-prompt.sh
 
-# Settings for git-prompt.sh {{{
+# Settings for git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1     # '*'=unstaged, '+'=staged
 export GIT_PS1_SHOWSTASHSTATE=1     # '$'=stashed
 export GIT_PS1_SHOWUNTRACKEDFILES=1 # '%'=untracked
 export GIT_PS1_STATESEPARATOR=''    # No space betweend branch and index status
-# }}}
 
 # Check if the terminal supports colors
-function __color_enabled() { # {{{
+function __color_enabled() {
   local exit=$?
   local -i colors
   colors=$(tput colors 2> /dev/null)
   [[ ${exit} -eq 0 ]] && [[ ${colors} -gt 2 ]]
-} # }}}
+}
 
 # Whether to use colors in the prompt
 unset __colorize_prompt && __color_enabled && __colorize_prompt=1
@@ -29,7 +25,7 @@ unset __colorize_prompt && __color_enabled && __colorize_prompt=1
 # Main icon to the left side of the prompt.
 # It will differ depending on whether the shell is running under ssh or tmux.
 # This function takes up to three arguments (ssh_icon, tmux_icon, norm_icon).
-function __icon_ps1() { # {{{
+function __icon_ps1() {
   local exit=$?       # Exit status
   local ssh_icon='s'  # Icon for ssh connection
   local tmux_icon='t' # Icon for tmux shell
@@ -44,19 +40,18 @@ function __icon_ps1() { # {{{
     *) return ${exit}
   esac
 
-  if [[ -n ${SSH_CONNECTION} ]] ; then
-    printf -- '%s' "${ssh_icon}"
-  elif [[ -n ${TMUX} ]] ; then
-    printf -- '%s' "${tmux_icon}"
-  else
-    printf -- '%s' "${norm_icon}"
+  # Display the appropriate icon
+  if   [[ -n ${SSH_CONNECTION} ]] ; then printf -- '%s' "${ssh_icon}"
+  elif [[ -n ${TMUX} ]]           ; then printf -- '%s' "${tmux_icon}"
+  else                                   printf -- '%s' "${norm_icon}"
   fi
 
   return ${exit}
-} # }}}
+}
 
 # Icon for a child shell instance.
-function __child_ps1() { # {{{
+# This function takes up one argument (child_icon).
+function __child_ps1() {
   local exit=$?        # Exit status
   local child_icon='b' # Icon to display
   local -i child_lvl=1 # What level is required to consider this a child
@@ -68,20 +63,17 @@ function __child_ps1() { # {{{
     *) return ${exit}
   esac
 
-  # Increase level requirement to 2 in case tmux is being used
-  if [[ -n ${TMUX} ]] ; then
-    child_lvl=2
-  fi
+  # Increase child shell requirement to 2 in case tmux is being used
+  [[ -n ${TMUX} ]] && child_lvl=2
 
-  if [[ ${SHLVL} -gt ${child_lvl} ]] ; then
-    printf -- '%s' "${child_icon}"
-  fi
+  # Display child shell icon
+  [[ ${SHLVL} -gt ${child_lvl} ]] && printf -- '%s' "${child_icon}"
 
   return ${exit}
-} # }}}
+}
 
 # Create the bash prompt.
-function __set_ps1() { # {{{
+function __set_ps1() {
   local exit=$?
 
   # Colors       ; Bright colors
@@ -97,7 +89,7 @@ function __set_ps1() { # {{{
   local _blink
   local _reset
 
-  if [[ ${__colorize_prompt} ]] ; then # {{{
+  if [[ ${__colorize_prompt} ]] ; then
     export GIT_PS1_SHOWCOLORHINTS=1
 
     _black="\[$(tput setaf 0)\]"   ; _bblack="\[$(tput setaf 8)\]"
@@ -113,28 +105,33 @@ function __set_ps1() { # {{{
     _reset="\[$(tput sgr0)\]"
   else
     unset GIT_PS1_SHOWCOLORHINTS
-  fi # }}}
-
-  # Set up pre_ps1 {{{
-  local ssh_icon='' # Icon for ssh connection
-  local tmux_icon='' # Icon for tmux shell
-  local norm_icon='' # Icon for local shell
-  local child_icon='' # Icon for child shell
-
-  # If root, use upper-case letter.
-  # Also use bold red for main icon, bold yellow for child icon.
-  if [[ ${EUID} -eq 0 ]] ; then
-    ssh_icon+="${_bold}${_red}Σ"
-    tmux_icon+="${_bold}${_red}Τ"
-    norm_icon+="${_bold}${_red}Λ"
-    child_icon+="${_bold}${_yellow}Β"
-  else
-    ssh_icon+="${_cyan}σ"
-    tmux_icon+="${_green}τ"
-    norm_icon+="${_bblue}λ"
-    child_icon+="${_byellow}β"
   fi
 
+  # Colors for each situation
+  local root_color="${_bold}${_red}"
+  local ssh_color="${_byellow}"
+  local tmux_color="${_green}"
+  local norm_color="${_bblue}"
+  local child_color="${_cyan}"
+
+  # Set up pre_ps1
+  local ssh_icon=''   # Icon for ssh connection
+  local tmux_icon=''  # Icon for tmux shell
+  local norm_icon=''  # Icon for local shell
+  local child_icon='' # Icon for child shell
+
+  # Set up icons and their color
+  if [[ ${EUID} -eq 0 ]] ; then
+    ssh_icon+="${root_color}Σ"
+    tmux_icon+="${root_color}Τ"
+    norm_icon+="${root_color}Λ"
+    child_icon+="${root_color}Β"
+  else
+    ssh_icon+="${ssh_color}σ"
+    tmux_icon+="${tmux_color}τ"
+    norm_icon+="${norm_color}λ"
+    child_icon+="${child_color}β"
+  fi
   ssh_icon+="${_reset} "
   tmux_icon+="${_reset} "
   norm_icon+="${_reset} "
@@ -148,33 +145,32 @@ function __set_ps1() { # {{{
 
   local pre_ps1="${icon_ps1}${child_ps1}"
 
-  # If root, only use bold `<hostname>:`
-  # Otherwise, use `<user>@<hostname>:`
-  if [[ ${EUID} -eq 0 ]] ; then
-    pre_ps1+="${_bold}\h${_reset}:"
-  else
-    pre_ps1+='\u@\h:'
+  # If root, only use bold `<hostname>:`, otherwise, use `<user>@<hostname>:`
+  if [[ ${EUID} -eq 0 ]] ; then pre_ps1+="${_bold}\h${_reset}:"
+  else                          pre_ps1+='\u@\h:'
   fi
 
-  # Add the current directory
-  pre_ps1+="${_bold}${_blue}\W${_reset}"
-  # }}}
+  # Add the current directory (color matched to icon)
+  pre_ps1+="${_bold}"
+  if   [[ ${EUID} -eq 0 ]]        ; then pre_ps1+="${root_color}"
+  elif [[ -n ${SSH_CONNECTION} ]] ; then pre_ps1+="${ssh_color}"
+  elif [[ -n ${TMUX} ]]           ; then pre_ps1+="${tmux_color}"
+  else                                   pre_ps1+="${norm_color}"
+  fi
+  pre_ps1+="\W${_reset}"
 
-  # Set up post_ps1 {{{
+  # Set up post_ps1
   local post_ps1
   post_ps1=''
 
   # If nonzero exit code, display it in red
-  if [[ ${exit} -ne 0 ]] ; then
-    post_ps1+="${_red}[${exit}]${_reset}"
-  fi
+  [[ ${exit} -ne 0 ]] && post_ps1+="${_red}[${exit}]${_reset}"
 
   post_ps1+=' '
-  # }}}
 
   __git_ps1 "${pre_ps1}" "${post_ps1}" '(%s)'
-} # }}}
+}
 
 export PROMPT_COMMAND=__set_ps1
 
-# vim: ft=bash fdm=marker
+# vim: ft=bash
