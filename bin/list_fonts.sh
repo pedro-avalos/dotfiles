@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# File: list_fonts.sh
 
 fc-list \
   | grep -ioE ": [^:]*$1[^:]+:" \
