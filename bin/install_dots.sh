@@ -39,3 +39,7 @@ ln -Tsf ~/.dotfiles/config/redshift.conf ~/.config/redshift.conf
 # Install qtile dotfiles
 echo "installing qtile dots..."
 ln -Tsf ~/.dotfiles/config/qtile ~/.config/qtile
+
+# Install terminal dotfiles
+echo "installing kitty dots..."
+ln -Tsf ~/.dotfiles/config/kitty ~/.config/kitty
