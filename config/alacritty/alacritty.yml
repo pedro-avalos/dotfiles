@@ -1,0 +1,4 @@
+# File: alacritty.yaml
+
+import:
+  - ~/.config/alacritty/themes/oxocarbon.yml

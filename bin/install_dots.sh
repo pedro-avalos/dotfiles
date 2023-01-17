@@ -43,3 +43,5 @@ ln -Tsf ~/.dotfiles/config/qtile ~/.config/qtile
 # Install terminal dotfiles
 echo "installing kitty dots..."
 ln -Tsf ~/.dotfiles/config/kitty ~/.config/kitty
+echo "installing alacritty dots..."
+ln -Tsf ~/.dotfiles/config/alacritty ~/.config/alacritty

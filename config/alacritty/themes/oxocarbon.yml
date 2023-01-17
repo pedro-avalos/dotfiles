@@ -1,0 +1,30 @@
+# File: oxocarbon.yaml
+
+colors:
+  primary:
+    foreground: "#DDE1E6"
+    background: "#161616"
+
+  selection:
+    text:       "#F2F4F8"
+    background: "#525252"
+
+  normal:
+    black:   "#262626"
+    red:     "#FF7EB6"
+    green:   "#42BE65"
+    yellow:  "#82CFFF"
+    blue:    "#33B1FF"
+    magenta: "#EE5396"
+    cyan:    "#3DDBD9"
+    white:   "#DDE1E6"
+
+  bright:
+    black:   "#393939"
+    red:     "#FF7EB6"
+    green:   "#42BE65"
+    yellow:  "#82CFFF"
+    blue:    "#33B1FF"
+    magenta: "#EE5396"
+    cyan:    "#3DDBD9"
+    white:   "#FFFFFF"
