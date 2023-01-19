@@ -4,4 +4,5 @@
 
 redshift-gtk &
 nm-applet &
-gnome-keyring-daemon --start &
+gnome-keyring-daemon --start --components=secrets &
+([ "${XDG_SESSION_TYPE}" = "x11" ] && picom) &
