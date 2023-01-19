@@ -5,14 +5,14 @@ import subprocess
 from libqtile import hook
 from libqtile.backend.base import Window
 
-from .util import paths
+from .util import scripts
 
 
 @hook.subscribe.startup_once
 def autostart() -> None:
     """Executes startup programs."""
 
-    subprocess.call([paths.scripts_dir / "autostart.sh"])
+    subprocess.call([scripts.autostart])
 
 
 @hook.subscribe.client_new

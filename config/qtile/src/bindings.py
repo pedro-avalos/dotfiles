@@ -173,20 +173,14 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
         Key(
             [],
             keyboard.PRINT,
-            lazy.spawn(scripts.select_shot_clip),
-            desc="Clip selected area screenshot",
+            lazy.spawn("xfce4-screenshooter"),
+            desc="Open screenshot utility",
         ),
         Key(
-            [keyboard.SUPER],
+            [keyboard.ALT],
             keyboard.PRINT,
-            lazy.spawn(scripts.select_shot),
-            desc="Save selected area screenshot",
-        ),
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            keyboard.PRINT,
-            lazy.spawn(scripts.full_shot),
-            desc="Save fullscreen screenshot",
+            lazy.spawn("xfce4-screenshooter -f -c"),
+            desc="Take fullscreen screenshot",
         ),
         # Volume controls
         Key(
