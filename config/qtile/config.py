@@ -43,5 +43,6 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 auto_fullscreen = True
+reconfigure_screens = True
 focus_on_window_activation = "smart"
 wmname = "LG3D"
