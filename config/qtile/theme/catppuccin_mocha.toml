@@ -3,8 +3,8 @@ wallpaper = "~/.config/qtile/wallpaper/catppuccin.png"
 wallpaper_mode = "fill"
 
 [fonts]
-default = "Source Code Pro"
-symbols = "SauceCodePro Nerd Font Mono"
+default = "Fira Sans"
+symbols = "FiraCode Nerd Font"
 
 [layouts]
 [layouts.default]
@@ -34,7 +34,7 @@ foreground = "#cdd6f4"
 background = "#1e1e2e"
 
 [widgets.battery]
-low_foreground = "#eba0ac"
+low_foreground  = "#eba0ac"
 
 [widgets.calendar]
 foreground = "#cba6f7"
@@ -52,7 +52,7 @@ foreground = "#f38ba8"
 foreground = "#94e2d5"
 
 [widgets.current_layout_icon]
-scale             = 0.6
+scale = 0.6
 
 [widgets.groupbox]
 pading                      = 8
