@@ -7,6 +7,8 @@ git -C ~/.dotfiles pull
 # Ensure directories exist
 echo "ensuring directories exist..."
 [ ! -d ~/.config ] && mkdir ~/.config
+[ ! -d ~/.local ] && mkdir ~/.local
+[ ! -d ~/.local/share ] && mkdir ~/.local/share
 
 # Install dotfiles executables and scripts
 echo "installing dots scripts..."
@@ -39,6 +41,11 @@ ln -Tsf ~/.dotfiles/config/redshift.conf ~/.config/redshift.conf
 # Install qtile dotfiles
 echo "installing qtile dots..."
 ln -Tsf ~/.dotfiles/config/qtile ~/.config/qtile
+
+# Install rofi dotfiles
+echo "installing rofi dots..."
+ln -Tsf ~/.dotfiles/config/rofi ~/.config/rofi
+ln -Tsf ~/.dotfiles/local/share/rofi ~/.local/share/rofi
 
 # Install terminal dotfiles
 echo "installing kitty dots..."
