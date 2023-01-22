@@ -43,9 +43,6 @@ class WidgetsMaker:
 
             widget.Spacer(**self._spacer_stretch),
 
-            widget.TextBox(**self._calendar_icon),
-            widget.Clock(**self._calendar),
-            widget.TextBox(**self._clock_icon),
             widget.Clock(**self._clock),
 
             widget.Spacer(**self._spacer_stretch),
@@ -56,8 +53,7 @@ class WidgetsMaker:
             else widget.Spacer(**self._spacer),
 
             widget.Spacer(**self._spacer),
-            widget.TextBox(**self._volume_icon),
-            widget.PulseVolume(**self._pulse_volume),
+            widget.Volume(**self._volume),
 
             # Battery indicator is optional
             widget.Battery(**self._battery)
@@ -84,7 +80,7 @@ class WidgetsMaker:
         self._launcher = {
             **{**self.widgets_theme.icon, **self.widgets_theme.launcher},
             "font": self.fonts_theme.symbols,
-            "text": "",
+            "text": "",
             "mouse_callbacks": {mouse.LEFT: self.apps.open_launcher},
         }
         self._groupbox = {
@@ -99,38 +95,17 @@ class WidgetsMaker:
             **self.widgets_theme.default,
             "font": self.fonts_theme.symbols,
         }
-        self._volume_icon = {
-            **{**self.widgets_theme.icon, **self.widgets_theme.volume},
-            "font": self.fonts_theme.symbols,
-            "mouse_callbacks": {mouse.RIGHT: self.apps.open_volume_control},
-            "text": "墳",
-        }
-        self._pulse_volume = {
+        self._volume = {
             **{**self.widgets_theme.default, **self.widgets_theme.volume},
             "font": self.fonts_theme.default,
             "mouse_callbacks": {mouse.RIGHT: self.apps.open_volume_control},
-        }
-        self._calendar_icon = {
-            **{**self.widgets_theme.icon, **self.widgets_theme.calendar},
-            "font": self.fonts_theme.symbols,
-            "mouse_callbacks": {mouse.LEFT: self.apps.open_calendar},
-            "text": "",
-        }
-        self._calendar = {
-            **{**self.widgets_theme.default, **self.widgets_theme.calendar},
-            "font": self.fonts_theme.default,
-            "mouse_callbacks": {mouse.LEFT: self.apps.open_calendar},
-            "format": "%a, %b %d",
-        }
-        self._clock_icon = {
-            **{**self.widgets_theme.icon, **self.widgets_theme.clock},
-            "font": self.fonts_theme.symbols,
-            "text": "",
+            "fmt": "奔 {}",
         }
         self._clock = {
             **{**self.widgets_theme.default, **self.widgets_theme.clock},
+            "mouse_callbacks": {mouse.LEFT: self.apps.open_calendar},
             "font": self.fonts_theme.default,
-            "format": "%H:%M",
+            "format": "%Y/%m/%d (%a) %H:%M",
         }
         self._battery = {
             **{**self.widgets_theme.default, **self.widgets_theme.battery},
