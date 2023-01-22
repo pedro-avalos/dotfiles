@@ -138,6 +138,11 @@ class WidgetsMaker:
             "format": "{char} {percent:2.0%}",
             "update_interval": 30,
             "low_percentage": 0.2,
+            "full_char": "",
+            "charge_char": "",
+            "discharge_char": "",
+            "empty_char": "",
+            "unknown_char": "",
         }
         self._quick_exit = {
             **{**self.widgets_theme.icon, **self.widgets_theme.quickexit},
