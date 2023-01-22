@@ -278,11 +278,11 @@ def make_mouse() -> list:
         Click(
             [keyboard.SUPER],
             mouse.WHEEL_UP,
-            lazy.screen.next_group(),
+            lazy.screen.prev_group(),
         ),
         Click(
             [keyboard.SUPER],
             mouse.WHEEL_DOWN,
-            lazy.screen.prev_group(),
+            lazy.screen.next_group(),
         ),
     ]
