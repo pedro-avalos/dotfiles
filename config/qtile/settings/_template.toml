@@ -10,6 +10,7 @@ CALENDAR       = "xdg-open https://calendar.google.com"
 EDITOR         = "kitty nvim"
 VOLUME_CONTROL = "pavucontrol"
 KILL_WINDOW    = "xdotool getwindowfocus windowkill"
+FILE_MANAGER   = "thunar" 
 
 [apps.wayland]
 TERMINAL       = "kitty"
@@ -19,6 +20,7 @@ CALENDAR       = "xdg-open https://calendar.google.com"
 EDITOR         = "kitty nvim"
 VOLUME_CONTROL = "pavucontrol"
 KILL_WINDOW    = "wtype getwindowfocus windowkill"
+FILE_MANAGER   = "thunar" 
 
 [widgets]
 show_battery = false
@@ -26,37 +28,37 @@ show_battery = false
 [groups]
 [groups.web]
 num = 1
-icon = "爵"
+icon = "󰖟"
 layout = "columns"
 matches = []
 
 [groups.dev]
 num = 2
-icon = ""
+icon = ""
 layout = "columns"
 matches = ["code"]
 
 [groups.doc]
 num = 3
-icon = ""
+icon = "󰈙"
 layout = "columns"
 matches = []
 
 [groups.chat]
 num = 4
-icon = ""
+icon = "󰭹"
 layout = "columns"
 matches = ["discord", "zoom", "skype"]
 
 [groups.music]
 num = 5
-icon = ""
+icon = "󰝚"
 layout = "columns"
 matches = ["spotify"]
 
 [groups.video]
 num = 6
-icon = ""
+icon = "ﳲ"
 layout = "max"
 matches = ["vlc", "mpv"]
 
@@ -68,12 +70,12 @@ matches = ["Steam", "lutris", "supertuxkart", "xonotic-sdl"]
 
 [groups.sys]
 num = 8
-icon = ""
+icon = "ﲵ"
 layout = "columns"
 matches = []
 
 [groups.virt]
 num = 9
-icon = ""
+icon = ""
 layout = "columns"
 matches = ["virt-manager", "remote-viewer"]
