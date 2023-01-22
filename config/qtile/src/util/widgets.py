@@ -60,6 +60,8 @@ class WidgetsMaker:
             if self.widgets_settings.show_battery
             else widget.Spacer(**self._spacer),
 
+            widget.KeyboardLayout(**self._keyboard_layout),
+
             widget.QuickExit(**self._quick_exit),
             widget.Spacer(**self._spacer),
         ]
@@ -118,6 +120,11 @@ class WidgetsMaker:
             "discharge_char": "",
             "empty_char": "",
             "unknown_char": "",
+        }
+        self._keyboard_layout = {
+            **{**self.widgets_theme.default},
+            "font": self.fonts_theme.default,
+            "configured_keyboards": ["us", "es"],
         }
         self._quick_exit = {
             **{**self.widgets_theme.icon, **self.widgets_theme.quickexit},
