@@ -135,7 +135,9 @@ class WidgetsMaker:
         self._battery = {
             **{**self.widgets_theme.default, **self.widgets_theme.battery},
             "font": self.fonts_theme.symbols,
-            "format": "{char} {percent:2.0%}"
+            "format": "{char} {percent:2.0%}",
+            "update_interval": 30,
+            "low_percentage": 0.2,
         }
         self._quick_exit = {
             **{**self.widgets_theme.icon, **self.widgets_theme.quickexit},
