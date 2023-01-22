@@ -8,7 +8,7 @@ from libqtile.config import Screen
 from .util import widgets
 from .util.apps import Apps
 from .util.settings import WidgetsSettings
-from .util.theme import FontsTheme, WidgetsTheme
+from .util.theme import FontsTheme, WallpaperTheme, WidgetsTheme
 
 
 def get_monitors() -> list[str]:
@@ -20,6 +20,7 @@ def get_monitors() -> list[str]:
 
 
 def make_screens(
+    wallpaper_theme: WallpaperTheme,
     fonts_theme: FontsTheme,
     widgets_theme: WidgetsTheme,
     widgets_settings: WidgetsSettings,
@@ -36,6 +37,8 @@ def make_screens(
 
     screens: list[Screen] = [
         Screen(
+            wallpaper=wallpaper_theme.wallpaper,
+            wallpaper_mode=wallpaper_theme.wallpaper_mode,
             top=Bar(
                 widgets_maker.main_widgets,
                 32,

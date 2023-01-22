@@ -82,3 +82,16 @@ class WidgetsTheme:
             ]:
                 if s in theme["widgets"]:
                     setattr(self, s, theme["widgets"][s])
+
+
+class WallpaperTheme:
+    """Wallpaper-related theming."""
+
+    def __init__(self, theme: Optional[dict] = None) -> None:
+        self.wallpaper: Optional[str] = None
+        self.wallpaper_mode: Optional[str] = None
+
+        if theme and "wallpaper" in theme:
+            for s in ["wallpaper", "wallpaper_mode"]:
+                if s in theme["layouts"]:
+                    setattr(self, s, theme["wallpaper"][s])

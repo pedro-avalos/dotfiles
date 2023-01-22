@@ -1,3 +1,7 @@
+[wallpaper]
+wallpaper = "~/.config/qtile/wallpaper/catppuccin.png"
+wallpaper_mode = "fill"
+
 [fonts]
 default = "Source Code Pro"
 symbols = "SauceCodePro Nerd Font Mono"
