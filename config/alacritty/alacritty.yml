@@ -1,4 +1,4 @@
-# File: alacritty.yaml
+# File: alacritty.yml
 
 import:
-  - ~/.config/alacritty/themes/oxocarbon.yml
+  - ~/.config/alacritty/themes/catppuccin-mocha.yml
