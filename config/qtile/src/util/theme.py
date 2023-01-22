@@ -93,5 +93,5 @@ class WallpaperTheme:
 
         if theme and "wallpaper" in theme:
             for s in ["wallpaper", "wallpaper_mode"]:
-                if s in theme["layouts"]:
+                if s in theme["wallpaper"]:
                     setattr(self, s, theme["wallpaper"][s])
