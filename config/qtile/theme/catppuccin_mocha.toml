@@ -67,7 +67,7 @@ this_screen_border          = "#cdd6f4"
 other_current_screen_border = "#45475a"
 other_screen_border         = "#45475a"
 urgent_alert_method         = "text"
-urgent_text                 = "#BF616A"
+urgent_text                 = "#eba0ac"
 
 [widgets.current_screen]
 active_color   = "#a6e3a1"
