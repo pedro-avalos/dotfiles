@@ -1,6 +1,6 @@
 """Provides the widgets to be used by the bar(s)."""
 
-from libqtile import widget
+from libqtile import qtile, widget
 
 from .apps import Apps
 from .io import mouse
@@ -42,7 +42,12 @@ class WidgetsMaker:
             widget.Spacer(**self._spacer),
             widget.WindowName(**self._window_name),
             widget.Spacer(**self._spacer_stretch),
-            widget.Systray(**self._systray),
+
+            # XXX: Systray does not support Wayland
+            widget.Systray(**self._systray)
+            if qtile.core.name == "x11"
+            else widget.Spacer(**self._spacer),
+
             widget.Spacer(**self._spacer),
             widget.TextBox(**self._volume_icon),
             widget.PulseVolume(**self._pulse_volume),
@@ -50,9 +55,12 @@ class WidgetsMaker:
             widget.Clock(**self._calendar),
             widget.TextBox(**self._clock_icon),
             widget.Clock(**self._clock),
+
+            # Battery indicator is optional
             widget.Battery(**self._battery)
             if self.widgets_settings.show_battery
             else widget.Spacer(**self._spacer),
+
             widget.QuickExit(**self._quick_exit),
             widget.Spacer(**self._spacer),
         ]
