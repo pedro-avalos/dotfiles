@@ -1,7 +1,3 @@
-[wallpaper]
-wallpaper = "~/.config/qtile/wallpaper/nord.png"
-mode      = "fill"
-
 [fonts]
 default = "Source Code Pro"
 symbols = "SauceCodePro Nerd Font Mono"
@@ -27,6 +23,12 @@ padding    = 6
 foreground = "#D8DEE9"
 background = "#2E3440"
 
+[widgets.icon]
+fontsize   = 16
+padding    = 6
+foreground = "#D8DEE9"
+background = "#2E3440"
+
 [widgets.battery]
 low_foreground = "#BF616A"
 
@@ -39,9 +41,6 @@ foreground = "#A3BE8C"
 [widgets.launcher]
 foreground = "#81A1C1"
 
-[widgets.windowname]
-foreground = "#8FBCBB"
-
 [widgets.quickexit]
 foreground = "#5E81AC"
 
@@ -49,7 +48,6 @@ foreground = "#5E81AC"
 foreground = "#B48EAD"
 
 [widgets.current_layout_icon]
-# custom_icon_paths = ["~/.config/qtile/icons/nord"]
 scale             = 0.6
 
 [widgets.groupbox]

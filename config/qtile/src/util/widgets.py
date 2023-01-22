@@ -40,7 +40,14 @@ class WidgetsMaker:
             widget.GroupBox(**self._groupbox),
             widget.CurrentLayoutIcon(**self._current_layout_icon),
             widget.Spacer(**self._spacer),
-            widget.WindowName(**self._window_name),
+
+            widget.Spacer(**self._spacer_stretch),
+
+            widget.TextBox(**self._calendar_icon),
+            widget.Clock(**self._calendar),
+            widget.TextBox(**self._clock_icon),
+            widget.Clock(**self._clock),
+
             widget.Spacer(**self._spacer_stretch),
 
             # XXX: Systray does not support Wayland
@@ -51,10 +58,6 @@ class WidgetsMaker:
             widget.Spacer(**self._spacer),
             widget.TextBox(**self._volume_icon),
             widget.PulseVolume(**self._pulse_volume),
-            widget.TextBox(**self._calendar_icon),
-            widget.Clock(**self._calendar),
-            widget.TextBox(**self._clock_icon),
-            widget.Clock(**self._clock),
 
             # Battery indicator is optional
             widget.Battery(**self._battery)
@@ -69,7 +72,6 @@ class WidgetsMaker:
             widget.GroupBox(**self._groupbox),
             widget.CurrentLayoutIcon(**self._current_layout_icon),
             widget.Spacer(**self._spacer),
-            widget.WindowName(**self._window_name),
             widget.Spacer(**self._spacer_stretch),
             widget.CurrentScreen(**self._current_screen),
         ]
@@ -80,31 +82,25 @@ class WidgetsMaker:
         self._spacer_stretch = {**self.widgets_theme.default}
         self._spacer = {**self.widgets_theme.default, "length": 6}
         self._launcher = {
-            **{**self.widgets_theme.default, **self.widgets_theme.launcher},
+            **{**self.widgets_theme.icon, **self.widgets_theme.launcher},
             "font": self.fonts_theme.symbols,
             "text": "",
             "mouse_callbacks": {mouse.LEFT: self.apps.open_launcher},
         }
         self._groupbox = {
-            **{**self.widgets_theme.default, **self.widgets_theme.groupbox},
+            **{**self.widgets_theme.icon, **self.widgets_theme.groupbox},
             "font": self.fonts_theme.symbols,
             "disable_drag": True,
         }
         self._current_layout_icon = {
-            **{**self.widgets_theme.default, **self.widgets_theme.current_layout_icon}
-        }
-        self._window_name = {
-            **{**self.widgets_theme.default, **self.widgets_theme.windowname},
-            "font": self.fonts_theme.default,
-            "empty_group_string": "Desktop",
-            "mouse_callbacks": {mouse.MIDDLE: self.apps.kill_window},
+            **{**self.widgets_theme.icon, **self.widgets_theme.current_layout_icon}
         }
         self._systray = {
             **self.widgets_theme.default,
             "font": self.fonts_theme.symbols,
         }
         self._volume_icon = {
-            **{**self.widgets_theme.default, **self.widgets_theme.volume},
+            **{**self.widgets_theme.icon, **self.widgets_theme.volume},
             "font": self.fonts_theme.symbols,
             "mouse_callbacks": {mouse.RIGHT: self.apps.open_volume_control},
             "text": "墳",
@@ -115,7 +111,7 @@ class WidgetsMaker:
             "mouse_callbacks": {mouse.RIGHT: self.apps.open_volume_control},
         }
         self._calendar_icon = {
-            **{**self.widgets_theme.default, **self.widgets_theme.calendar},
+            **{**self.widgets_theme.icon, **self.widgets_theme.calendar},
             "font": self.fonts_theme.symbols,
             "mouse_callbacks": {mouse.LEFT: self.apps.open_calendar},
             "text": "",
@@ -127,7 +123,7 @@ class WidgetsMaker:
             "format": "%a, %b %d",
         }
         self._clock_icon = {
-            **{**self.widgets_theme.default, **self.widgets_theme.clock},
+            **{**self.widgets_theme.icon, **self.widgets_theme.clock},
             "font": self.fonts_theme.symbols,
             "text": "",
         }
@@ -139,14 +135,15 @@ class WidgetsMaker:
         self._battery = {
             **{**self.widgets_theme.default, **self.widgets_theme.battery},
             "font": self.fonts_theme.symbols,
+            "format": "{char} {percent:2.0%}"
         }
         self._quick_exit = {
-            **{**self.widgets_theme.default, **self.widgets_theme.quickexit},
+            **{**self.widgets_theme.icon, **self.widgets_theme.quickexit},
             "font": self.fonts_theme.symbols,
             "default_text": "",
             "countdown_format": "{}",
         }
         self._current_screen = {
-            **{**self.widgets_theme.default, **self.widgets_theme.current_screen},
+            **{**self.widgets_theme.icon, **self.widgets_theme.current_screen},
             "font": self.fonts_theme.default,
         }

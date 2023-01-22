@@ -1,7 +1,3 @@
-[wallpaper]
-wallpaper = "~/.config/qtile/wallpaper/oxocarbon.png"
-mode      = "fill"
-
 [fonts]
 default = "Source Code Pro"
 symbols = "SauceCodePro Nerd Font Mono"
@@ -27,6 +23,12 @@ padding    = 6
 foreground = "#DDE1E6"
 background = "#161616"
 
+[widgets.default]
+fontsize   = 16
+padding    = 6
+foreground = "#DDE1E6"
+background = "#161616"
+
 [widgets.battery]
 low_foreground = "#EE5396"
 
@@ -39,9 +41,6 @@ foreground = "#3DDBD9"
 [widgets.launcher]
 foreground = "#BE95FF"
 
-[widgets.windowname]
-foreground = "#82CFFF"
-
 [widgets.quickexit]
 foreground = "#EE5396"
 
@@ -49,7 +48,6 @@ foreground = "#EE5396"
 foreground = "#BE95FF"
 
 [widgets.current_layout_icon]
-# custom_icon_paths = ["~/.config/qtile/icons/oxocarbon"]
 scale             = 0.6
 
 [widgets.groupbox]

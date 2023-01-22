@@ -18,7 +18,6 @@ widgets_settings = settings.WidgetsSettings(settings=s)
 
 # Create theme
 t = theme.load_theme(theme_name=s["theme"]["name"])
-wallpaper_theme = theme.WallpaperTheme(theme=t)
 fonts_theme = theme.FontsTheme(theme=t)
 layouts_theme = theme.LayoutsTheme(theme=t)
 widgets_theme = theme.WidgetsTheme(theme=t)
@@ -29,7 +28,6 @@ mouse = make_mouse()
 layouts = make_layouts(layouts_theme=layouts_theme)
 floating_layout = make_floating_layout(layouts_theme=layouts_theme)
 screens = make_screens(
-    wallpaper_theme=wallpaper_theme,
     fonts_theme=fonts_theme,
     widgets_theme=widgets_theme,
     widgets_settings=widgets_settings,

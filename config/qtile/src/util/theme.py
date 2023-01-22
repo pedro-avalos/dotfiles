@@ -23,18 +23,6 @@ def load_theme(theme_name: str) -> dict:
     return theme
 
 
-class WallpaperTheme:
-    """Wallpaper-related theming."""
-
-    def __init__(self, theme: Optional[dict] = None) -> None:
-        self.wallpaper: Optional[str] = None
-        self.mode: Optional[str] = None
-
-        if theme and "path" in theme:
-            for s in ["wallpaper", "mode"]:
-                setattr(self, s, theme["wallpaper"][s])
-
-
 class FontsTheme:
     """Font-related theming."""
 
@@ -67,11 +55,11 @@ class WidgetsTheme:
 
     def __init__(self, theme: Optional[dict] = None) -> None:
         self.default: dict = dict()
+        self.icon: dict = dict()
         self.battery: dict = dict()
         self.calendar: dict = dict()
         self.clock: dict = dict()
         self.launcher: dict = dict()
-        self.windowname: dict = dict()
         self.quickexit: dict = dict()
         self.volume: dict = dict()
         self.current_layout_icon: dict = dict()
@@ -81,11 +69,11 @@ class WidgetsTheme:
         if theme and "widgets" in theme:
             for s in [
                 "default",
+                "icon",
                 "battery",
                 "calendar",
                 "clock",
                 "launcher",
-                "windowname",
                 "quickexit",
                 "volume",
                 "current_layout_icon",
