@@ -2,7 +2,12 @@
 # File: autostart.sh
 # Author: Pedro Avalos
 
-redshift-gtk &
-nm-applet &
 gnome-keyring-daemon --start --components=secrets &
-([ "${XDG_SESSION_TYPE}" = "x11" ] && picom -b &)
+nm-applet &
+
+if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
+  picom -b &
+  redshift-gtk &
+elif [ "${XDG_SESSION_TYPE}" = "wayland" ] ; then
+  gammastep-indicator &
+fi
