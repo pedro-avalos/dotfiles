@@ -9,10 +9,16 @@ echo "ensuring directories exist..."
 [ ! -d ~/.config ] && mkdir ~/.config
 [ ! -d ~/.local ] && mkdir ~/.local
 [ ! -d ~/.local/share ] && mkdir ~/.local/share
+[ ! -d ~/.local/share/xfce4 ] && mkdir ~/.local/share/xfce4
+[ ! -d ~/.local/share/xfce4/terminal ] && mkdir ~/.local/share/xfce4/terminal
 
 # Install dotfiles executables and scripts
 echo "installing dots scripts..."
 ln -Tsf ~/.dotfiles/bin ~/.bin
+
+# Install xfce dotfiles
+echo "installing xfce dots..."
+ln -Tsf ~/.dotfiles/local/share/xfce4/terminal/colorschemes ~/.local/share/xfce4/terminal/colorschemes
 
 # Install keybindings
 echo "installing inputrc dots..."
