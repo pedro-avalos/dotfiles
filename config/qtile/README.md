@@ -15,8 +15,8 @@ See `pkglist.txt`. (TODO)
 
 ### Mod4 + Shift
 
-![mod4+shift bindings](./mod4.png "Mod4+Shift bindings")
+![mod4+shift bindings](./mod4-shift.png "Mod4+Shift bindings")
 
 ### Mod4 + Control
 
-![mod4+control bindings](./mod4.png "Mod4+Control bindings")
+![mod4+control bindings](./mod4-control.png "Mod4+Control bindings")
