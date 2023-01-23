@@ -33,6 +33,7 @@ class WidgetsMaker:
         self.widgets_settings: WidgetsSettings = widgets_settings
         self.apps: Apps = apps
         self._create_settings()
+        compositor: str = "x11" if qtile is None else qtile.core.name
         self.main_widgets = [
             widget.Spacer(**self._spacer),
             widget.TextBox(**self._launcher),
@@ -46,7 +47,7 @@ class WidgetsMaker:
             widget.Spacer(**self._spacer_stretch),
             # XXX: Systray does not support Wayland
             widget.Systray(**self._systray)
-            if qtile.core.name == "x11"
+            if compositor == "x11"
             else widget.Spacer(**self._none),
             widget.Spacer(**self._spacer),
             widget.Volume(**self._volume),

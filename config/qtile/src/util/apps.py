@@ -8,8 +8,9 @@ class Apps:
 
     def __init__(self, settings: dict) -> None:
         assert "apps" in settings
-        assert qtile.core.name in settings["apps"]
-        self.settings: dict = settings["apps"][qtile.core.name]
+        compositor: str = "x11" if qtile is None else qtile.core.name
+        assert compositor in settings["apps"]
+        self.settings: dict = settings["apps"][compositor]
 
     def kill_window(self) -> None:
         """Kills the focused window."""

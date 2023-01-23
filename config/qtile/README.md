@@ -9,6 +9,10 @@ See `pkglist.txt`. (TODO)
 
 ## Keybindings
 
+### No modifier
+
+![no mod bindings](./no_modifier.png "No modifier bindings")
+
 ### Mod4
 
 ![mod4 bindings](./mod4.png "Mod4 bindings")
