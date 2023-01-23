@@ -50,7 +50,7 @@ class WidgetsMaker:
             # XXX: Systray does not support Wayland
             widget.Systray(**self._systray)
             if qtile.core.name == "x11"
-            else widget.Spacer(**self._spacer),
+            else widget.Spacer(**self._none),
 
             widget.Spacer(**self._spacer),
             widget.Volume(**self._volume),
@@ -58,7 +58,7 @@ class WidgetsMaker:
             # Battery indicator is optional
             widget.Battery(**self._battery)
             if self.widgets_settings.show_battery
-            else widget.Spacer(**self._spacer),
+            else widget.Spacer(**self._none),
 
             widget.KeyboardLayout(**self._keyboard_layout),
 
@@ -79,6 +79,7 @@ class WidgetsMaker:
 
         self._spacer_stretch = {**self.widgets_theme.default}
         self._spacer = {**self.widgets_theme.default, "length": 6}
+        self._none = {**self.widgets_theme.default, "length": 0}
         self._launcher = {
             **{**self.widgets_theme.icon, **self.widgets_theme.launcher},
             "font": self.fonts_theme.symbols,
@@ -95,7 +96,6 @@ class WidgetsMaker:
         }
         self._systray = {
             **self.widgets_theme.default,
-            "font": self.fonts_theme.symbols,
         }
         self._volume = {
             **{**self.widgets_theme.default, **self.widgets_theme.volume},
