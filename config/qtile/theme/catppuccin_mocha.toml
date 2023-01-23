@@ -11,7 +11,7 @@ symbols = "FiraCode Nerd Font"
 margin        = 6
 border_width  = 3
 border_focus  = "#b4befe"
-border_normal = "#6c7086" # Overlay0
+border_normal = "#6c7086"
 grow_amount   = 3
 
 [layouts.columns]
@@ -50,6 +50,10 @@ foreground = "#f38ba8"
 
 [widgets.volume]
 foreground = "#94e2d5"
+
+[widgets.notify]
+foreground_low    = "#a6adc8"
+foreground_urgent = "#fab387"
 
 [widgets.current_layout_icon]
 scale = 0.6

@@ -47,8 +47,12 @@ foreground = "#EE5396"
 [widgets.volume]
 foreground = "#BE95FF"
 
+[widgets.notify]
+foreground_low    = "#525252"
+foreground_urgent = "#EE5396"
+
 [widgets.current_layout_icon]
-scale             = 0.6
+scale = 0.6
 
 [widgets.groupbox]
 pading                      = 8

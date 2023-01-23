@@ -40,9 +40,9 @@ class LayoutsTheme:
     """Layouts-related theming."""
 
     def __init__(self, theme: Optional[dict] = None) -> None:
-        self.default: dict = dict()
-        self.columns: dict = dict()
-        self.floating: dict = dict()
+        self.default: dict = {}
+        self.columns: dict = {}
+        self.floating: dict = {}
 
         if theme and "layouts" in theme:
             for s in ["default", "columns", "floating"]:
@@ -54,17 +54,18 @@ class WidgetsTheme:
     """Widgets-related theming."""
 
     def __init__(self, theme: Optional[dict] = None) -> None:
-        self.default: dict = dict()
-        self.icon: dict = dict()
-        self.battery: dict = dict()
-        self.calendar: dict = dict()
-        self.clock: dict = dict()
-        self.launcher: dict = dict()
-        self.quickexit: dict = dict()
-        self.volume: dict = dict()
-        self.current_layout_icon: dict = dict()
-        self.groupbox: dict = dict()
-        self.current_screen: dict = dict()
+        self.default: dict = {}
+        self.icon: dict = {}
+        self.battery: dict = {}
+        self.calendar: dict = {}
+        self.clock: dict = {}
+        self.launcher: dict = {}
+        self.quickexit: dict = {}
+        self.volume: dict = {}
+        self.current_layout_icon: dict = {}
+        self.notify: dict = {}
+        self.groupbox: dict = {}
+        self.current_screen: dict = {}
 
         if theme and "widgets" in theme:
             for s in [
@@ -77,6 +78,7 @@ class WidgetsTheme:
                 "quickexit",
                 "volume",
                 "current_layout_icon",
+                "notify",
                 "groupbox",
                 "current_screen",
             ]:

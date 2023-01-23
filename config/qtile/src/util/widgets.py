@@ -89,7 +89,7 @@ class WidgetsMaker:
             **{**self.widgets_theme.icon, **self.widgets_theme.current_layout_icon}
         }
         self._notify = {
-            **self.widgets_theme.default,
+            **{**self.widgets_theme.default, **self.widgets_theme.notify},
             "font": self.fonts_theme.default,
         }
         self._systray = {
