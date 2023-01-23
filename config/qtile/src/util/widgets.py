@@ -40,28 +40,21 @@ class WidgetsMaker:
             widget.GroupBox(**self._groupbox),
             widget.CurrentLayoutIcon(**self._current_layout_icon),
             widget.Spacer(**self._spacer),
-
+            widget.Notify(**self._notify),
             widget.Spacer(**self._spacer_stretch),
-
             widget.Clock(**self._clock),
-
             widget.Spacer(**self._spacer_stretch),
-
             # XXX: Systray does not support Wayland
             widget.Systray(**self._systray)
             if qtile.core.name == "x11"
             else widget.Spacer(**self._none),
-
             widget.Spacer(**self._spacer),
             widget.Volume(**self._volume),
-
             # Battery indicator is optional
             widget.Battery(**self._battery)
             if self.widgets_settings.show_battery
             else widget.Spacer(**self._none),
-
             widget.KeyboardLayout(**self._keyboard_layout),
-
             widget.QuickExit(**self._quick_exit),
             widget.Spacer(**self._spacer),
         ]
@@ -93,6 +86,10 @@ class WidgetsMaker:
         }
         self._current_layout_icon = {
             **{**self.widgets_theme.icon, **self.widgets_theme.current_layout_icon}
+        }
+        self._notify = {
+            **self.widgets_theme.default,
+            "font": self.fonts_theme.default,
         }
         self._systray = {
             **self.widgets_theme.default,
