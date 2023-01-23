@@ -1,5 +1,7 @@
 """Qtile configuration entrypoint."""
 
+from libqtile.config import Rule
+
 from src.bindings import make_keys, make_mouse
 from src.groups import make_groups
 from src.hooks import autostart  # pyright: ignore
@@ -38,7 +40,7 @@ screens = make_screens(
 
 # Other settings
 dgroups_key_binder = None
-dgroups_app_rules = []
+dgroups_app_rules: list[Rule] = []
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False

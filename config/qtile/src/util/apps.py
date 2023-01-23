@@ -1,5 +1,7 @@
 """Provides what the default apps are, and functions related to them."""
 
+from typing import Optional
+
 from libqtile import qtile
 
 
@@ -15,26 +17,40 @@ class Apps:
     def kill_window(self) -> None:
         """Kills the focused window."""
 
-        qtile.cmd_spawn(self.settings["KILL_WINDOW"])
+        if qtile is not None:
+            qtile.cmd_spawn(self.settings.get("KILL_WINDOW"))
 
     def open_browser(self) -> None:
-        qtile.cmd_spawn(self.settings["BROWSER"])
+        """Opens default web browser."""
+
+        if qtile is not None:
+            qtile.cmd_spawn(self.settings.get("BROWSER"))
 
     def open_calendar(self) -> None:
-        qtile.cmd_spawn(self.settings["CALENDAR"])
+        """Opens default calendar app."""
+
+        if qtile is not None:
+            qtile.cmd_spawn(self.settings.get("CALENDAR"))
 
     def open_launcher(self) -> None:
-        qtile.cmd_spawn(self.settings["LAUNCHER"])
+        """Opens default launcher."""
+
+        if qtile is not None:
+            qtile.cmd_spawn(self.settings.get("LAUNCHER"))
 
     def open_volume_control(self) -> None:
-        qtile.cmd_spawn(self.settings["VOLUME_CONTROL"])
+        """Opens default volume control app."""
 
-    def open_app(self, appname: str) -> None:
-        if appname in self.settings:
-            qtile.cmd_spawn(self.settings[appname])
+        if qtile is not None:
+            qtile.cmd_spawn(self.settings.get("VOLUME_CONTROL"))
 
-    def get_app(self, appname: str) -> None:
+    def open_app(self, name: str) -> None:
+        """Opens default app for a given name."""
+
+        if qtile is not None and name in self.settings:
+            qtile.cmd_spawn(self.settings.get(name))
+
+    def get_app(self, name: str) -> Optional[str]:
         """Retrieves specific name of app."""
 
-        if appname in self.settings:
-            return self.settings[appname]
+        return self.settings.get(name)
