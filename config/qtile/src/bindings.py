@@ -109,13 +109,6 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
             lazy.layout.decrease_nmaster(),
             desc="Shrink window (monadtall), decrease number in master pane (tile)",
         ),
-        # Toggle floating
-        Key(
-            [keyboard.SUPER],
-            "F",
-            lazy.window.toggle_floating(),
-            desc="Toggle floating mode on focused window",
-        ),
         # Move floating windows to front
         Key(
             [keyboard.SUPER, keyboard.SHIFT],
@@ -168,6 +161,12 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
             "E",
             lazy.spawn(apps.get_app("EDITOR")),
             desc="Open default editor",
+        ),
+        Key(
+            [keyboard.SUPER],
+            "F",
+            lazy.spawn(apps.get_app("FILE_MANAGER")),
+            desc="Open default file manager",
         ),
         # Screenshots
         Key(
