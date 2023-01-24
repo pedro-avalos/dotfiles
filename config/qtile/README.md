@@ -4,24 +4,30 @@ This is my Qtile configuration.
 
 ## Requirements
 
+If a requirement has a an asterisk (`*`) by it, it means that you can change
+this required package to whatever one you may want to replace it with.
+All you have to do is change the appropriate setting in
+`settings/setting.toml`.
+
 <details>
 <summary>Arch Linux</summary>
 
 - `xorg` & `wayland`
+- `light-locker`*
 - `qtile`
 - `python-pywlroots`
 - `python-dbus-next`
 - `python-pyxdg`
 - `picom`
-- `rofi` & `wofi`
+- `rofi`* & `wofi`*
 - `papirus-icon-theme`
-- `xdotool` & `wtype`
-- `kitty`
+- `xdotool`* & `wtype`*
+- `kitty`*
 - `network-manager-applet`
 - `redshift` & `gammastep`
-- `pamixer` & `pavucontrol`
-- `xfce4-screenshooter`
-- `firefox`
+- `pamixer` & `pavucontrol`*
+- `xfce4-screenshooter`*
+- `firefox`*
 - `ttf-fira-code`
 - `ttf-fira-mono`
 - `ttf-fira-sans`

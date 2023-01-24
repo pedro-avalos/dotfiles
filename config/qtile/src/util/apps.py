@@ -20,6 +20,12 @@ class Apps:
         if qtile is not None:
             qtile.cmd_spawn(self.settings.get("KILL_WINDOW"))
 
+    def lock(self) -> None:
+        """Uses default screen locker."""
+
+        if qtile is not None:
+            qtile.cmd_spawn(self.settings.get("LOCKER_CMD"))
+
     def open_browser(self) -> None:
         """Opens default web browser."""
 

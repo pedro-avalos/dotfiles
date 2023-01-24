@@ -10,7 +10,8 @@ CALENDAR       = "xdg-open https://calendar.google.com"
 EDITOR         = "kitty nvim"
 VOLUME_CONTROL = "pavucontrol"
 KILL_WINDOW    = "xdotool getwindowfocus windowkill"
-FILE_MANAGER   = "thunar" 
+FILE_MANAGER   = "thunar"
+LOCKER_CMD     = "light-locker-command -l"
 
 [apps.wayland]
 TERMINAL       = "kitty"
@@ -20,7 +21,8 @@ CALENDAR       = "xdg-open https://calendar.google.com"
 EDITOR         = "kitty nvim"
 VOLUME_CONTROL = "pavucontrol"
 KILL_WINDOW    = "wtype getwindowfocus windowkill"
-FILE_MANAGER   = "thunar" 
+FILE_MANAGER   = "thunar"
+LOCKER_CMD     = "light-locker-command -l"
 
 [widgets]
 show_battery = false

@@ -139,6 +139,12 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
         ),
         # Apps
         Key(
+            [keyboard.SUPER, keyboard.CTRL],
+            "L",
+            lazy.spawn(apps.get_app("LOCKER_CMD")),
+            desc="Use default screen locker",
+        ),
+        Key(
             [keyboard.SUPER],
             "R",
             lazy.spawn(apps.get_app("LAUNCHER")),
