@@ -1,11 +1,32 @@
 # Qtile
 
-This is my qtile configuration.
-
+This is my Qtile configuration.
 
 ## Requirements
 
-See `pkglist.txt`. (TODO)
+<details>
+<summary>Arch Linux</summary>
+
+- `xorg` & `wayland`
+- `qtile`
+- `python-pywlroots`
+- `python-dbus-next`
+- `python-pyxdg`
+- `picom`
+- `rofi` & `wofi`
+- `xdotool` & `wtype`
+- `kitty`
+- `network-manager-applet`
+- `redshift` & `gammastep`
+- `pamixer` & `pavucontrol`
+- `xfce4-screenshooter`
+- `firefox`
+- `ttf-fira-code`
+- `ttf-fira-mono`
+- `ttf-fira-sans`
+- `ttf-firacode-nerd`
+
+</details>
 
 ## Keybindings
 
