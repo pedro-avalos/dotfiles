@@ -1,60 +1,66 @@
 #!/usr/bin/env sh
 # File: install_dots.sh
 
+DOTS_DIR="${HOME}/.dotfiles"
+
+install_dots ()
+{
+  rm -rf "$2"
+  ln -Tsf "$1" "$2"
+}
+
 # Update dotfiles
 git -C ~/.dotfiles pull
 
 # Ensure directories exist
 echo "ensuring directories exist..."
-[ ! -d ~/.config ] && mkdir ~/.config
-[ ! -d ~/.local ] && mkdir ~/.local
-[ ! -d ~/.local/share ] && mkdir ~/.local/share
-[ ! -d ~/.local/share/xfce4 ] && mkdir ~/.local/share/xfce4
-[ ! -d ~/.local/share/xfce4/terminal ] && mkdir ~/.local/share/xfce4/terminal
+[ ! -d ~/.config ]      && mkdir "${HOME}/.config"
+[ ! -d ~/.local ]       && mkdir "${HOME}/.local"
+[ ! -d ~/.local/share ] && mkdir "${HOME}/.local/share"
 
 # Install dotfiles executables and scripts
 echo "installing dots scripts..."
-ln -Tsf ~/.dotfiles/bin ~/.bin
+install_dots "${DOTS_DIR}/bin" "${HOME}/.bin"
 
 # Install xfce dotfiles
 echo "installing xfce dots..."
-ln -Tsf ~/.dotfiles/local/share/xfce4/terminal/colorschemes ~/.local/share/xfce4/terminal/colorschemes
+install_dots "${DOTS_DIR}/local/share/xfce4" "${HOME}/.local/share/xfce4"
 
 # Install keybindings
 echo "installing inputrc dots..."
-ln -Tsf ~/.dotfiles/inputrc ~/.inputrc
+install_dots "${DOTS_DIR}/inputrc" "${HOME}/.inputrc"
 
 # Install bash dotfiles
 echo "installing bash dots..."
-ln -Tsf ~/.dotfiles/bashrc       ~/.bashrc
-ln -Tsf ~/.dotfiles/bashrc.d     ~/.bashrc.d
-ln -Tsf ~/.dotfiles/bash_profile ~/.bash_profile
-ln -Tsf ~/.dotfiles/bash_logout  ~/.bash_logout
+install_dots "${DOTS_DIR}/bashrc"       "${HOME}/.bashrc"
+install_dots "${DOTS_DIR}/bashrc.d"     "${HOME}/.bashrc.d"
+install_dots "${DOTS_DIR}/bash_profile" "${HOME}/.bash_profile"
+install_dots "${DOTS_DIR}/bash_logout"  "${HOME}/.bash_logout"
 
 # Install tmux dotfiles
 echo "installing tmux dots..."
-ln -Tsf ~/.dotfiles/config/tmux  ~/.config/tmux
-ln -Tsf ~/.dotfiles/config/tmuxp ~/.config/tmuxp
+install_dots "${DOTS_DIR}/config/tmux"  "${HOME}/.config/tmux"
+install_dots "${DOTS_DIR}/config/tmuxp" "${HOME}/.config/tmuxp"
 
 # Install gtk dotfiles
 echo "installing gtk dots..."
-ln -Tsf ~/.dotfiles/config/gtk-3.0 ~/.config/gtk-3.0
+install_dots "${DOTS_DIR}/config/gtk-3.0" "${HOME}/.config/gtk-3.0"
 
 # Install redshift dotfiles
 echo "installing redshift dots..."
-ln -Tsf ~/.dotfiles/config/redshift.conf ~/.config/redshift.conf
+install_dots "${DOTS_DIR}/config/redshift.conf" "${HOME}/.config/redshift.conf"
 
 # Install qtile dotfiles
 echo "installing qtile dots..."
-ln -Tsf ~/.dotfiles/config/qtile ~/.config/qtile
+install_dots "${DOTS_DIR}/config/qtile" "${HOME}/.config/qtile"
 
 # Install rofi dotfiles
 echo "installing rofi dots..."
-ln -Tsf ~/.dotfiles/config/rofi ~/.config/rofi
-ln -Tsf ~/.dotfiles/local/share/rofi ~/.local/share/rofi
+install_dots "${DOTS_DIR}/config/rofi"      "${HOME}/.config/rofi"
+install_dots "${DOTS_DIR}/local/share/rofi" "${HOME}/.local/share/rofi"
 
 # Install terminal dotfiles
 echo "installing kitty dots..."
-ln -Tsf ~/.dotfiles/config/kitty ~/.config/kitty
+install_dots "${DOTS_DIR}/config/kitty" "${HOME}/.config/kitty"
 echo "installing alacritty dots..."
-ln -Tsf ~/.dotfiles/config/alacritty ~/.config/alacritty
+install_dots "${DOTS_DIR}/config/alacritty" "${HOME}/.config/alacritty"
