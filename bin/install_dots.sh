@@ -46,8 +46,9 @@ install_dots "${DOTS_DIR}/config/tmuxp" "${HOME}/.config/tmuxp"
 echo "installing gtk dots..."
 install_dots "${DOTS_DIR}/config/gtk-3.0" "${HOME}/.config/gtk-3.0"
 
-# Install redshift dotfiles
-echo "installing redshift dots..."
+# Install color temperature dotfiles
+echo "installing color-temp dots..."
+install_dots "${DOTS_DIR}/config/gammastep"     "${HOME}/.config/gammastep"
 install_dots "${DOTS_DIR}/config/redshift.conf" "${HOME}/.config/redshift.conf"
 
 # Install qtile dotfiles

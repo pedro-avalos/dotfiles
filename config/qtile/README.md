@@ -24,7 +24,7 @@ All you have to do is change the appropriate setting in
 - `xdotool`* & `wtype`*
 - `kitty`*
 - `network-manager-applet`
-- `redshift` & `gammastep`
+- `gammastep`
 - `pamixer` & `pavucontrol`*
 - `xfce4-screenshooter`*
 - `firefox`*
