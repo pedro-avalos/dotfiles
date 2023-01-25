@@ -3,9 +3,7 @@
 # Configuration related to bat.
 
 # Check if bat exists in the first place
-if ! command -v bat &> /dev/null ; then
-  return
-fi
+! command -v bat &> /dev/null && return
 
 export MANROFFOPT='-c'
 export MANPAGER="sh -c 'col -bx | bat --language=man --plain'"

@@ -3,6 +3,8 @@
 
 DOTS_DIR="${HOME}/.dotfiles"
 
+# Helper function to replace existing file/directory with my dotfiles
+# Takes in two parameters: (src, dest)
 install_dots ()
 {
   rm -rf "$2"

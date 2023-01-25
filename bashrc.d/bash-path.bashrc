@@ -2,27 +2,16 @@
 # File: bash-path.bashrc
 # Add executable paths to PATH environmental variable.
 
-if [[ -d ${HOME}/bin ]] ; then
-  PATH="${PATH}:${HOME}/bin"
-fi
-
-if [[ -d ${HOME}/.bin ]] ; then
-  PATH="${PATH}:${HOME}/.bin"
-fi
-
-if [[ -d ${HOME}/.local/bin ]] ; then
-  PATH="${PATH}:${HOME}/.local/bin"
-fi
+# Expected executable paths
+[[ -d ${HOME}/bin ]]        && PATH="${PATH}:${HOME}/bin"
+[[ -d ${HOME}/.bin ]]       && PATH="${PATH}:${HOME}/.bin"
+[[ -d ${HOME}/.local/bin ]] && PATH="${PATH}:${HOME}/.local/bin"
 
 # Neovim executables, e.g. updating repository
-if [[ -d ${HOME}/.config/nvim/bin ]] ; then
-  PATH="${PATH}:${HOME}/.config/nvim/bin"
-fi
+[[ -d ${HOME}/.config/nvim/bin ]] && PATH="${PATH}:${HOME}/.config/nvim/bin"
 
-# Doom Emacs
-if [[ -d ${HOME}/.emacs.d/bin ]] ; then
-  PATH="${PATH}:${HOME}/.emacs.d/bin"
-fi
+# Emacs executables, e.g. Doom Emacs
+[[ -d ${HOME}/.emacs.d/bin ]] && PATH="${PATH}:${HOME}/.emacs.d/bin"
 
 export PATH
 
