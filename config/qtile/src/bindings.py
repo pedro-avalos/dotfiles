@@ -137,6 +137,12 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
             lazy.window.kill(),
             desc="Close focused window",
         ),
+        Key(
+            [keyboard.ALT],
+            "F4",
+            lazy.window.kill(),
+            desc="Close focused window",
+        ),
         # Apps
         Key(
             [keyboard.SUPER, keyboard.CTRL],
@@ -272,6 +278,12 @@ def make_mouse() -> list:
             mouse.RIGHT,
             lazy.window.set_size_floating(),
             start=lazy.window.get_size(),
+        ),
+        # Click windows (toggle floating)
+        Click(
+            [keyboard.SUPER],
+            mouse.LEFT,
+            lazy.window.toggle_floating(),
         ),
         # Bring a floating window to the front
         Click(
