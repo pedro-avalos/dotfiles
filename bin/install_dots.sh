@@ -39,10 +39,10 @@ done
 install_dots ()
 {
   if [ "${FORCE}" ] ; then
-    rm -rfi "$2"
-    ln -Tsf "$1" "$2"
+    rm -rf  "$2"      2> /dev/null
+    ln -Tsf "$1" "$2" 2> /dev/null
   else
-    ln -Ts "$1" "$2"
+    ln -Ts "$1" "$2" 2> /dev/null
   fi
 }
 
