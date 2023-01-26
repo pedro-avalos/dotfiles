@@ -1,5 +1,6 @@
 ;; author Pedro Avalos
 ;; file: init.el
+;; Do not edit init.el. Edit config.org instead.
 
 (org-babel-load-file
  (expand-file-name
