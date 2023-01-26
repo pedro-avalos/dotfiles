@@ -279,12 +279,6 @@ def make_mouse() -> list:
             lazy.window.set_size_floating(),
             start=lazy.window.get_size(),
         ),
-        # Click windows (toggle floating)
-        Click(
-            [keyboard.SUPER],
-            mouse.LEFT,
-            lazy.window.toggle_floating(),
-        ),
         # Bring a floating window to the front
         Click(
             [keyboard.SUPER],
@@ -301,5 +295,11 @@ def make_mouse() -> list:
             [keyboard.SUPER],
             mouse.WHEEL_DOWN,
             lazy.screen.next_group(),
+        ),
+        # Click windows (toggle floating)
+        Click(
+            [keyboard.SUPER, keyboard.SHIFT],
+            mouse.LEFT,
+            lazy.window.toggle_floating(),
         ),
     ]
