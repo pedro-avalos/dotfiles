@@ -159,6 +159,24 @@ with: ~M-x all-the-icons-install-fonts~.
     :custom ((doom-modeline-height 15)))
 #+END_SRC
 
+*** Dashboard
+
+I like a nice and pretty startup screen.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Install and enable the dashboard
+  (use-package dashboard
+    :config
+    (dashboard-setup-startup-hook))
+
+  ;; Use all-the-icons font
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+
+  (setq dashboard-set-navigator t) ; Show navigator below the banner
+  (setq dashboard-set-init-info t) ; Show info about the packages and init time
+#+END_SRC
+
 ** Keybindings
 
 I prefer vim keybindings, sorry not sorry.
