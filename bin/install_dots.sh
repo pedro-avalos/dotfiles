@@ -39,9 +39,6 @@ install_dots "${DOTS_DIR}/bashrc.d"     "${HOME}/.bashrc.d"
 install_dots "${DOTS_DIR}/bash_profile" "${HOME}/.bash_profile"
 install_dots "${DOTS_DIR}/bash_logout"  "${HOME}/.bash_logout"
 
-echo "installing emacs dots..."
-install_dots "${DOTS_DIR}/emacs.d" "${HOME}/.emacs.d"
-
 # Install tmux dotfiles
 echo "installing tmux dots..."
 install_dots "${DOTS_DIR}/config/tmux"  "${HOME}/.config/tmux"
