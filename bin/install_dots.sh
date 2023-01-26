@@ -44,6 +44,9 @@ echo "installing tmux dots..."
 install_dots "${DOTS_DIR}/config/tmux"  "${HOME}/.config/tmux"
 install_dots "${DOTS_DIR}/config/tmuxp" "${HOME}/.config/tmuxp"
 
+echo "installing emacs dots..."
+install_dots "${DOTS_DIR}/emacs.d"  "${HOME}/.emacs.d"
+
 # Install gtk dotfiles
 echo "installing gtk dots..."
 install_dots "${DOTS_DIR}/config/gtk-3.0" "${HOME}/.config/gtk-3.0"
