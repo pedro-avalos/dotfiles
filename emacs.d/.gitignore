@@ -1,2 +1,8 @@
+# Plugins
 elpa/
+
+# Compiled configuration
 config.el
+
+# Customization variables
+custom.el
