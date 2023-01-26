@@ -193,6 +193,6 @@ I prefer vim keybindings, sorry not sorry.
 #+BEGIN_SRC emacs-lisp
   ;; Use spaces, not tabs
   (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 4)
+  (setq-default tab-width 2)
   (setq indent-line-function 'insert-tab)
 #+END_SRC
