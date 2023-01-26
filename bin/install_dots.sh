@@ -42,7 +42,6 @@ install_dots ()
     rm -rfi "$2"
     ln -Tsf "$1" "$2"
   else
-    rm -r "$2"
     ln -Ts "$1" "$2"
   fi
 }
