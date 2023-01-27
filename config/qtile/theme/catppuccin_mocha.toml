@@ -3,8 +3,8 @@ wallpaper = "~/.config/qtile/wallpaper/catppuccin.png"
 wallpaper_mode = "fill"
 
 [fonts]
-default = "Fira Sans"
-symbols = "FiraCode Nerd Font"
+default = "IBM Plex Sans"
+symbols = "BlexMono Nerd Font"
 
 [layouts]
 [layouts.default]
