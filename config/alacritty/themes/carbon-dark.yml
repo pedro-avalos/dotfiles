@@ -1,0 +1,32 @@
+# File: oxocarbon.yaml
+# Color scheme based on the Carbon Design System (Gray 100)
+# https://ibm.com/design/language/color
+
+colors:
+  primary:
+    foreground: "#f4f4f4"
+    background: "#161616"
+
+  selection:
+    text:       "#161616"
+    background: "#8d8d8d"
+
+  normal:
+    black:   "#161616"
+    red:     "#fa4d56"
+    green:   "#42be65"
+    yellow:  "#f1c21b"
+    blue:    "#4589ff"
+    magenta: "#ff7eb6"
+    cyan:    "#bae6ff"
+    white:   "#f4f4f4"
+
+  bright:
+    black:   "#000000"
+    red:     "#da1e28"
+    green:   "#24a148"
+    yellow:  "#f1c21b"
+    blue:    "#0f62fe"
+    magenta: "#d12771"
+    cyan:    "#33b1ff"
+    white:   "#ffffff"

@@ -1,4 +1,4 @@
 # File: alacritty.yml
 
 import:
-  - ~/.config/alacritty/themes/catppuccin-mocha.yml
+  - ~/.config/alacritty/themes/carbon-dark.yml
