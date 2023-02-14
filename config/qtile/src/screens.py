@@ -48,21 +48,22 @@ def make_screens(
         ),
     ]
 
-    # TODO: Add this back in when it works for Wayland too
-    # monitors: list[str] = get_monitors()
-    # if len(monitors) > 1:
-    #     subprocess.call(["autorandr"])
+    monitors: list[str] = get_monitors()
+    if len(monitors) > 1:
+        subprocess.call(["autorandr"])
 
-    # for _ in range(1, len(monitors)):
-    #     screens.append(
-    #         Screen(
-    #             top=Bar(
-    #                 widgets_maker.other_widgets,
-    #                 32,
-    #                 opacity=0.95,
-    #                 margin=6,
-    #             ),
-    #         )
-    #     )
+    screens.extend(
+        [
+            Screen(
+                top=Bar(
+                    widgets_maker.other_widgets,
+                    32,
+                    opacity=0.95,
+                    margin=6,
+                )
+            )
+            for _ in range(1, len(monitors))
+        ]
+    )
 
     return screens
