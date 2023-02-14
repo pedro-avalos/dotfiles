@@ -12,7 +12,7 @@ from .util import scripts
 def autostart() -> None:
     """Executes startup programs."""
 
-    subprocess.call([scripts.autostart])
+    subprocess.Popen([scripts.autostart])
 
 
 @hook.subscribe.client_new
