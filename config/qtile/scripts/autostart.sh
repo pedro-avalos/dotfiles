@@ -4,11 +4,11 @@
 
 gnome-keyring-daemon --start --components=secrets &
 light-locker --lock-on-lid &
-nm-applet &
+nm-applet --indicator &
 gammastep-indicator &
 
 if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
   picom -b &
-# elif [ "${XDG_SESSION_TYPE}" = "wayland" ] ; then
-#   :
+elif [ "${XDG_SESSION_TYPE}" = "wayland" ] ; then
+  :
 fi
