@@ -76,8 +76,9 @@ install_dots "${DOTS_DIR}/emacs.d"  "${HOME}/.emacs.d"
 echo "installing gtk dots..."
 install_dots "${DOTS_DIR}/config/gtk-3.0" "${HOME}/.config/gtk-3.0"
 
-echo "installing qtile dots..."
+echo "installing window manager dots..."
 install_dots "${DOTS_DIR}/config/qtile" "${HOME}/.config/qtile"
+install_dots "${DOTS_DIR}/dwm" "${HOME}/.dwm"
 
 echo "installing qutebrowser dots..."
 install_dots "${DOTS_DIR}/config/qutebrowser" "${HOME}/.config/qutebrowser"

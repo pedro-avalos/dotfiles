@@ -1,0 +1,1 @@
+../config/qtile/scripts/autostart.sh
