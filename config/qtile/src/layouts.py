@@ -33,7 +33,7 @@ def make_floating_layout(layouts_theme: LayoutsTheme) -> layout.Floating:
     return layout.Floating(
         float_rules=[
             Match(title="Open File"),
-            Match(title="File Operation Progress", wm_class="thunar"), # Wayland
+            Match(title="File Operation Progress", wm_class="thunar"),  # Wayland
             Match(wm_class="Arandr"),
             Match(wm_class="org.kde.ark"),
             Match(wm_class="confirm"),
@@ -50,7 +50,7 @@ def make_floating_layout(layouts_theme: LayoutsTheme) -> layout.Floating:
             Match(wm_class="popup_menu"),
             Match(wm_class="splash"),
             Match(wm_class="pavucontrol"),
-            Match(wm_class="Pinentry-gtk-2"), # GPG key password entry
+            Match(wm_class="Pinentry-gtk-2"),  # GPG key password entry
             Match(wm_class="pinentry"),  # GPG key password entry
             Match(wm_class="qt5ct"),
             Match(wm_class="ssh-askpass"),

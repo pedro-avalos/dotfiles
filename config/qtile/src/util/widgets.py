@@ -1,6 +1,6 @@
 """Provides the widgets to be used by the bar(s)."""
 
-from libqtile import qtile, widget
+from libqtile import widget
 
 from . import compositor
 from .apps import Apps
