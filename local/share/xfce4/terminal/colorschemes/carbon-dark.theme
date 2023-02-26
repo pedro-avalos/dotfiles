@@ -1,0 +1,11 @@
+[Scheme]
+Name=Carbon-dark
+ColorCursor=#f4f4f4
+ColorCursorUseDefault=FALSE
+ColorForeground=#f4f4f4
+ColorBackground=#161616
+ColorSelectionBackground=#8d8d8d
+ColorSelection=#161616
+ColorSelectionUseDefault=FALSE
+TabActivityColor=#FF8389
+ColorPalette=#161616;#FA4D56;#42BE65;#F1C21B;#4589FF;#FF7EB6;#BAE6FF;#F4F4F4;#000000;#DA1E28;#24A148;#F1C21B;#0F62FE;#D12771;#33B1FF;#FFFFFF
