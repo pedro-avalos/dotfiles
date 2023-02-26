@@ -4,8 +4,8 @@
 LOC=$( readlink -f "$0" )
 DIR=$( dirname "${LOC}" )
 
-export SEPL=""
-export SEPR=" | "
+export SEPL=" ["
+export SEPR="] "
 
 # Source modules
 . "${DIR}/modules/battery.sh"

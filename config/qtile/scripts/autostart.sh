@@ -1,13 +1,12 @@
 #!/usr/bin/env sh
-# File: .xprofile
+# File: autostart.sh
 
-gnome-keyring-daemon --start --components=secrets &
-light-locker --lock-on-lid &
+nm-applet --indicator &
 
 if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
-  picom -b &
+	redshift-gtk &
 elif [ "${XDG_SESSION_TYPE}" = "wayland" ] ; then
-  :
+	gammastep-indicator &
 fi
 
 # vim: ft=sh
