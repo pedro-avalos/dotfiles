@@ -1,259 +1,238 @@
 """Provides the bindings (mouse and keyboard) used by qtile."""
 
-from libqtile.config import Click, Drag, Group, Key
+from libqtile.config import Click, Drag, Group, Key, Mouse
 from libqtile.lazy import lazy
 
-from .util import lazy_functions, scripts
 from .util.apps import Apps
-from .util.io import keyboard, mouse
+from .util.io import keyboard as kb
+from .util.io import mouse as m
+from .util.lazy_functions import (
+    float_to_front,
+    traverse_down,
+    traverse_left,
+    traverse_right,
+    traverse_up,
+)
 
 
 def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
     keys: list[Key] = [
-        # Layout controls
+        # Window management
         Key(
-            [keyboard.SUPER],
-            keyboard.TAB,
-            lazy.next_layout(),
-            desc="Toggle between layouts",
-        ),
-        # Change focus
-        Key(
-            [keyboard.SUPER],
-            keyboard.SPACE,
-            lazy.layout.next(),
-            desc="Switch window focus to other pane(s) of stack",
+            [kb.SUPER, kb.CTRL],
+            "Q",
+            lazy.window.kill(),
+            desc="Close window",
         ),
         Key(
-            [keyboard.SUPER],
-            "K",
-            lazy.layout.up(),
-            desc="Move focus up in stack pane",
-        ),
-        Key(
-            [keyboard.SUPER],
-            "J",
-            lazy.layout.down(),
-            desc="Move focus down in stack pane",
-        ),
-        Key(
-            [keyboard.SUPER],
-            "H",
-            lazy.layout.left(),
-            desc="Move focus left in stack pane",
-        ),
-        Key(
-            [keyboard.SUPER],
-            "L",
-            lazy.layout.right(),
-            desc="Move focus right in stack pane",
-        ),
-        # Move window
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            keyboard.SPACE,
-            lazy.layout.rotate(),
-            lazy.layout.flip(),
-            desc="Swap panes of split stack",
-        ),
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            "K",
-            lazy.layout.shuffle_up(),
-            lazy.layout.section_up(),
-            desc="Move window up in current stack",
-        ),
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            "J",
-            lazy.layout.shuffle_down(),
-            lazy.layout.section_down(),
-            desc="Move window down in current stack",
-        ),
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            "H",
-            lazy.layout.shuffle_left(),
-            desc="Move window left in current stack",
-        ),
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            "L",
-            lazy.layout.shuffle_right(),
-            desc="Move window right in current stack",
-        ),
-        # Resize window or increase number in master (tile)
-        Key(
-            [keyboard.SUPER],
-            "M",
-            lazy.layout.maximize(),
-            desc="Toggle between min and max sizes",
-        ),
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            "M",
-            lazy.layout.toggle_fullscreen(),
+            [kb.SUPER],
+            "F",
+            lazy.window.toggle_fullscreen(),
             desc="Toggle fullscreen",
         ),
         Key(
-            [keyboard.SUPER, keyboard.CTRL],
-            "K",
-            lazy.layout.grow(),
-            lazy.layout.increase_nmaster(),
-            desc="Expand window (monadtall), increase number in master pane (tile)",
+            [kb.SUPER, kb.SHIFT],
+            kb.SPACE,
+            lazy.window.toggle_floating(),
+            desc="Toggle floating",
         ),
         Key(
-            [keyboard.SUPER, keyboard.CTRL],
+            [kb.SUPER],
+            kb.SPACE,
+            float_to_front,
+            desc="Float to front",
+        ),
+        Key(
+            [kb.SUPER],
             "J",
-            lazy.layout.shrink(),
-            lazy.layout.decrease_nmaster(),
-            desc="Shrink window (monadtall), decrease number in master pane (tile)",
-        ),
-        # Move floating windows to front
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            "F",
-            lazy_functions.float_to_front,
-            desc="Move floating windows to front",
-        ),
-        # Toggle split
-        Key(
-            [keyboard.SUPER, keyboard.SHIFT],
-            keyboard.RETURN,
-            lazy.layout.toggle_split(),
-            desc="Toggle between split and unsplit sides of stack",
-        ),
-        # Reset windows/layout
-        Key(
-            [keyboard.SUPER],
-            "N",
-            lazy.layout.normalize(),
-            desc="Normalize window size ratios",
-        ),
-        # Close window
-        Key(
-            [keyboard.SUPER],
-            "W",
-            lazy.window.kill(),
-            desc="Close focused window",
+            traverse_down,
+            desc="Traverse down",
         ),
         Key(
-            [keyboard.ALT],
-            "F4",
-            lazy.window.kill(),
-            desc="Close focused window",
+            [kb.SUPER],
+            "K",
+            traverse_up,
+            desc="Traverse up",
         ),
-        # Apps
         Key(
-            [keyboard.SUPER, keyboard.CTRL],
+            [kb.SUPER],
+            "H",
+            traverse_left,
+            desc="Traverse left",
+        ),
+        Key(
+            [kb.SUPER],
             "L",
-            lazy.spawn(apps.get_app("LOCKER_CMD")),
-            desc="Use default screen locker",
+            traverse_right,
+            desc="Traverse right",
         ),
         Key(
-            [keyboard.SUPER],
+            [kb.SUPER, kb.SHIFT],
+            "J",
+            lazy.layout.shuffle_down(),
+            desc="Shuffle down",
+        ),
+        Key(
+            [kb.SUPER, kb.SHIFT],
+            "K",
+            lazy.layout.shuffle_up(),
+            desc="Shuffle up",
+        ),
+        Key(
+            [kb.SUPER, kb.SHIFT],
+            "H",
+            lazy.layout.shuffle_left(),
+            desc="Shuffle left",
+        ),
+        Key(
+            [kb.SUPER, kb.SHIFT],
+            "L",
+            lazy.layout.shuffle_right(),
+            desc="Shuffle right",
+        ),
+        Key(
+            [kb.SUPER, kb.ALT],
+            "J",
+            lazy.layout.grow_down(),
+            desc="Grow down",
+        ),
+        Key(
+            [kb.SUPER, kb.ALT],
+            "K",
+            lazy.layout.grow_up(),
+            desc="Grow up",
+        ),
+        Key(
+            [kb.SUPER, kb.ALT],
+            "H",
+            lazy.layout.grow_left(),
+            desc="Grow left",
+        ),
+        Key(
+            [kb.SUPER, kb.ALT],
+            "L",
+            lazy.layout.grow_right(),
+            desc="Grow right",
+        ),
+        Key(
+            [kb.SUPER, kb.SHIFT],
             "R",
-            lazy.spawn(apps.get_app("LAUNCHER")),
-            desc="Open default launcher",
+            lazy.reload_config(),
+            desc="Reload config",
         ),
         Key(
-            [keyboard.SUPER],
-            keyboard.RETURN,
-            lazy.spawn(apps.get_app("TERMINAL")),
-            desc="Open default terminal",
+            [kb.SUPER, kb.CTRL],
+            "R",
+            lazy.restart(),
+            desc="Restart qtile",
         ),
         Key(
-            [keyboard.SUPER],
-            "B",
-            lazy.spawn(apps.get_app("BROWSER")),
-            desc="Open default browser",
+            [kb.SUPER],
+            kb.TAB,
+            lazy.next_layout(),
+            desc="Next layout",
         ),
         Key(
-            [keyboard.SUPER],
-            "E",
-            lazy.spawn(apps.get_app("EDITOR")),
-            desc="Open default editor",
+            [kb.SUPER, kb.CTRL],
+            "H",
+            lazy.window.toggle_minimize(),
+            desc="Minimize window",
         ),
         Key(
-            [keyboard.SUPER],
-            "F",
-            lazy.spawn(apps.get_app("FILE_MANAGER")),
-            desc="Open default file manager",
-        ),
-        # Screenshots
-        Key(
-            [],
-            keyboard.PRINT,
-            lazy.spawn("xfce4-screenshooter"),
-            desc="Open screenshot utility",
+            [kb.SUPER],
+            "S",
+            lazy.window.static(),
+            desc="Make window static",
         ),
         Key(
-            [keyboard.ALT],
-            keyboard.PRINT,
-            lazy.spawn("xfce4-screenshooter -f -c"),
-            desc="Take fullscreen screenshot",
+            [kb.SUPER, kb.CTRL],
+            kb.ESC,
+            lazy.shutdown(),
+            desc="Shutdown qtile",
         ),
         # Volume controls
         Key(
             [],
-            keyboard.AUDIO_RAISE_VOLUME,
+            kb.AUDIO_RAISE_VOLUME,
             lazy.spawn("pamixer -i 2"),
             desc="Raise volume",
         ),
         Key(
             [],
-            keyboard.AUDIO_LOWER_VOLUME,
+            kb.AUDIO_LOWER_VOLUME,
             lazy.spawn("pamixer -d 2"),
             desc="Lower volume",
         ),
         Key(
             [],
-            keyboard.AUDIO_MUTE,
+            kb.AUDIO_MUTE,
             lazy.spawn("pamixer -t"),
             desc="Toggle mute",
         ),
-        # Brightness
+        # Brightness control
         Key(
             [],
-            keyboard.BRIGHTNESS_UP,
+            kb.BRIGHTNESS_UP,
             lazy.spawn("brightnessctl set +5%"),
-            desc="Increase monitor brightness",
+            desc="Increase brightness",
         ),
         Key(
             [],
-            keyboard.BRIGHTNESS_DOWN,
+            kb.BRIGHTNESS_DOWN,
             lazy.spawn("brightnessctl set 5%-"),
-            desc="Decrease monitor brightness",
+            desc="Decrease brightness",
         ),
-        # Reload qtile configuration
+        # Apps
         Key(
-            [keyboard.SUPER, keyboard.CTRL],
+            [kb.SUPER],
+            kb.RETURN,
+            lazy.spawn(apps["TERMINAL"]),
+            desc="Spawn terminal",
+        ),
+        Key(
+            [kb.SUPER],
             "R",
-            lazy.reload_config(),
-            desc="Restart qtile config",
+            lazy.spawn(apps["LAUNCHER"]),
+            desc="Spawn launcher",
         ),
-        # Quit qtile
         Key(
-            [keyboard.SUPER, keyboard.CTRL],
-            "Q",
-            lazy.shutdown(),
-            desc="Exit qtile",
+            [kb.SUPER, kb.CTRL],
+            "L",
+            lazy.spawn(apps["LOCKER_CMD"]),
+            desc="Spawn screenlocker",
+        ),
+        Key(
+            [kb.SUPER, kb.SHIFT],
+            "B",
+            lazy.spawn(apps["BROWSER"]),
+            desc="Spawn browser",
+        ),
+        # Screenshots
+        Key(
+            [],
+            kb.PRINT,
+            lazy.spawn("xfce4-screenshooter"),
+            desc="Spawn screenshot",
+        ),
+        Key(
+            [kb.ALT],
+            kb.PRINT,
+            lazy.spawn("xfce4-screenshooter"),
+            desc="Spawn full screenshot",
         ),
     ]
 
     for group in groups:
         keys.extend(
             [
-                # super + num = switch to group
                 Key(
-                    [keyboard.SUPER],
+                    [kb.SUPER],
                     group.name,
                     lazy.group[group.name].toscreen(),
                     desc=f"Switch to group {group.name}",
                 ),
-                # super + shift + name = move focused window to group
                 Key(
-                    [keyboard.SUPER, keyboard.SHIFT],
+                    [kb.SUPER, kb.SHIFT],
                     group.name,
                     lazy.window.togroup(group.name),
                     desc=f"Move focused window to group {group.name}",
@@ -264,42 +243,30 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
     return keys
 
 
-def make_mouse() -> list:
+def make_mouse() -> list[Mouse]:
     return [
-        # Drag windows (turns into a floating mode)
+        # Window control
         Drag(
-            [keyboard.SUPER],
-            mouse.LEFT,
+            [kb.SUPER],
+            m.LEFT,
             lazy.window.set_position_floating(),
+            start=lazy.window.get_position(),
         ),
-        # Resize windows (turns into a floating window)
         Drag(
-            [keyboard.SUPER],
-            mouse.RIGHT,
+            [kb.SUPER],
+            m.RIGHT,
             lazy.window.set_size_floating(),
             start=lazy.window.get_size(),
         ),
-        # Bring a floating window to the front
+        # Group control
         Click(
-            [keyboard.SUPER],
-            mouse.MIDDLE,
-            lazy.window.bring_to_front(),
-        ),
-        # Change group
-        Click(
-            [keyboard.SUPER],
-            mouse.WHEEL_UP,
+            [kb.SUPER],
+            m.WHEEL_UP,
             lazy.screen.prev_group(),
         ),
         Click(
-            [keyboard.SUPER],
-            mouse.WHEEL_DOWN,
+            [kb.SUPER],
+            m.WHEEL_DOWN,
             lazy.screen.next_group(),
-        ),
-        # Click windows (toggle floating)
-        Click(
-            [keyboard.SUPER, keyboard.SHIFT],
-            mouse.LEFT,
-            lazy.window.toggle_floating(),
         ),
     ]

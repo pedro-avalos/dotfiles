@@ -46,6 +46,15 @@ All you have to do is change the appropriate setting in
 
 </details>
 
+### Mod1
+
+<details>
+<summary>Keymapping image</summary>
+
+![no mod bindings](./mod1.png "Mod1 bindings")
+
+</details>
+
 ### Mod4
 
 <details>
@@ -73,3 +82,12 @@ All you have to do is change the appropriate setting in
 
 </details>
 
+
+### Mod4 + Control
+
+<details>
+<summary>Keymapping image</summary>
+
+![mod4+control bindings](./mod4-mod1.png "Mod4+Mod1 bindings")
+
+</details>

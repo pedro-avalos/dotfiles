@@ -2,10 +2,10 @@
 
 from libqtile import layout
 
-from .util import theme
+from .util.theme import LayoutsTheme
 
 
-def make_layouts(layouts_theme: theme.LayoutsTheme) -> list:
+def make_layouts(layouts_theme: LayoutsTheme) -> list:
     """Creates the layouts used."""
 
     return [
@@ -26,7 +26,7 @@ def make_layouts(layouts_theme: theme.LayoutsTheme) -> list:
     ]
 
 
-def make_floating_layout(layouts_theme: theme.LayoutsTheme) -> layout.Floating:
+def make_floating_layout(layouts_theme: LayoutsTheme) -> layout.Floating:
     """Creates the floating layout used."""
 
     return layout.Floating(

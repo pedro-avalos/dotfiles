@@ -4,27 +4,20 @@ from typing import Optional
 
 from libqtile import qtile
 
+from . import compositor
+
 
 class Apps:
-    """Holds app-related functions"""
+    """Holds app names and app-related functions."""
 
     def __init__(self, settings: dict) -> None:
         assert "apps" in settings
-        compositor: str = "x11" if qtile is None else qtile.core.name
-        assert compositor in settings["apps"]
-        self.settings: dict = settings["apps"][compositor]
-
-    def kill_window(self) -> None:
-        """Kills the focused window."""
-
-        if qtile is not None:
-            qtile.cmd_spawn(self.settings.get("KILL_WINDOW"))
-
-    def lock(self) -> None:
-        """Uses default screen locker."""
-
-        if qtile is not None:
-            qtile.cmd_spawn(self.settings.get("LOCKER_CMD"))
+        assert "common" in settings["apps"]
+        assert compositor.name in settings["apps"]
+        self.settings: dict = {
+            **settings["apps"]["common"],
+            **settings["apps"][compositor.name],
+        }
 
     def open_browser(self) -> None:
         """Opens default web browser."""
@@ -56,7 +49,6 @@ class Apps:
         if qtile is not None and name in self.settings:
             qtile.cmd_spawn(self.settings.get(name))
 
-    def get_app(self, name: str) -> Optional[str]:
-        """Retrieves specific name of app."""
-
-        return self.settings.get(name)
+    def __getitem__(self, key: str) -> Optional[str]:
+        val = self.settings.get(key)
+        return None if val is None else val

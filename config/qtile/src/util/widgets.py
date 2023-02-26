@@ -2,6 +2,7 @@
 
 from libqtile import qtile, widget
 
+from . import compositor
 from .apps import Apps
 from .io import mouse
 from .settings import WidgetsSettings
@@ -27,13 +28,11 @@ class WidgetsMaker:
         widgets_settings: WidgetsSettings,
         apps: Apps,
     ) -> None:
-
         self.fonts_theme: FontsTheme = fonts_theme
         self.widgets_theme: WidgetsTheme = widgets_theme
         self.widgets_settings: WidgetsSettings = widgets_settings
         self.apps: Apps = apps
         self._create_settings()
-        compositor: str = "x11" if qtile is None else qtile.core.name
         self.main_widgets = [
             widget.Spacer(**self._spacer),
             widget.TextBox(**self._launcher),
@@ -47,14 +46,14 @@ class WidgetsMaker:
             widget.Spacer(**self._spacer_stretch),
             # XXX: Systray does not support Wayland
             widget.Systray(**self._systray)
-            if compositor == "x11"
-            else widget.Spacer(**self._none),
+            if compositor.name == "x11"
+            else widget.StatusNotifier(**self._systray),
             widget.Spacer(**self._spacer),
             widget.Volume(**self._volume),
             # Battery indicator is optional
             widget.Battery(**self._battery)
             if self.widgets_settings.show_battery
-            else widget.Spacer(**self._none),
+            else widget.TextBox(**self._none),
             widget.KeyboardLayout(**self._keyboard_layout),
             widget.QuickExit(**self._quick_exit),
             widget.Spacer(**self._spacer),
@@ -73,7 +72,7 @@ class WidgetsMaker:
 
         self._spacer_stretch = {**self.widgets_theme.default}
         self._spacer = {**self.widgets_theme.default, "length": 6}
-        self._none = {**self.widgets_theme.default, "length": 0}
+        self._none = {**self.widgets_theme.default, "text": "", "length": 0}
         self._launcher = {
             **{**self.widgets_theme.icon, **self.widgets_theme.launcher},
             "font": self.fonts_theme.symbols,

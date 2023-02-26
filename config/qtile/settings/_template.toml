@@ -2,27 +2,24 @@
 name = "carbon"
 
 [apps]
-[apps.x11]
-TERMINAL       = "kitty"
-BROWSER        = "firefox"
-LAUNCHER       = "rofi -show drun"
-CALENDAR       = "xdg-open https://calendar.google.com"
-EDITOR         = "kitty nvim"
+[apps.common]
+TERMINAL        = "kitty"
+BROWSER         = "firefox"
+CALENDAR        = "xdg-open https://calendar.google.com"
+EDITOR          = "kitty nvim"
 VOLUME_CONTROL = "pavucontrol"
-KILL_WINDOW    = "xdotool getwindowfocus windowkill"
 FILE_MANAGER   = "thunar"
-LOCKER_CMD     = "light-locker-command -l"
+LOCKER_CMD      = "light-locker-command -l"
+SCREENSHOT      = "xfce4-screenshooter"
+FULL_SCREENSHOT = "xfce4-screenshooter -f -c"
+
+[apps.x11]
+LAUNCHER        = "rofi -show drun"
+KILL_WINDOW     = "xdotool getwindowfocus windowkill"
 
 [apps.wayland]
-TERMINAL       = "kitty"
-BROWSER        = "firefox"
 LAUNCHER       = "wofi --show drun"
-CALENDAR       = "xdg-open https://calendar.google.com"
-EDITOR         = "kitty nvim"
-VOLUME_CONTROL = "pavucontrol"
 KILL_WINDOW    = "wtype getwindowfocus windowkill"
-FILE_MANAGER   = "thunar"
-LOCKER_CMD     = "light-locker-command -l"
 
 [widgets]
 show_battery = false
