@@ -4,7 +4,7 @@ from libqtile.config import Rule
 
 from src.bindings import make_keys, make_mouse
 from src.groups import make_groups
-from src.hooks import autostart, float_windows  # pyright: ignore
+from src.hooks import float_windows  # pyright: ignore
 from src.layouts import make_floating_layout, make_layouts
 from src.screens import make_screens
 from src.util import settings, theme
