@@ -1,7 +1,8 @@
 """Provides useful lazy functions."""
 
-from typing import Literal
+from typing import Literal, Union
 
+from libqtile.backend.base import WindowType
 from libqtile.config import Screen
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
@@ -42,9 +43,9 @@ def traverse_right(qtile: Qtile) -> None:
 def _focus_window(qtile: Qtile, dir: Literal[-1, 1], axis: Literal["x", "y"]) -> None:
     win = None
     win_wide = None
-    dist = 10_000
-    dist_wide = 10_000
-    cur = qtile.current_window
+    dist: int = 10_000
+    dist_wide: int = 10_000
+    cur: Union[WindowType, Screen, None] = qtile.current_window
     if not cur:
         cur = qtile.current_screen
 

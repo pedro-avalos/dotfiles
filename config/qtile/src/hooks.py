@@ -5,7 +5,7 @@ import subprocess
 from libqtile import hook
 
 from .util import scripts
-from .util.compositor import float_windows # pyright: ignore
+from .util.compositor import float_windows  # pyright: ignore
 
 
 @hook.subscribe.startup_once

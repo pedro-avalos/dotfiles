@@ -1,9 +1,8 @@
-from libqtile import hook
-from libqtile.backend.base import Window
+from libqtile import hook, qtile
 
 
 @hook.subscribe.client_new
-def float_windows(window: Window):
+def float_windows(window):
     if window.window.get_wm_type == "desktop":
         window.cmd_static(qtile.current_screen.index)
         return

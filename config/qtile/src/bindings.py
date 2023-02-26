@@ -93,25 +93,29 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
         Key(
             [kb.SUPER, kb.ALT],
             "J",
-            lazy.layout.grow_down(),
+            lazy.layout.grow_down().when(layout=["bsp", "columns"]),
+            lazy.layout.shrink().when(
+                layout=["monadtall", "monadwide", "monadthreecol"]
+            ),
             desc="Grow down",
         ),
         Key(
             [kb.SUPER, kb.ALT],
             "K",
-            lazy.layout.grow_up(),
+            lazy.layout.grow_up().when(layout=["bsp", "columns"]),
+            lazy.layout.grow().when(layout=["monadtall", "monadwide", "monadthreecol"]),
             desc="Grow up",
         ),
         Key(
             [kb.SUPER, kb.ALT],
             "H",
-            lazy.layout.grow_left(),
+            lazy.layout.grow_left().when(layout=["bsp", "columns"]),
             desc="Grow left",
         ),
         Key(
             [kb.SUPER, kb.ALT],
             "L",
-            lazy.layout.grow_right(),
+            lazy.layout.grow_right().when(layout=["bsp", "columns"]),
             desc="Grow right",
         ),
         Key(
@@ -211,13 +215,13 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
         Key(
             [],
             kb.PRINT,
-            lazy.spawn("xfce4-screenshooter"),
+            lazy.spawn(apps["SCREENSHOT"]),
             desc="Spawn screenshot",
         ),
         Key(
             [kb.ALT],
             kb.PRINT,
-            lazy.spawn("xfce4-screenshooter"),
+            lazy.spawn(apps["FULL_SCREENSHOT"]),
             desc="Spawn full screenshot",
         ),
     ]

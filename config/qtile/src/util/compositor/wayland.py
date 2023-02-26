@@ -4,7 +4,7 @@ from libqtile.log_utils import logger
 
 
 @hook.subscribe.client_new
-def float_windows(window: Window):
+def float_windows(window):
     if type(window) is Window:
         state = window.surface.toplevel._ptr.current
         if 0 < state.max_width < 1920:
