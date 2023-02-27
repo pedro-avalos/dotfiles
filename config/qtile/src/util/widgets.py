@@ -72,7 +72,7 @@ class WidgetsMaker:
 
         self._spacer_stretch = {**self.widgets_theme.default}
         self._spacer = {**self.widgets_theme.default, "length": 6}
-        self._none = {**self.widgets_theme.default, "text": "", "length": 0}
+        self._none = {**self.widgets_theme.default, "text": ""}
         self._launcher = {
             **{**self.widgets_theme.icon, **self.widgets_theme.launcher},
             "font": self.fonts_theme.symbols,
