@@ -25,7 +25,12 @@ parallelize &
 # Update status bar
 while true ; do
 	top=""
-	top="${top}$( battery )"
+
+	BATT=$( battery )
+	if [ -n "${BATT}" ] ; then
+		top="${top}${BATT}"
+	fi
+
 	top="${top}$( datetime )"
 	top="${top}${__NM_NETWORK__}"
 
