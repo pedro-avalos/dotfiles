@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 # bar.sh
+# Heavily inspired by: https://github.com/joestandring/dwm-bar
 
 LOC=$( readlink -f "$0" )
 DIR=$( dirname "${LOC}" )
@@ -10,6 +11,7 @@ export SEPR="] "
 # Source modules
 . "${DIR}/modules/battery.sh"
 . "${DIR}/modules/nm_network.sh"
+. "${DIR}/modules/datetime.sh"
 
 # Run these updates in parallel
 parallelize() {
@@ -24,6 +26,7 @@ parallelize &
 while true ; do
 	top=""
 	top="${top}$( battery )"
+	top="${top}$( datetime )"
 	top="${top}${__NM_NETWORK__}"
 
 	xsetroot -name "${top}"
