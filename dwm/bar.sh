@@ -12,6 +12,8 @@ export SEPR="] "
 . "${DIR}/modules/battery.sh"
 . "${DIR}/modules/nm_network.sh"
 . "${DIR}/modules/datetime.sh"
+. "${DIR}/modules/alsa_volume.sh"
+# . "${DIR}/modules/pulse_volume.sh"
 
 # Run these updates in parallel
 parallelize() {
@@ -31,6 +33,8 @@ while true ; do
 		top="${top}${BATT}"
 	fi
 
+	top="${top}$( alsa_volume )"
+	# top="${top}$( pulse_volume )"
 	top="${top}$( datetime )"
 	top="${top}${__NM_NETWORK__}"
 
