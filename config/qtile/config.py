@@ -1,5 +1,6 @@
 """Qtile configuration entrypoint."""
 
+from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.config import Rule
 
 from src.bindings import make_keys, make_mouse
@@ -45,5 +46,7 @@ auto_fullscreen = True
 auto_minimize = True
 reconfigure_screens = True
 focus_on_window_activation = "smart"
-wl_input_rules = None
+wl_input_rules = {
+    "type:pointer": InputConfig(tap=True),
+}
 wmname = "LG3D"
