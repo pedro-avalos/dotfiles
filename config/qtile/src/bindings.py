@@ -3,16 +3,10 @@
 from libqtile.config import Click, Drag, Group, Key, Mouse
 from libqtile.lazy import lazy
 
+from .util import lazy_functions as my_lazy
 from .util.apps import Apps
 from .util.io import keyboard as kb
 from .util.io import mouse as m
-from .util.lazy_functions import (
-    float_to_front,
-    traverse_down,
-    traverse_left,
-    traverse_right,
-    traverse_up,
-)
 
 
 def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
@@ -22,7 +16,7 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
             [kb.SUPER, kb.CTRL],
             "Q",
             lazy.window.kill(),
-            desc="Close window",
+            desc="Close window"
         ),
         Key(
             [kb.SUPER],
@@ -39,31 +33,31 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
         Key(
             [kb.SUPER],
             kb.SPACE,
-            float_to_front,
+            my_lazy.float_to_front,
             desc="Float to front",
         ),
         Key(
             [kb.SUPER],
             "J",
-            traverse_down,
+            lazy.layout.down(),
             desc="Traverse down",
         ),
         Key(
             [kb.SUPER],
             "K",
-            traverse_up,
+            lazy.layout.up(),
             desc="Traverse up",
         ),
         Key(
             [kb.SUPER],
             "H",
-            traverse_left,
+            lazy.layout.left(),
             desc="Traverse left",
         ),
         Key(
             [kb.SUPER],
             "L",
-            traverse_right,
+            lazy.layout.right(),
             desc="Traverse right",
         ),
         Key(
@@ -117,6 +111,12 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
             "L",
             lazy.layout.grow_right().when(layout=["bsp", "columns"]),
             desc="Grow right",
+        ),
+        Key(
+            [kb.SUPER, kb.ALT],
+            "N",
+            lazy.layout.normalize(),
+            desc="Normalize",
         ),
         Key(
             [kb.SUPER, kb.SHIFT],
@@ -204,12 +204,6 @@ def make_keys(groups: list[Group], apps: Apps) -> list[Key]:
             "L",
             lazy.spawn(apps["LOCKER_CMD"]),
             desc="Spawn screenlocker",
-        ),
-        Key(
-            [kb.SUPER, kb.SHIFT],
-            "B",
-            lazy.spawn(apps["BROWSER"]),
-            desc="Spawn browser",
         ),
         # Screenshots
         Key(
