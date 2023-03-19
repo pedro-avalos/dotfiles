@@ -5,17 +5,15 @@ import subprocess
 
 import dbus
 from libqtile import hook, layout, qtile, widget
-from libqtile.backend.base import Window
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.bar import Bar
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.log_utils import logger
 
-# Default apps
+# Default applications
 CAL_CMD = "xdg-open https://calendar.proton.me"
 TERMINAL_CMD = "kitty"
-LAUNCHER_CMD = "rofi -show drun"
+LAUNCHER_CMD = "rofi -show drun" if qtile.core.name == "x11" else "wofi --show drun"
 
 # Volume control
 RAISE_VOL_CMD = "pamixer -ui 2"
@@ -30,13 +28,7 @@ DEC_BRIGHTNESS_CMD = "brightnessctl set -5%"
 # System-ish tools
 LOCK_CMD = "light-locker-command -l"
 SCREENSHOT_CMD = "xfce4-screenshooter"
-FULL_SCREENSHOT_CMD = "xfce4-screenshooter -f -c"
-KILL_WINDOW_CMD = "xdotool getwindowfocus windowkill"
-
-# Wayland may need different tools
-if qtile is not None and qtile.core.name == "wayland":
-      LAUNCHER_CMD = "wofi --show drun"
-      KILL_WINDOW_CMD = "wtype getwindowfocus windowkill"
+FULL_SCREENSHOT_CMD = "xfce4-screenshooter -fc"
 
 @lazy.function
 def float_to_front(qtile):
@@ -49,33 +41,11 @@ def float_to_front(qtile):
 @hook.subscribe.startup_once
 def start_once():
     p = subprocess.Popen(
-        [os.path.expanduser("~/.config/qtile/scripts/autostart.sh")]
+        [os.path.expanduser("~/.config/qtile/autostart.sh")]
     )
     hook.subscribe.shutdown(p.terminate)
 
-@hook.subscribe.client_new
-def float_windows(window):
-    if qtile.core.name == "x11": 
-        if window.window.get_wm_type == "desktop":
-            window.cmd_static(qtile.current_screen.index)
-            return
-        hints = window.window.get_wm_normal_hints()
-        if hints and 0 < hints["max_width"] < 1920:
-            window.floating = True
-    elif qtile.core.name == "wayland":
-        if type(window) is Window:
-            state = window.surface.toplevel._ptr.current
-            if 0 < state.max_width < 1920:
-                window.floating = True
-            else:
-                logger.debug(
-                    (
-                        window.name,
-                        window.get_wm_class(),
-                        (state.min_width, state.max_width),
-                    )
-                )
-
+# Default configuation for all layouts
 layout_defaults = {
     "grow_amount": 3,
     "margin": 6,
@@ -85,6 +55,7 @@ layout_defaults = {
     "border_focus_stack": "#be95ff",
 }
 
+# Layouts for qtile to use
 layouts = [
     # layout.Bsp(**layout_defaults),
     layout.Columns(num_columns=3, **layout_defaults),
@@ -102,6 +73,7 @@ layouts = [
     # layout.Zoomy(**layoutdefaultse),
 ]
 
+# Setup for floating layout
 floating_layout = layout.Floating(
     float_rules=[
         Match(title="Open File"),
@@ -133,6 +105,7 @@ floating_layout = layout.Floating(
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
+        Match(wm_class="blueman-manager"),
         Match(wm_type="dialog"),
         Match(role="gimp-file-export"),
         Match(func=lambda c: c.has_fixed_size()),
@@ -141,66 +114,58 @@ floating_layout = layout.Floating(
     border_width=0, **layout_defaults,
 )
 
+# Groups for qtile to use
 groups = [
     Group(
-        "1",
-        layout="monadtall",
+        name="1",
         label=" 󰖟 ",
+        layout="monadtall",
         matches=[],
     ),
     Group(
-        "2",
-        layout="monadtall",
+        name="2",
         label="  ",
+        layout="monadtall",
         matches=[],
     ),
     Group(
-        "3",
-        layout="monadtall",
+        name="3",
         label=" 󰈙 ",
+        layout="monadtall",
         matches=[],
     ),
     Group(
-        "4",
-        layout="monadtall",
+        name="4",
         label=" 󰭹 ",
-        matches=[
-            Match(wm_class="discord"),
-        ],
+        layout="monadtall",
+        matches=[Match(wm_class="discord")],
     ),
     Group(
-        "5",
-        layout="monadtall",
+        name="5",
         label="  ",
-        matches=[
-            Match(wm_class="spotify"),
-        ],
-    ),
-    Group(
-        "6",
-        layout="max",
-        label=" 󰟴 ",
-        matches=[
-            Match(wm_class="vlc"),
-            Match(wm_class="mpv"),
-        ],
-    ),
-    Group(
-        "7",
         layout="monadtall",
-        label="  ",
-        matches=[
-            Match(wm_class="Steam"),
-        ],
+        matches=[Match(wm_class="spotify")],
     ),
     Group(
-        "8",
+        name="6",
+        label=" 󰟴 ",
+        layout="max",
+        matches=[Match(wm_class="vlc"), Match(wm_class="mpv")],
+    ),
+    Group(
+        name="7",
+        label="  ",
+        layout="monadtall",
+        matches=[Match(wm_class="Steam")],
+    ),
+    Group(
+        name="8",
         layout="monadtall",
         label="  ",
         matches=[],
     ),
     Group(
-        "9",
+        name="9",
         layout="monadtall",
         label=" 󰇘 ",
         matches=[],
@@ -508,6 +473,7 @@ widget_defaults = {
     "background": "#161616",
 }
 
+# Widgets for the main screen
 main_widgets = [
     widget.Spacer(length=6, **widget_defaults),
     widget.TextBox(
@@ -570,6 +536,7 @@ main_widgets = [
     widget.Spacer(length=6, **widget_defaults),
 ]
 
+# Widgets for other screens
 other_widgets = [
     widget.Spacer(length=6, **widget_defaults),
     widget.GroupBox(
@@ -598,6 +565,7 @@ other_widgets = [
     widget.Spacer(length=6, **widget_defaults),
 ]
 
+# Screens for qtile to use
 screens = [
     Screen(
         wallpaper=wallpaper,
@@ -615,6 +583,7 @@ screens = [
     ),
 ]
 
+# Miscellaneous settings
 dgroups_key_binder = None
 dgroups_app_rules = []
 follow_mouse_focus = True
