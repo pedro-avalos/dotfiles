@@ -454,6 +454,7 @@ mouse = [
     ),
 ]
 
+# Try to get the wallpaper from accountsservice
 bus = dbus.SystemBus()
 uid = os.getuid()
 accts_obj = bus.get_object(
@@ -463,11 +464,13 @@ props_iface = dbus.Interface(accts_obj, "org.freedesktop.DBus.Properties")
 wallpaper = props_iface.Get(
     "org.freedesktop.DisplayManager.AccountsService", "BackgroundFile"
 )
+
+# If no accountsservice wallpaper found, use backup wallpaper
 if not wallpaper:
-    wallpaper = "~/.config/qtile/wallpaper/carbon.png"
+    wallpaper = "~/.config/qtile/wallpaper.png"
 
 widget_defaults = {
-    "font": "IBM Plex Sans",
+    "font": "IBM Plex Mono",
     "fontsize": 16,
     "foreground": "#f4f4f4",
     "background": "#161616",
@@ -497,16 +500,20 @@ main_widgets = [
         **{**widget_defaults, "font": "BlexMono Nerd Font"},
     ),
     widget.Spacer(length=6, **widget_defaults),
-    widget.CurrentLayout(**widget_defaults),
+    widget.CurrentLayoutIcon(padding=0, scale=0.6, **widget_defaults),
     widget.Spacer(**widget_defaults),
     widget.Clock(
-        format="%Y/%m/%d (%a) %H:%M",
+        format=" %Y/%m/%d (%a)",
         mouse_callbacks={m.LEFT: lazy.spawn(CAL_CMD)},
-        **{**widget_defaults, "foreground": "#78a9ff"},
+        **{**widget_defaults, "foreground": "#78a9ff", "font": "BlexMono Nerd Font"},
+    ),
+    widget.Clock(
+        format=" %H:%M",
+        **{**widget_defaults, "foreground": "#78a9ff", "font": "BlexMono Nerd Font"},
     ),
     widget.Spacer(**widget_defaults),
     widget.Systray(**widget_defaults)
-    if qtile is None or qtile.core.name == "x11"
+    if qtile.core.name == "x11"
     else widget.StatusNotifier(**widget_defaults),
     widget.Spacer(length=6, **widget_defaults),
     widget.Volume(
