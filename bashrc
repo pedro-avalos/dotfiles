@@ -16,6 +16,8 @@ export HISTSIZE=10000                 # History length
 export HISTFILESIZE=10000             # History file length
 export HISTCONTROL=ignoreboth         # Don't put duplicate lines in history
 export GPG_TTY                        # Makes GPG passphrase prompts work
+export VISUAL='emacsclient -ca emacs' # Use GUI for emacs
+export EDITOR='emacsclient -ta ""'    # Use TUI for emacs
 
 # Change some shell options
 shopt -s histappend   # Append to history file
