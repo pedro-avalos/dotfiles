@@ -13,7 +13,7 @@ Some configuration files I use in my Linux installations.
 
 The following dotfiles are complex enough to warrant further documentation:
 
-- [Qtile dotfiles readme](./config/qtile/README.md)
+- [Qtile dotfiles readme](./config/qtile/README.org)
 
 ## Separate dotfile repositories
 

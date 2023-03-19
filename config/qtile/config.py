@@ -1,50 +1,628 @@
-"""Qtile configuration entrypoint."""
+# -*- coding: utf-8 -*-
+import os
+import os.path
+import subprocess
 
+import dbus
+from libqtile import hook, layout, qtile, widget
+from libqtile.backend.base import Window
 from libqtile.backend.wayland.inputs import InputConfig
-from libqtile.config import Rule
+from libqtile.bar import Bar
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.lazy import lazy
+from libqtile.log_utils import logger
 
-from src.bindings import make_keys, make_mouse
-from src.groups import make_groups
-from src.hooks import autostart, float_windows  # pyright: ignore
-from src.layouts import make_floating_layout, make_layouts
-from src.screens import make_screens
-from src.util import settings, theme
-from src.util.apps import Apps
+# Default apps
+CAL_CMD = "xdg-open https://calendar.proton.me"
+TERMINAL_CMD = "kitty"
+LAUNCHER_CMD = "rofi -show drun"
 
-# Create settings
-s = settings.load_settings()
-a = Apps(settings=s)
-widgets_settings = settings.WidgetsSettings(settings=s)
+# Volume control
+RAISE_VOL_CMD = "pamixer -ui 2"
+LOWER_VOL_CMD = "pamixer -ud 2"
+TOGGLE_MUTE_CMD = "pamixer -t"
+VOL_CTRL_CMD = "pavucontrol"
 
-# Create theme
-t = theme.load_theme(theme_name=s["theme"]["name"])
-wallpaper_theme = theme.WallpaperTheme(theme=t)
-fonts_theme = theme.FontsTheme(theme=t)
-layouts_theme = theme.LayoutsTheme(theme=t)
-widgets_theme = theme.WidgetsTheme(theme=t)
+# Brightness controls
+INC_BRIGHTNESS_CMD = "brightnessctl set +5%"
+DEC_BRIGHTNESS_CMD = "brightnessctl set -5%"
 
-groups = make_groups(settings=s)
-keys = make_keys(groups=groups, apps=a)
-mouse = make_mouse()
-layouts = make_layouts(layouts_theme=layouts_theme)
-floating_layout = make_floating_layout(layouts_theme=layouts_theme)
-screens = make_screens(
-    wallpaper_theme=wallpaper_theme,
-    fonts_theme=fonts_theme,
-    widgets_theme=widgets_theme,
-    widgets_settings=widgets_settings,
-    apps=a,
+# System-ish tools
+LOCK_CMD = "light-locker-command -l"
+SCREENSHOT_CMD = "xfce4-screenshooter"
+FULL_SCREENSHOT_CMD = "xfce4-screenshooter -f -c"
+KILL_WINDOW_CMD = "xdotool getwindowfocus windowkill"
+
+# Wayland may need different tools
+if qtile is not None and qtile.core.name == "wayland":
+      LAUNCHER_CMD = "wofi --show drun"
+      KILL_WINDOW_CMD = "wtype getwindowfocus windowkill"
+
+@lazy.function
+def float_to_front(qtile):
+    """Moves all floating windows to the front."""
+
+    for win in qtile.current_group.windows:
+        if win.floating:
+            win.cmd_bring_to_front()
+
+@hook.subscribe.startup_once
+def start_once():
+    p = subprocess.Popen(
+        [os.path.expanduser("~/.config/qtile/scripts/autostart.sh")]
+    )
+    hook.subscribe.shutdown(p.terminate)
+
+@hook.subscribe.client_new
+def float_windows(window):
+    if qtile.core.name == "x11": 
+        if window.window.get_wm_type == "desktop":
+            window.cmd_static(qtile.current_screen.index)
+            return
+        hints = window.window.get_wm_normal_hints()
+        if hints and 0 < hints["max_width"] < 1920:
+            window.floating = True
+    elif qtile.core.name == "wayland":
+        if type(window) is Window:
+            state = window.surface.toplevel._ptr.current
+            if 0 < state.max_width < 1920:
+                window.floating = True
+            else:
+                logger.debug(
+                    (
+                        window.name,
+                        window.get_wm_class(),
+                        (state.min_width, state.max_width),
+                    )
+                )
+
+layout_defaults = {
+    "grow_amount": 3,
+    "margin": 6,
+    "border_focus": "#4589ff",
+    "border_normal": "#393939",
+    "border_normal_stack": "#393939",
+    "border_focus_stack": "#be95ff",
+}
+
+layouts = [
+    # layout.Bsp(**layout_defaults),
+    layout.Columns(num_columns=3, **layout_defaults),
+    layout.Floating(border_width=0, **layout_defaults),
+    layout.Max(**layout_defaults),
+    # layout.Matrix(**layout_defaults),
+    layout.MonadTall(**layout_defaults),
+    # layout.MonadThreeCol(**layout_defaults),
+    # layout.MonadWide(**layout_defaults),
+    # layout.RatioTile(**layout_defaults),
+    layout.Stack(**layout_defaults),
+    layout.Tile(**layout_defaults),
+    # layout.TreeTab(**layout_defaults),
+    # layout.VerticalTile(**layout_defaults),
+    # layout.Zoomy(**layoutdefaultse),
+]
+
+floating_layout = layout.Floating(
+    float_rules=[
+        Match(title="Open File"),
+        Match(title="File Operation Progress", wm_class="thunar"),
+        Match(wm_class="Arandr"),
+        Match(wm_class="org.kde.ark"),
+        Match(wm_class="confirm"),
+        Match(wm_class="dialog"),
+        Match(wm_class="download"),
+        Match(wm_class="error"),
+        Match(wm_class="fiji-Main"),
+        Match(wm_class="file_progress"),
+        Match(wm_class="imv"),
+        Match(wm_class="lxappearance"),
+        Match(wm_class="mpv"),
+        Match(wm_class="notification"),
+        Match(wm_class="notify"),
+        Match(wm_class="popup_menu"),
+        Match(wm_class="splash"),
+        Match(wm_class="pavucontrol"),
+        Match(wm_class="Pinentry-gtk-2"),
+        Match(wm_class="pinentry"),
+        Match(wm_class="qt5ct"),
+        Match(wm_class="ssh-askpass"),
+        Match(wm_class="Dragon-drag-and-drop"),
+        Match(wm_class="toolbar"),
+        Match(wm_class="wlroots"),
+        Match(wm_class="Xephyr"),
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_type="dialog"),
+        Match(role="gimp-file-export"),
+        Match(func=lambda c: c.has_fixed_size()),
+        Match(func=lambda c: bool(c.is_transient_for())),
+    ],
+    border_width=0, **layout_defaults,
 )
 
-# Other settings
+groups = [
+    Group(
+        "1",
+        layout="monadtall",
+        label=" 󰖟 ",
+        matches=[],
+    ),
+    Group(
+        "2",
+        layout="monadtall",
+        label="  ",
+        matches=[],
+    ),
+    Group(
+        "3",
+        layout="monadtall",
+        label=" 󰈙 ",
+        matches=[],
+    ),
+    Group(
+        "4",
+        layout="monadtall",
+        label=" 󰭹 ",
+        matches=[
+            Match(wm_class="discord"),
+        ],
+    ),
+    Group(
+        "5",
+        layout="monadtall",
+        label="  ",
+        matches=[
+            Match(wm_class="spotify"),
+        ],
+    ),
+    Group(
+        "6",
+        layout="max",
+        label=" 󰟴 ",
+        matches=[
+            Match(wm_class="vlc"),
+            Match(wm_class="mpv"),
+        ],
+    ),
+    Group(
+        "7",
+        layout="monadtall",
+        label="  ",
+        matches=[
+            Match(wm_class="Steam"),
+        ],
+    ),
+    Group(
+        "8",
+        layout="monadtall",
+        label="  ",
+        matches=[],
+    ),
+    Group(
+        "9",
+        layout="monadtall",
+        label=" 󰇘 ",
+        matches=[],
+    ),
+]
+
+class kb:
+    ALT = "mod1"
+    HYPER = "mod3"
+    SUPER = "mod4"
+    CTRL = "control"
+    SHIFT = "shift"
+    SPACE = "space"
+    BACKSPACE = "BackSpace"
+    ENTER = "Return"
+    DELETE = "Delete"
+    TAB = "Tab"
+    ESC = "Escape"
+
+    EXCLAM = "exclam"
+    QUOTEDBL = "quotedbl"
+
+    PRINT = "Print"
+    HOME = "Home"
+    END = "End"
+
+    LEFT = "Left"
+    RIGHT = "Right"
+    UP = "Up"
+    DOWN = "Down"
+
+    AUDIO_RAISE_VOLUME = "XF86AudioRaiseVolume"
+    AUDIO_LOWER_VOLUME = "XF86AudioLowerVolume"
+    AUDIO_MUTE = "XF86AudioMute"
+    AUDIO_NEXT = "XF86AudioNext"
+    AUDIO_PREV = "XF86AudioPrev"
+    AUDIO_PLAY = "XF86AudioPlay"
+    AUDIO_STOP = "XF86AudioStop"
+
+    BRIGHTNESS_UP = "XF86MonBrightnessUp"
+    BRIGHTNESS_DOWN = "XF86MonBrightnessDown"
+
+class m:
+    LEFT = "Button1"
+    MIDDLE = "Button2"
+    RIGHT = "Button3"
+
+    WHEEL_UP = "Button4"
+    WHEEL_DOWN = "Button5"
+    WHEEL_LEFT = "Button6"
+    WHEEL_RIGHT = "Button7"
+
+    PREVIOUS = "Button8"
+    NEXT = "Button9"
+
+keys = [
+    Key(
+        [kb.SUPER, kb.CTRL],
+        "Q",
+        lazy.window.kill(),
+        desc="Close window",
+    ),
+    Key(
+        [kb.SUPER],
+        "F",
+        lazy.window.toggle_fullscreen(),
+        desc="Toggle fullscreen",
+    ),
+    Key(
+        [kb.SUPER, kb.SHIFT],
+        kb.SPACE,
+        lazy.window.toggle_floating(),
+        desc="Toggle floating",
+    ),
+    Key(
+        [kb.SUPER],
+        kb.SPACE,
+        float_to_front,
+        desc="Float to front",
+    ),
+    Key(
+        [kb.SUPER],
+        "H",
+        lazy.layout.left(),
+        desc="Traverse left",
+    ),
+    Key(
+        [kb.SUPER],
+        "J",
+        lazy.layout.down(),
+        desc="Traverse down",
+    ),
+    Key(
+        [kb.SUPER],
+        "K",
+        lazy.layout.up(),
+        desc="Traverse up",
+    ),
+    Key(
+        [kb.SUPER],
+        "L",
+        lazy.layout.right(),
+        desc="Traverse right",
+    ),
+    Key(
+        [kb.SUPER, kb.SHIFT],
+        "H",
+        lazy.layout.shuffle_left(),
+        desc="Shuffle left",
+    ),
+    Key(
+        [kb.SUPER, kb.SHIFT],
+        "J",
+        lazy.layout.shuffle_down(),
+        desc="Shuffle down",
+    ),
+    Key(
+        [kb.SUPER, kb.SHIFT],
+        "K",
+        lazy.layout.shuffle_up(),
+        desc="Shuffle up",
+    ),
+    Key(
+        [kb.SUPER, kb.SHIFT],
+        "L",
+        lazy.layout.shuffle_right(),
+        desc="Shuffle right",
+    ),
+    Key(
+        [kb.SUPER, kb.ALT],
+        "H",
+        lazy.layout.grow_left().when(layout=["bsp", "columns"]),
+        desc="Grow left",
+    ),
+    Key(
+        [kb.SUPER, kb.ALT], "J",
+        lazy.layout.grow_down().when(layout=["bsp", "columns"]),
+        lazy.layout.shrink().when(layout=["monadtall", "monadwide", "monadthreecol"]),
+        desc="Grow down",
+    ),
+    Key(
+        [kb.SUPER, kb.ALT], "K",
+        lazy.layout.grow_up().when(layout=["bsp", "columns"]),
+        lazy.layout.grow().when(layout=["monadtall", "monadwide", "monadthreecol"]),
+        desc="Grow up",
+    ),
+    Key(
+        [kb.SUPER, kb.ALT], "L",
+        lazy.layout.grow_right().when(layout=["bsp", "columns"]),
+        desc="Grow right",
+    ),
+    Key(
+        [kb.SUPER, kb.ALT],
+        "N",
+        lazy.layout.normalize(),
+        desc="Reset window size",
+    ),
+    Key(
+        [kb.SUPER],
+        kb.ESC,
+        lazy.reload_config(),
+        desc="Reload config",
+    ),
+    Key(
+        [kb.SUPER, kb.SHIFT],
+        kb.ESC,
+        lazy.restart(),
+        desc="Restart qtile",
+    ),
+    Key(
+        [kb.SUPER, kb.CTRL],
+        kb.ESC,
+        lazy.shutdown(),
+        desc="Shutdown qtile",
+    ),
+    Key(
+        [kb.SUPER],
+        kb.TAB,
+        lazy.next_layout(),
+        desc="Next layout",
+    ),
+    Key(
+        [kb.SUPER, kb.SHIFT],
+        kb.TAB,
+        lazy.prev_layout(),
+        desc="Previous layout",
+    ),
+    Key(
+        [kb.SUPER],
+        kb.ENTER,
+        lazy.spawn(TERMINAL_CMD),
+        desc="Spawn terminal",
+    ),
+    Key(
+        [kb.SUPER],
+        "R",
+        lazy.spawn(LAUNCHER_CMD),
+        desc="Spawn launcher",
+    ),
+    Key(
+        [kb.SUPER, kb.CTRL],
+        "L",
+        lazy.spawn(LOCK_CMD),
+        desc="Lock screen",
+    ),
+    Key(
+        [],
+        kb.PRINT,
+        lazy.spawn(SCREENSHOT_CMD),
+        desc="Take screenshot",
+    ),
+    Key(
+        [kb.ALT],
+        kb.PRINT,
+        lazy.spawn(FULL_SCREENSHOT_CMD),
+        desc="Take fullscreen screenshot",
+    ),
+    Key(
+        [],
+        kb.AUDIO_LOWER_VOLUME,
+        lazy.spawn(LOWER_VOL_CMD),
+        desc="Lower volume",
+    ),
+    Key(
+        [],
+        kb.AUDIO_RAISE_VOLUME,
+        lazy.spawn(RAISE_VOL_CMD),
+        desc="Raise volume",
+    ),
+    Key(
+        [],
+        kb.AUDIO_MUTE,
+        lazy.spawn(TOGGLE_MUTE_CMD),
+        desc="Toggle mute",
+    ),
+    Key(
+        [],
+        kb.BRIGHTNESS_UP,
+        lazy.spawn(INC_BRIGHTNESS_CMD),
+        desc="Increase brightness",
+    ),
+    Key(
+        [],
+        kb.BRIGHTNESS_DOWN,
+        lazy.spawn(DEC_BRIGHTNESS_CMD),
+        desc="Decrease brightness",
+    ),
+]
+
+for group in groups:
+    keys.extend([
+        Key(
+            [kb.SUPER],
+            group.name,
+            lazy.group[group.name].toscreen(),
+            desc=f"Switch to group {group.name}"
+        ),
+        Key(
+            [kb.SUPER, kb.SHIFT],
+            group.name,
+            lazy.window.togroup(group.name),
+            desc=f"Move focused window to group {group.name}"
+        ),
+    ])
+
+mouse = [
+    Drag(
+        [kb.SUPER], m.LEFT,
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [kb.SUPER], m.RIGHT,
+        lazy.window.set_size_floating(),
+        start=lazy.window.get_size(),
+    ),
+    Click(
+        [kb.SUPER],
+        m.WHEEL_UP,
+        lazy.screen.prev_group()
+    ),
+    Click(
+        [kb.SUPER],
+        m.WHEEL_DOWN,
+        lazy.screen.next_group(),
+    ),
+]
+
+bus = dbus.SystemBus()
+uid = os.getuid()
+accts_obj = bus.get_object(
+    "org.freedesktop.Accounts", f"/org/freedesktop/Accounts/User{uid}"
+)
+props_iface = dbus.Interface(accts_obj, "org.freedesktop.DBus.Properties")
+wallpaper = props_iface.Get(
+    "org.freedesktop.DisplayManager.AccountsService", "BackgroundFile"
+)
+if not wallpaper:
+    wallpaper = "~/.config/qtile/wallpaper/carbon.png"
+
+widget_defaults = {
+    "font": "IBM Plex Sans",
+    "fontsize": 16,
+    "foreground": "#f4f4f4",
+    "background": "#161616",
+}
+
+main_widgets = [
+    widget.Spacer(length=6, **widget_defaults),
+    widget.TextBox(
+        text="  ",
+        mouse_callbacks={m.RIGHT: lazy.spawn(LAUNCHER_CMD)},
+        **{**widget_defaults, "foreground": "#f1c21b", "font": "BlexMono Nerd Font"},
+    ),
+    widget.Spacer(length=6, **widget_defaults),
+    widget.GroupBox(
+        disable_drag=True,
+        active="#c6c6c6",
+        inactive="#6f6f6f",
+        highlight_method="line",
+        highlight_color="#393939",
+        this_current_screen_border="#4589ff",
+        this_screen_border="#6f6f6f",
+        other_current_screen_border="#8d8d8d",
+        other_screen_border="#6f6f6f",
+        urgent_alert_method="line",
+        urgent_text="#ff8389",
+        **{**widget_defaults, "font": "BlexMono Nerd Font"},
+    ),
+    widget.Spacer(length=6, **widget_defaults),
+    widget.CurrentLayout(**widget_defaults),
+    widget.Spacer(**widget_defaults),
+    widget.Clock(
+        format="%Y/%m/%d (%a) %H:%M",
+        mouse_callbacks={m.LEFT: lazy.spawn(CAL_CMD)},
+        **{**widget_defaults, "foreground": "#78a9ff"},
+    ),
+    widget.Spacer(**widget_defaults),
+    widget.Systray(**widget_defaults)
+    if qtile is None or qtile.core.name == "x11"
+    else widget.StatusNotifier(**widget_defaults),
+    widget.Spacer(length=6, **widget_defaults),
+    widget.Volume(
+        fmt="󱄠 {}",
+        mouse_callbacks={m.RIGHT: lazy.spawn(VOL_CTRL_CMD)},
+        **{**widget_defaults, "font": "BlexMono Nerd Font"},
+    ),
+    widget.Battery(
+        format="{char} {percent:2.0%}",
+        update_interval=30,
+        low_percentage=0.2,
+        full_char="󰁹",
+        charge_char="󰂄",
+        discharge_char="󰂀",
+        empty_char="",
+        unknown_char="󰂑",
+        **{**widget_defaults, "font": "BlexMono Nerd Font"},
+    ),
+    widget.KeyboardLayout(
+        configured_keyboards=["us", "es"],
+        **widget_defaults,
+    ),
+    widget.QuickExit(
+        default_text="󰍃",
+        **{**widget_defaults, "foreground": "#fa4d56", "font": "BlexMono Nerd Font"},
+    ),
+    widget.Spacer(length=6, **widget_defaults),
+]
+
+other_widgets = [
+    widget.Spacer(length=6, **widget_defaults),
+    widget.GroupBox(
+        disable_drag=True,
+        active="#c6c6c6",
+        inactive="#6f6f6f",
+        highlight_method="line",
+        highlight_color="#393939",
+        this_current_screen_border="#4589ff",
+        this_screen_border="#6f6f6f",
+        other_current_screen_border="#8d8d8d",
+        other_screen_border="#6f6f6f",
+        urgent_alert_method="line",
+        urgent_text="#ff8389",
+        **widget_defaults,
+    ),
+    widget.CurrentLayoutIcon(scale=0.6, **widget_defaults),
+    widget.Spacer(**widget_defaults),
+    widget.CurrentScreen(
+        active_color="#f4f4f4",
+        active_text="A",
+        inactive_color="#8d8d8d",
+        inactive_text="i",
+        **widget_defaults,
+    ),
+    widget.Spacer(length=6, **widget_defaults),
+]
+
+screens = [
+    Screen(
+        wallpaper=wallpaper,
+        wallpaper_mode="fill",
+        top=Bar(
+            main_widgets, 32, opacity=0.95, margin=6,
+        ),
+    ),
+    Screen(
+        wallpaper=wallpaper,
+        wallpaper_mode="fill",
+        top=Bar(
+            other_widgets, 32, opacity=0.95, margin=6,
+        ),
+    ),
+]
+
 dgroups_key_binder = None
-dgroups_app_rules: list[Rule] = []
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 auto_fullscreen = True
 auto_minimize = True
-reconfigure_screens = True
+reconfigure_screns = True
 focus_on_window_activation = "smart"
 wl_input_rules = {
     "type:pointer": InputConfig(tap=True),
