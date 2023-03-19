@@ -481,7 +481,7 @@ main_widgets = [
     widget.Spacer(length=6, **widget_defaults),
     widget.TextBox(
         text="  ",
-        mouse_callbacks={m.RIGHT: lazy.spawn(LAUNCHER_CMD)},
+        mouse_callbacks={m.LEFT: lazy.spawn(LAUNCHER_CMD)},
         **{**widget_defaults, "foreground": "#f1c21b", "font": "BlexMono Nerd Font"},
     ),
     widget.Spacer(length=6, **widget_defaults),
