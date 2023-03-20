@@ -7,13 +7,15 @@ import dbus
 from libqtile import hook, layout, qtile, widget
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.bar import Bar
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Rule, Screen
 from libqtile.lazy import lazy
+
+compositor = "x11" if qtile is None else qtile.core.name
 
 # Default applications
 CAL_CMD = "xdg-open https://calendar.proton.me"
 TERMINAL_CMD = "kitty"
-LAUNCHER_CMD = "rofi -show drun" if qtile.core.name == "x11" else "wofi --show drun"
+LAUNCHER_CMD = "rofi -show drun" if compositor == "x11" else "wofi --show drun"
 
 # Volume control
 RAISE_VOL_CMD = "pamixer -ui 2"
@@ -476,6 +478,10 @@ widget_defaults = {
     "background": "#161616",
 }
 
+# Check if this machine has a battery
+BATT_PATHS = ["/sys/class/power_supply/BAT0"]
+show_battery = any(os.path.exists(path) for path in BATT_PATHS)
+
 # Widgets for the main screen
 main_widgets = [
     widget.Spacer(length=6, **widget_defaults),
@@ -514,8 +520,8 @@ main_widgets = [
     ),
     widget.Spacer(**widget_defaults),
     widget.Systray(**widget_defaults)
-    if qtile.core.name == "x11"
-    else widget.StatusNotifier(**widget_defaults),
+      if compositor == "x11"
+      else widget.StatusNotifier(**widget_defaults),
     widget.Spacer(length=6, **widget_defaults),
     widget.Volume(
         fmt="󱄠 {}",
@@ -532,7 +538,7 @@ main_widgets = [
         empty_char="󰂎",
         unknown_char="󰂑",
         **{**widget_defaults, "font": "BlexMono Nerd Font"},
-    ),
+    ) if show_battery else widget.TextBox(text="", **widget_defaults),
     widget.KeyboardLayout(
         configured_keyboards=["us", "es"],
         **widget_defaults,
@@ -594,7 +600,7 @@ screens = [
 
 # Miscellaneous settings
 dgroups_key_binder = None
-dgroups_app_rules = []
+dgroups_app_rules: list[Rule] = []
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
