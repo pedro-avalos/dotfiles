@@ -194,6 +194,8 @@ I like using [[https://github.com/seagle0128/doom-modeline][doom-modeline]] (a f
 
 ** Dashboard
 
+*** Configuring Dashboard
+
 I like a nice and pretty startup screen.
 
 #+BEGIN_SRC emacs-lisp
@@ -208,6 +210,12 @@ I like a nice and pretty startup screen.
 
   (setq dashboard-set-navigator t) ; Show navigator below the banner
   (setq dashboard-set-init-info t) ; Show info about the packages and init time
+#+END_SRC
+
+*** Dashboard in Emacsclient
+
+#+BEGIN_SRC emacs-lisp
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+END_SRC
 
 * Ivy (Counsel/Swiper)
