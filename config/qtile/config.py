@@ -529,7 +529,7 @@ main_widgets = [
         full_char="󰁹",
         charge_char="󰂄",
         discharge_char="󰂀",
-        empty_char="",
+        empty_char="󰂎",
         unknown_char="󰂑",
         **{**widget_defaults, "font": "BlexMono Nerd Font"},
     ),

@@ -714,7 +714,7 @@ These are the widgets on the main monitor/screen.
           full_char="󰁹",
           charge_char="󰂄",
           discharge_char="󰂀",
-          empty_char="",
+          empty_char="󰂎",
           unknown_char="󰂑",
           ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
       ),
