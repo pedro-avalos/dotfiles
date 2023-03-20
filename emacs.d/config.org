@@ -201,24 +201,24 @@ I like a nice and pretty startup screen.
   ;; Install and enable the dashboard
   (use-package dashboard
     :init
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
+    (setq dashboard-set-heading-icons t)  ;; Use all-the-icons font
+    (setq dashboard-set-file-icons t)     ;; Use all-the-icons font
     (setq dashboard-startup-banner 'logo) ;; Standard emacs logo
-    (setq dashboard-center-content nil)
+    (setq dashboard-center-content nil)   ;; Don't center content
+    (setq dashboard-set-navigator t)      ;; Show navigator below the banner
+    (setq dashboard-set-init-info t)      ;; Show info about the packages and init time
     :config
     (dashboard-setup-startup-hook))
 
-  ;; Use all-the-icons font
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-
-  (setq dashboard-set-navigator t) ;; Show navigator below the banner
-  (setq dashboard-set-init-info t) ;; Show info about the packages and init time
 #+END_SRC
 
 *** Dashboard in Emacsclient
 
+To be able to use dashboard when emacs is daemonized, the following snippet
+is required.
+
 #+BEGIN_SRC emacs-lisp
+  ;; Enable dashboard for emacsclient
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+END_SRC
 
