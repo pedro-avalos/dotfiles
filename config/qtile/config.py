@@ -471,6 +471,10 @@ wallpaper = props_iface.Get(
 if not wallpaper:
     wallpaper = "~/.config/qtile/wallpaper.png"
 
+# Check if this machine has a battery
+BATT_PATHS = ["/sys/class/power_supply/BAT0"]
+show_battery = any(os.path.exists(path) for path in BATT_PATHS)
+
 widget_defaults = {
     "font": "IBM Plex Mono",
     "fontsize": 16,
@@ -478,15 +482,11 @@ widget_defaults = {
     "background": "#161616",
 }
 
-# Check if this machine has a battery
-BATT_PATHS = ["/sys/class/power_supply/BAT0"]
-show_battery = any(os.path.exists(path) for path in BATT_PATHS)
-
 # Widgets for the main screen
 main_widgets = [
     widget.Spacer(length=6, **widget_defaults),
     widget.TextBox(
-        text="  ",
+        text="",
         mouse_callbacks={m.LEFT: lazy.spawn(LAUNCHER_CMD)},
         **{**widget_defaults, "foreground": "#f1c21b", "font": "BlexMono Nerd Font"},
     ),
@@ -502,7 +502,7 @@ main_widgets = [
         other_current_screen_border="#8d8d8d",
         other_screen_border="#6f6f6f",
         urgent_alert_method="line",
-        urgent_border="#ff8389",
+        urgent_border="#fa4d56",
         urgent_text="#ff8389",
         **{**widget_defaults, "font": "BlexMono Nerd Font"},
     ),
@@ -512,11 +512,11 @@ main_widgets = [
     widget.Clock(
         format=" %Y/%m/%d (%a)",
         mouse_callbacks={m.LEFT: lazy.spawn(CAL_CMD)},
-        **{**widget_defaults, "foreground": "#78a9ff", "font": "BlexMono Nerd Font"},
+        **{**widget_defaults, "font": "BlexMono Nerd Font"},
     ),
     widget.Clock(
         format=" %H:%M",
-        **{**widget_defaults, "foreground": "#78a9ff", "font": "BlexMono Nerd Font"},
+        **{**widget_defaults, "font": "BlexMono Nerd Font"},
     ),
     widget.Spacer(**widget_defaults),
     widget.Systray(**widget_defaults)
@@ -540,11 +540,13 @@ main_widgets = [
         **{**widget_defaults, "font": "BlexMono Nerd Font"},
     ) if show_battery else widget.TextBox(text="", **widget_defaults),
     widget.KeyboardLayout(
+        fmt="󰌌 {}",
         configured_keyboards=["us", "es"],
-        **widget_defaults,
+        **{**widget_defaults, "font": "BlexMono Nerd Font"},
     ),
     widget.QuickExit(
         default_text="󰍃",
+        countdown_format="{}",
         **{**widget_defaults, "foreground": "#fa4d56", "font": "BlexMono Nerd Font"},
     ),
     widget.Spacer(length=6, **widget_defaults),
@@ -564,7 +566,7 @@ other_widgets = [
         other_current_screen_border="#8d8d8d",
         other_screen_border="#6f6f6f",
         urgent_alert_method="line",
-        urgent_border="#ff8389",
+        urgent_border="#fa4d56",
         urgent_text="#ff8389",
         **widget_defaults,
     ),

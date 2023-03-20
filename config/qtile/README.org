@@ -651,6 +651,17 @@ dotfiles.
 
 ** Widgets
 
+*** Battery
+
+To be able to use the configuration on both my desktop and laptop, I first
+check if a battery is present.
+
+#+BEGIN_SRC python
+  # Check if this machine has a battery
+  BATT_PATHS = ["/sys/class/power_supply/BAT0"]
+  show_battery = any(os.path.exists(path) for path in BATT_PATHS)
+#+END_SRC
+
 *** Widget defaults
 
 These are parameters I pass to almost all widgets. Pulling it out into a
@@ -665,17 +676,6 @@ dictionary allows me to repeat less code.
   }
 #+END_SRC
 
-*** Battery
-
-To be able to use the configuration on both my desktop and laptop, I first
-check if a battery is present.
-
-#+BEGIN_SRC python
-  # Check if this machine has a battery
-  BATT_PATHS = ["/sys/class/power_supply/BAT0"]
-  show_battery = any(os.path.exists(path) for path in BATT_PATHS)
-#+END_SRC
-
 *** Main widgets
 
 These are the widgets on the main monitor/screen.
@@ -685,7 +685,7 @@ These are the widgets on the main monitor/screen.
   main_widgets = [
       widget.Spacer(length=6, **widget_defaults),
       widget.TextBox(
-          text="  ",
+          text="",
           mouse_callbacks={m.LEFT: lazy.spawn(LAUNCHER_CMD)},
           ,**{**widget_defaults, "foreground": "#f1c21b", "font": "BlexMono Nerd Font"},
       ),
@@ -701,7 +701,7 @@ These are the widgets on the main monitor/screen.
           other_current_screen_border="#8d8d8d",
           other_screen_border="#6f6f6f",
           urgent_alert_method="line",
-          urgent_border="#ff8389",
+          urgent_border="#fa4d56",
           urgent_text="#ff8389",
           ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
       ),
@@ -711,11 +711,11 @@ These are the widgets on the main monitor/screen.
       widget.Clock(
           format=" %Y/%m/%d (%a)",
           mouse_callbacks={m.LEFT: lazy.spawn(CAL_CMD)},
-          ,**{**widget_defaults, "foreground": "#78a9ff", "font": "BlexMono Nerd Font"},
+          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
       ),
       widget.Clock(
           format=" %H:%M",
-          ,**{**widget_defaults, "foreground": "#78a9ff", "font": "BlexMono Nerd Font"},
+          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
       ),
       widget.Spacer(**widget_defaults),
       widget.Systray(**widget_defaults)
@@ -739,11 +739,13 @@ These are the widgets on the main monitor/screen.
           ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
       ) if show_battery else widget.TextBox(text="", **widget_defaults),
       widget.KeyboardLayout(
+          fmt="󰌌 {}",
           configured_keyboards=["us", "es"],
-          ,**widget_defaults,
+          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
       ),
       widget.QuickExit(
           default_text="󰍃",
+          countdown_format="{}",
           ,**{**widget_defaults, "foreground": "#fa4d56", "font": "BlexMono Nerd Font"},
       ),
       widget.Spacer(length=6, **widget_defaults),
@@ -770,7 +772,7 @@ is that this bar will have less widgets.
           other_current_screen_border="#8d8d8d",
           other_screen_border="#6f6f6f",
           urgent_alert_method="line",
-          urgent_border="#ff8389",
+          urgent_border="#fa4d56",
           urgent_text="#ff8389",
           ,**widget_defaults,
       ),
