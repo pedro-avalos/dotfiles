@@ -119,8 +119,7 @@ You will need to install the icons fonts with: ~M-x all-the-icons-install-fonts~
 
 #+BEGIN_SrC emacs-lisp
   ;; Icons
-  (use-package all-the-icons
-    :if (display-graphic-p))
+  (use-package all-the-icons)
 
   ;; Emojis
   (use-package emojify
@@ -132,13 +131,13 @@ You will need to install the icons fonts with: ~M-x all-the-icons-install-fonts~
 I find the following UI elements unnecessary, so I disable them.
 
 #+BEGIN_SRC emacs-lisp
-  (setq inhibit-startup-message t) ; Don't show startup message
+  (setq inhibit-startup-message t) ;; Don't show startup message
 
-  (menu-bar-mode -1)   ; Disable visible scroll bar
-  (tool-bar-mode -1)   ; Disable the toolbar
-  (tooltip-mode -1)    ; Disable tooltips
-  (set-fringe-mode 10) ; Some extra space on the gutter/fringe
-  (scroll-bar-mode -1) ; Disable menu bar
+  (menu-bar-mode -1)   ;; Disable visible scroll bar
+  (tool-bar-mode -1)   ;; Disable the toolbar
+  (tooltip-mode -1)    ;; Disable tooltips
+  (set-fringe-mode 10) ;; Some extra space on the gutter/fringe
+  (scroll-bar-mode -1) ;; Disable menu bar
 #+END_SRC
 
 ** Eighty Column Rule
@@ -158,10 +157,10 @@ For further reading, see:
 ** Column and Line Numbers
 
 #+BEGIN_SRC emacs-lisp
-  (column-number-mode)                 ; Show column numbers
-  (global-display-line-numbers-mode 1) ; Show line numbers
+  (column-number-mode)                 ;; Show column numbers
+  (global-display-line-numbers-mode 1) ;; Show line numbers
 
-  (global-visual-line-mode t) ; Word wrap
+  (global-visual-line-mode t) ;; Word wrap
 
   ;; Don't show line numbers in these modes
   (dolist (mode '(org-mode-hook
@@ -173,13 +172,13 @@ For further reading, see:
 
 ** Theme
 
-I like the [[https://catppuccin.com/][catppuccin]] color scheme.
+I like the [[https://carbondesignsystem.com/guidelines/color/usage/][carbon design system]] color scheme. The theme I use in emacs is based
+on the neovim theme [[https://github.com/nyoom-engineering/oxocarbon.nvim][oxocarbon]] (which is based on the carbon design system).
 
 #+BEGIN_SRC emacs-lisp
+  (use-package autothemer) ;; Dependency for the oxocarbon-emacs theme
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-  (load-theme 'catppuccin t)
-  (setq catppuccin-flavor 'mocha)
-  (catppuccin-reload)
+  (load-theme 'oxocarbon t)
 #+END_SRC
 
 ** Modeline
@@ -201,6 +200,11 @@ I like a nice and pretty startup screen.
 #+BEGIN_SRC emacs-lisp
   ;; Install and enable the dashboard
   (use-package dashboard
+    :init
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-startup-banner 'logo) ;; Standard emacs logo
+    (setq dashboard-center-content nil)
     :config
     (dashboard-setup-startup-hook))
 
@@ -208,8 +212,8 @@ I like a nice and pretty startup screen.
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
 
-  (setq dashboard-set-navigator t) ; Show navigator below the banner
-  (setq dashboard-set-init-info t) ; Show info about the packages and init time
+  (setq dashboard-set-navigator t) ;; Show navigator below the banner
+  (setq dashboard-set-init-info t) ;; Show info about the packages and init time
 #+END_SRC
 
 *** Dashboard in Emacsclient
