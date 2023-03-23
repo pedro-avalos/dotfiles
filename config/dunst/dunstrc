@@ -1,0 +1,43 @@
+# -*- mode: conf -*-
+
+[global]
+  font = "IBM Plex Mono 12"
+  icon_theme = Papirus
+  enable_recursive_icon_lookup = yes
+  icon_position = left
+
+  # Allow a small subset of html markup
+  #
+  # If a markup is not allowed, those tags will be stripped out of the message
+  markup     = full
+  plain_text = no
+  format     = "<b>%s</b>\n%b"
+
+  # Sort messages by urgency
+  sort = no
+
+  # Show how many messages are hidden (due to geometry)
+  indicate_hidden = yes
+
+  # Center message text
+  alignment = center
+
+[urgency_low]
+  frame_color = "#393939"
+  background  = "#262626"
+  foreground  = "#c6c6c6"
+  timeout     = 5
+
+[urgency_normal]
+  frame_color = "#393939"
+  background  = "#262626"
+  foreground  = "#f4f4f4"
+  timeout     = 5
+
+[urgency_critical]
+  frame_color = "#da1e28"
+  background  = "#262626"
+  foreground  = "#ff8389"
+  timeout     = 0
+
+# vim: ft=cfg
