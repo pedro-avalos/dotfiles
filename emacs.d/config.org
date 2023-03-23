@@ -416,6 +416,18 @@ Use ~SPC~ as the prefix key.
     "b K" '(kill-buffer :which-key "Kill buffer"))
 #+END_SRC
 
+* Modes
+
+These are useful modes that I like to have with emacs.
+
+** Yaml
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yaml-mode
+    :mode (("\\.yml$" . yaml-mode)
+           ("\\.yaml$" . yaml-mode)))
+#+END_SRC
+
 * Other Settings
 
 ** Babel
