@@ -456,20 +456,7 @@ mouse = [
     ),
 ]
 
-# Try to get the wallpaper from accountsservice
-bus = dbus.SystemBus()
-uid = os.getuid()
-accts_obj = bus.get_object(
-    "org.freedesktop.Accounts", f"/org/freedesktop/Accounts/User{uid}"
-)
-props_iface = dbus.Interface(accts_obj, "org.freedesktop.DBus.Properties")
-wallpaper = props_iface.Get(
-    "org.freedesktop.DisplayManager.AccountsService", "BackgroundFile"
-)
-
-# If no accountsservice wallpaper found, use backup wallpaper
-if not wallpaper:
-    wallpaper = "~/.config/qtile/wallpaper.png"
+wallpaper = "~/.config/qtile/wallpaper.png"
 
 # Check if this machine has a battery
 BATT_PATHS = ["/sys/class/power_supply/BAT0"]

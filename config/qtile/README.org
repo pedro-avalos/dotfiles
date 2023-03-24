@@ -626,27 +626,8 @@ file_progress, confirm, download and error.
 
 ** Wallpaper
 
-I first attempt to get the wallpaper set by accountsservice. If none is found,
-then I use my backup wallpaper for qtile. This allows me to change the
-wallpaper in XFCE (for example) and still have the same wallpaper. This also
-allows someone else to easily use a different wallpaper. than the one in my
-dotfiles.
-
 #+BEGIN_SRC python
-  # Try to get the wallpaper from accountsservice
-  bus = dbus.SystemBus()
-  uid = os.getuid()
-  accts_obj = bus.get_object(
-      "org.freedesktop.Accounts", f"/org/freedesktop/Accounts/User{uid}"
-  )
-  props_iface = dbus.Interface(accts_obj, "org.freedesktop.DBus.Properties")
-  wallpaper = props_iface.Get(
-      "org.freedesktop.DisplayManager.AccountsService", "BackgroundFile"
-  )
-
-  # If no accountsservice wallpaper found, use backup wallpaper
-  if not wallpaper:
-      wallpaper = "~/.config/qtile/wallpaper.png"
+  wallpaper = "~/.config/qtile/wallpaper.png"
 #+END_SRC
 
 ** Widgets
