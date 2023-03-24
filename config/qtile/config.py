@@ -322,8 +322,8 @@ keys = [
     Key(
         [kb.SUPER, kb.ALT],
         "N",
-        lazy.layout.normalize(),
-        desc="Reset window size",
+        lazy.layout.reset(),
+        desc="Reset window sizes",
     ),
     Key(
         [kb.SUPER],
