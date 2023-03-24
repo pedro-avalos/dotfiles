@@ -36,6 +36,7 @@ configuration for xorg or wayland.
   - ~emacs~
   - ~redshift~ (xorg) &/or ~gammastep~ (wayland)
   - ~picom~ (xorg)
+  - ~xfce4-clipman-plugin~
 
 * Autostart Script
 
@@ -48,6 +49,7 @@ This is the shell script that will be executed upon qtile's startup.
   blueman-applet &
   dunst &
   emacs --daemon &
+  xfce4-clipman &
 
   if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
       redshift-gtk &

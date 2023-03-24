@@ -5,6 +5,7 @@ nm-applet --indicator &
 blueman-applet &
 dunst &
 emacs --daemon &
+xfce4-clipman &
 
 if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
     redshift-gtk &
