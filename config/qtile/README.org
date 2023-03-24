@@ -647,15 +647,34 @@ check if a battery is present.
 
 *** Widget defaults
 
-These are parameters I pass to almost all widgets. Pulling it out into a
-dictionary allows me to repeat less code.
+The following dictionaries help minimize the places that need editing to
+change the color scheme, font selection, or shared widget settings.
 
 #+BEGIN_SRC python
+  # Default color scheme
+  colors = {
+      "bg": ["#161616", "#161616"],  # Background color
+      "fg": ["#f4f4f4", "#f4f4f4"],  # Foreground color
+      "py": ["#f1c21b", "#f1c21b"],  # Color for python icon
+      "err": ["#ff8389", "#ff8389"],  # Color for error text
+      "red": ["#fa4d56", "#fa4d56"],  # Color for exit button
+      "current": ["#4589ff", "#4589ff"],  # Current border color
+      "unfocus": ["#6f6f6f", "#6f6f6f"],  # Current (unfocused) border color
+      "inactive": ["#6f6f6f", "#6f6f6f"],  # Inactive element
+  }
+
+  # Default fonts
+  fonts = {
+      "default": "IBM Plex Mono",
+      "icons": "BlexMono Nerd Font",
+  }
+
+  # Default widget settings
   widget_defaults = {
-      "font": "IBM Plex Mono",
+      "font": fonts["default"],
       "fontsize": 16,
-      "foreground": "#f4f4f4",
-      "background": "#161616",
+      "background": colors["bg"],
+      "foreground": colors["fg"],
   }
 #+END_SRC
 
@@ -670,23 +689,27 @@ These are the widgets on the main monitor/screen.
       widget.TextBox(
           text="",
           mouse_callbacks={m.LEFT: lazy.spawn(LAUNCHER_CMD)},
-          ,**{**widget_defaults, "foreground": "#f1c21b", "font": "BlexMono Nerd Font"},
+          ,**{
+              ,**widget_defaults,
+              "foreground": colors["py"],
+              "font": fonts["icons"],
+          },
       ),
       widget.Spacer(length=6, **widget_defaults),
       widget.GroupBox(
           disable_drag=True,
-          active="#c6c6c6",
-          inactive="#6f6f6f",
+          active=colors["fg"],
+          inactive=colors["inactive"],
           highlight_method="line",
-          highlight_color="#161616",
-          this_current_screen_border="#4589ff",
-          this_screen_border="#6f6f6f",
+          highlight_color=colors["bg"],
+          this_current_screen_border=colors["current"],
+          this_screen_border=colors["unfocus"],
           other_current_screen_border="#8d8d8d",
           other_screen_border="#6f6f6f",
           urgent_alert_method="line",
-          urgent_border="#fa4d56",
-          urgent_text="#ff8389",
-          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
+          urgent_border=colors["red"],
+          urgent_text=colors["err"],
+          ,**{**widget_defaults, "font": fonts["icons"]},
       ),
       widget.Spacer(length=6, **widget_defaults),
       widget.CurrentLayoutIcon(padding=0, scale=0.6, **widget_defaults),
@@ -694,42 +717,45 @@ These are the widgets on the main monitor/screen.
       widget.Clock(
           format=" %Y/%m/%d (%a)",
           mouse_callbacks={m.LEFT: lazy.spawn(CAL_CMD)},
-          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
+          ,**{**widget_defaults, "font": fonts["icons"]},
       ),
       widget.Clock(
           format=" %H:%M",
-          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
+          ,**{**widget_defaults, "font": fonts["icons"]},
       ),
       widget.Spacer(**widget_defaults),
       widget.Systray(**widget_defaults)
-        if compositor == "x11"
-        else widget.StatusNotifier(**widget_defaults),
+      if compositor == "x11"
+      else widget.StatusNotifier(**widget_defaults),
       widget.Spacer(length=6, **widget_defaults),
       widget.Volume(
           fmt="󱄠 {}",
           mouse_callbacks={m.RIGHT: lazy.spawn(VOL_CTRL_CMD)},
-          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
+          ,**{**widget_defaults, "font": fonts["icons"]},
       ),
       widget.Battery(
           format="{char} {percent:2.0%}",
           update_interval=30,
           low_percentage=0.2,
+          low_foreground=colors["err"],
           full_char="󰁹",
           charge_char="󰂄",
           discharge_char="󰂀",
           empty_char="󰂎",
           unknown_char="󰂑",
-          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
-      ) if show_battery else widget.TextBox(text="", **widget_defaults),
+          ,**{**widget_defaults, "font": fonts["icons"]},
+      )
+      if show_battery
+      else widget.TextBox(text="", **widget_defaults),
       widget.KeyboardLayout(
           fmt="󰌌 {}",
           configured_keyboards=["us", "es"],
-          ,**{**widget_defaults, "font": "BlexMono Nerd Font"},
+          ,**{**widget_defaults, "font": fonts["icons"]},
       ),
       widget.QuickExit(
           default_text="󰍃",
           countdown_format="{}",
-          ,**{**widget_defaults, "foreground": "#fa4d56", "font": "BlexMono Nerd Font"},
+          ,**{**widget_defaults, "foreground": colors["red"], "font": fonts["icons"]},
       ),
       widget.Spacer(length=6, **widget_defaults),
   ]
@@ -746,25 +772,25 @@ is that this bar will have less widgets.
       widget.Spacer(length=6, **widget_defaults),
       widget.GroupBox(
           disable_drag=True,
-          active="#c6c6c6",
-          inactive="#6f6f6f",
+          active=colors["fg"],
+          inactive=colors["inactive"],
           highlight_method="line",
-          highlight_color="#161616",
-          this_current_screen_border="#4589ff",
-          this_screen_border="#6f6f6f",
+          highlight_color=colors["bg"],
+          this_current_screen_border=colors["current"],
+          this_screen_border=colors["unfocus"],
           other_current_screen_border="#8d8d8d",
           other_screen_border="#6f6f6f",
           urgent_alert_method="line",
-          urgent_border="#fa4d56",
-          urgent_text="#ff8389",
+          urgent_border=colors["red"],
+          urgent_text=colors["err"],
           ,**widget_defaults,
       ),
       widget.CurrentLayoutIcon(scale=0.6, **widget_defaults),
       widget.Spacer(**widget_defaults),
       widget.CurrentScreen(
-          active_color="#f4f4f4",
+          active_color=colors["fg"],
           active_text="A",
-          inactive_color="#8d8d8d",
+          inactive_color=colors["inactive"],
           inactive_text="i",
           ,**widget_defaults,
       ),
@@ -781,14 +807,20 @@ is that this bar will have less widgets.
           wallpaper=wallpaper,
           wallpaper_mode="fill",
           top=Bar(
-              main_widgets, 32, opacity=0.95, margin=6,
+              widgets=main_widgets,
+              size=32,
+              opacity=0.95,
+              background=colors["bg"],
           ),
       ),
       Screen(
           wallpaper=wallpaper,
           wallpaper_mode="fill",
           top=Bar(
-              other_widgets, 32, opacity=0.95, margin=6,
+              widgets=other_widgets,
+              size=32,
+              opacity=0.95,
+              backgrounds=colors["bg"],
           ),
       ),
   ]
