@@ -274,7 +274,8 @@ keys = [
     Key(
         [kb.SUPER, kb.SHIFT],
         "H",
-        lazy.layout.shuffle_left(),
+        lazy.layout.shuffle_left().when(layout=["bsp", "columns"]),
+        lazy.layout.swap_left().when(layout=["monadtall", "monadthreecol", "monadwide"]),
         desc="Shuffle left",
     ),
     Key(
@@ -292,7 +293,8 @@ keys = [
     Key(
         [kb.SUPER, kb.SHIFT],
         "L",
-        lazy.layout.shuffle_right(),
+        lazy.layout.shuffle_right().when(layout=["bsp", "columns"]),
+        lazy.layout.swap_right().when(layout=["monadtall", "monadthreecol", "monadwide"]),
         desc="Shuffle right",
     ),
     Key(
@@ -310,13 +312,13 @@ keys = [
     Key(
         [kb.SUPER, kb.ALT], "J",
         lazy.layout.grow_down().when(layout=["bsp", "columns"]),
-        lazy.layout.shrink().when(layout=["monadtall", "monadwide", "monadthreecol"]),
+        lazy.layout.shrink().when(layout=["monadtall", "monadthreecol", "monadwide"]),
         desc="Grow down",
     ),
     Key(
         [kb.SUPER, kb.ALT], "K",
         lazy.layout.grow_up().when(layout=["bsp", "columns"]),
-        lazy.layout.grow().when(layout=["monadtall", "monadwide", "monadthreecol"]),
+        lazy.layout.grow().when(layout=["monadtall", "monadthreecol", "monadwide"]),
         desc="Grow up",
     ),
     Key(
