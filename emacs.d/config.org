@@ -308,6 +308,8 @@ The smex package allows ~M-x~ to remember our history.
 
 * LSP
 
+Language Server Protocol.
+
 #+BEGIN_SRC emacs-lisp
   (use-package lsp-mode
     :init
@@ -322,11 +324,21 @@ The smex package allows ~M-x~ to remember our history.
   (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
   (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
   (use-package dap-mode)
-  ;; (use-package dap-LANGUAGE) to load the dap adapter for the language
 
   (use-package which-key
     :config
     (which-key-mode))
+#+END_SRC
+
+** C/C++
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c-mode-hook 'lsp)
+  (add-hook 'c++-mode-hook 'lsp)
+
+  (setq gc-cons-threshold (* 100 1024 1024)
+        read-process-output-max (* 1024 1024)
+        treemacs-space-between-root-nodes nil)
 #+END_SRC
 
 * Keybindings
