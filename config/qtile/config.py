@@ -3,7 +3,6 @@ import os
 import os.path
 import subprocess
 
-import dbus
 from libqtile import hook, layout, qtile, widget
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.bar import Bar
