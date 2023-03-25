@@ -364,6 +364,7 @@ file_progress, confirm, download and error.
 | SUPER+SHIFT+J     | Shuffle down                         |
 | SUPER+SHIFT+K     | Shuffle up                           |
 | SUPER+SHIFT+L     | Shuffle right                        |
+| SUPER+SHIFT+Z     | Swap focused window to main (xmonad) |
 | SUPER+ALT+J       | Grow left                            |
 | SUPER+ALT+J       | Grow down                            |
 | SUPER+ALT+K       | Grow up                              |
@@ -455,6 +456,12 @@ file_progress, confirm, download and error.
           "L",
           lazy.layout.shuffle_right(),
           desc="Shuffle right",
+      ),
+      Key(
+          [kb.SUPER, kb.SHIFT],
+          "Z",
+          lazy.layout.swap_main().when(layout=["monadtall", "monadthreecol", "monadwide"]),
+          desc="Swap current window to main pane",
       ),
       Key(
           [kb.SUPER, kb.ALT],

@@ -296,6 +296,12 @@ keys = [
         desc="Shuffle right",
     ),
     Key(
+        [kb.SUPER, kb.SHIFT],
+        "Z",
+        lazy.layout.swap_main().when(layout=["monadtall", "monadthreecol", "monadwide"]),
+        desc="Swap current window to main pane",
+    ),
+    Key(
         [kb.SUPER, kb.ALT],
         "H",
         lazy.layout.grow_left().when(layout=["bsp", "columns"]),
