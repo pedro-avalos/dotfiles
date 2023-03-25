@@ -236,13 +236,13 @@ keys = [
         desc="Toggle fullscreen",
     ),
     Key(
-        [kb.SUPER, kb.SHIFT],
+        [kb.SUPER],
         kb.SPACE,
         lazy.window.toggle_floating(),
         desc="Toggle floating",
     ),
     Key(
-        [kb.SUPER],
+        [kb.SUPER, kb.SHIFT],
         kb.SPACE,
         float_to_front,
         desc="Float to front",

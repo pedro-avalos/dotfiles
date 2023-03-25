@@ -354,6 +354,7 @@ file_progress, confirm, download and error.
 |-------------------+--------------------------------------|
 | SUPER+CTRL+Q      | Close focused window                 |
 | SUPER+F           | Toggle fullscreen for focused window |
+| SUPER+SPACE       | Toggle floating for focused window   |
 | SUPER+SHIFT+SPACE | Move all floating windows to front   |
 | SUPER+H           | Traverse left                        |
 | SUPER+J           | Traverse down                        |
@@ -396,13 +397,13 @@ file_progress, confirm, download and error.
           desc="Toggle fullscreen",
       ),
       Key(
-          [kb.SUPER, kb.SHIFT],
+          [kb.SUPER],
           kb.SPACE,
           lazy.window.toggle_floating(),
           desc="Toggle floating",
       ),
       Key(
-          [kb.SUPER],
+          [kb.SUPER, kb.SHIFT],
           kb.SPACE,
           float_to_front,
           desc="Float to front",
