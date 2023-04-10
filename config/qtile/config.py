@@ -588,7 +588,7 @@ other_widgets = [
         urgent_alert_method="line",
         urgent_border=colors["red"],
         urgent_text=colors["err"],
-        **widget_defaults,
+        **{**widget_defaults, "font": fonts["icons"]},
     ),
     widget.CurrentLayoutIcon(scale=0.6, **widget_defaults),
     widget.Spacer(**widget_defaults),
