@@ -219,7 +219,7 @@ is required.
 
 #+BEGIN_SRC emacs-lisp
   ;; Enable dashboard for emacsclient
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 #+END_SRC
 
 * Ivy (Counsel/Swiper)
