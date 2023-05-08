@@ -11,5 +11,5 @@ if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
     redshift-gtk &
     picom --daemon &
 elif [ "${XDG_SESSION_TYPE}" = "wayland" ] ; then
-    gammastep-indicator
+    gammastep-indicator &
 fi
