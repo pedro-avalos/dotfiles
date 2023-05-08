@@ -456,7 +456,7 @@ These are useful modes that I like to have with emacs.
 I prefer to use a tab width of 2 character.
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default indent-tabs-mode nil)
+  (setq-default indent-tabs-mode t)
   (setq-default tab-width 2)
   (setq indent-line-function 'insert-tab)
   (setq org-src-preserve-indentation nil 
