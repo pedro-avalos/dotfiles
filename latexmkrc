@@ -1,1 +1,8 @@
+# Generate pdf using pdflatex (-pdf)
+$pdf_mode = 1;
+
+# use bibtex if a .bib file exists
+$bibtex_use = 1;
+
+# Default pdf viewer
 $pdf_previewer = 'zathura';
