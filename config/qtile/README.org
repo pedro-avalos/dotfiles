@@ -1,7 +1,5 @@
 #+TITLE: Qtile Configuration
 #+AUTHOR: Pedro Avalos
-#+PROPERTY: header-args :tangle config.py
-#+auto_tangle: t
 #+STARTUP: showeverything
 
 * About
