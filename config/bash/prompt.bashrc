@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# File: bash-prompt.bashrc
 
 # Needed for git repo status
 # shellcheck source=./git-prompt.sh
-[[ -e ~/.bashrc.d/git-prompt.sh ]] && source ~/.bashrc.d/git-prompt.sh
+[[ -f ~/.config/bash/git-prompt.sh ]] && . ~/.config/bash/git-prompt.sh
 
 # Settings for git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1     # '*'=unstaged, '+'=staged

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# File: bat.bashrc
 # Configuration related to bat.
 
 # Check if bat exists in the first place

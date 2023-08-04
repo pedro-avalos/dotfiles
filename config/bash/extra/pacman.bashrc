@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# File: pacman.bashrc
 # Configuration related to pacman and paru.
 
 # Check if pacman exists in the first place
