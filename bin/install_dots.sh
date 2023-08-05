@@ -64,8 +64,11 @@ echo "installing bash dots..."
 install_dots "${DOTS_DIR}/bashrc"       "${HOME}/.bashrc"
 install_dots "${DOTS_DIR}/config/bash"  "${HOME}/.config/bash"
 install_dots "${DOTS_DIR}/bash_profile" "${HOME}/.bash_profile"
-install_dots "${DOTS_DIR}/bash_profile" "${HOME}/.profile"
 install_dots "${DOTS_DIR}/bash_logout"  "${HOME}/.bash_logout"
+
+echo "installing zsh dots..."
+install_dots "${DOTS_DIR}/zshrc"       "${HOME}/.zshrc"
+install_dots "${DOTS_DIR}/config/zsh"  "${HOME}/.config/zsh"
 
 echo "installing tmux dots..."
 install_dots "${DOTS_DIR}/config/tmux"  "${HOME}/.config/tmux"
