@@ -13,8 +13,7 @@ fi
 [[ $- != *i* ]] && return
 
 # Ensure essential directories and files exist
-[[ ! -d ~/.cache/bash ]]         && mkdir -p ~/.cache/bash
-[[ ! -f ~/.cache/bash/history ]] && touch ~/.cache/bash/history
+[[ ! -d ~/.cache/bash ]] && mkdir -p ~/.cache/bash
 
 # Export environmental variables
 export HISTFILE=~/.cache/bash/history # Bash history file
