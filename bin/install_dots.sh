@@ -47,7 +47,7 @@ install_dots ()
 }
 
 # Update dotfiles
-git -C ~/.dotfiles pull
+git -C ~/.dotfiles pull --recurse-submodules
 
 echo "ensuring directories exist..."
 [ ! -d ~/.config ]      && mkdir "${HOME}/.config"
@@ -70,6 +70,10 @@ install_dots "${DOTS_DIR}/bash_logout"  "${HOME}/.bash_logout"
 echo "installing tmux dots..."
 install_dots "${DOTS_DIR}/config/tmux"  "${HOME}/.config/tmux"
 install_dots "${DOTS_DIR}/config/tmuxp" "${HOME}/.config/tmuxp"
+
+echo "installing (neo)vim dots..."
+install_dots "${DOTS_DIR}/vim"          "${HOME}/.config/vim"
+install_dots "${DOTS_DIR}/vim/init.vim" "${HOME}/.vimrc"
 
 echo "installing emacs dots..."
 install_dots "${DOTS_DIR}/emacs.d"  "${HOME}/.emacs.d"
