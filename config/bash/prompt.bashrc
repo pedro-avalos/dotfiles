@@ -75,43 +75,43 @@ function __child_ps1() {
 function __set_ps1() {
   local exit=$?
 
-  # Colors       ; Bright colors
-  local _black   ; local _bblack
-  local _red     ; local _bred
-  local _green   ; local _bgreen
-  local _yellow  ; local _byellow
-  local _blue    ; local _bblue
-  local _magenta ; local _bmagenta
-  local _cyan    ; local _bcyan
-  local _white   ; local _bwhite
-  local _bold
-  local _blink
-  local _reset
+  # Colors      ; Bright colors
+  local black   ; local bblack
+  local red     ; local bred
+  local green   ; local bgreen
+  local yellow  ; local byellow
+  local blue    ; local bblue
+  local magenta ; local bmagenta
+  local cyan    ; local bcyan
+  local white   ; local bwhite
+  local bold
+  local blink
+  local sgr0
 
   if [[ ${__colorize_prompt} ]] ; then
     export GIT_PS1_SHOWCOLORHINTS=1
 
-    _black="\[$(tput setaf 0)\]"   ; _bblack="\[$(tput setaf 8)\]"
-    _red="\[$(tput setaf 1)\]"     ; _bred="\[$(tput setaf 9)\]"
-    _green="\[$(tput setaf 2)\]"   ; _bgreen="\[$(tput setaf 10)\]"
-    _yellow="\[$(tput setaf 3)\]"  ; _byellow="\[$(tput setaf 11)\]"
-    _blue="\[$(tput setaf 4)\]"    ; _bblue="\[$(tput setaf 12)\]"
-    _magenta="\[$(tput setaf 5)\]" ; _bmagenta="\[$(tput setaf 13)\]"
-    _cyan="\[$(tput setaf 6)\]"    ; _bcyan="\[$(tput setaf 14)\]"
-    _white="\[$(tput setaf 7)\]"   ; _bwhite="\[$(tput setaf 15)\]"
-    _bold="\[$(tput bold)\]"
-    _blink="\[$(tput blink)\]"
-    _reset="\[$(tput sgr0)\]"
+    black="\[$(tput setaf 0)\]"   ; bblack="\[$(tput setaf 8)\]"
+    red="\[$(tput setaf 1)\]"     ; bred="\[$(tput setaf 9)\]"
+    green="\[$(tput setaf 2)\]"   ; bgreen="\[$(tput setaf 10)\]"
+    yellow="\[$(tput setaf 3)\]"  ; byellow="\[$(tput setaf 11)\]"
+    blue="\[$(tput setaf 4)\]"    ; bblue="\[$(tput setaf 12)\]"
+    magenta="\[$(tput setaf 5)\]" ; bmagenta="\[$(tput setaf 13)\]"
+    cyan="\[$(tput setaf 6)\]"    ; bcyan="\[$(tput setaf 14)\]"
+    white="\[$(tput setaf 7)\]"   ; bwhite="\[$(tput setaf 15)\]"
+    bold="\[$(tput bold)\]"
+    blink="\[$(tput blink)\]"
+    sgr0="\[$(tput sgr0)\]"
   else
     unset GIT_PS1_SHOWCOLORHINTS
   fi
 
   # Colors for each situation
-  local root_color="${_bold}${_red}"
-  local ssh_color="${_byellow}"
-  local tmux_color="${_green}"
-  local norm_color="${_bblue}"
-  local child_color="${_cyan}"
+  local root_color="${bold}${red}"
+  local ssh_color="${magenta}"
+  local tmux_color="${green}"
+  local norm_color="${blue}"
+  local child_color="${cyan}"
 
   # Set up pre_ps1
   local ssh_icon=''   # Icon for ssh connection
@@ -131,10 +131,10 @@ function __set_ps1() {
     norm_icon+="${norm_color}λ"
     child_icon+="${child_color}β"
   fi
-  ssh_icon+="${_reset} "
-  tmux_icon+="${_reset} "
-  norm_icon+="${_reset} "
-  child_icon+="${_reset} "
+  ssh_icon+="${sgr0} "
+  tmux_icon+="${sgr0} "
+  norm_icon+="${sgr0} "
+  child_icon+="${sgr0} "
 
   local icon_ps1
   local child_ps1
@@ -144,10 +144,11 @@ function __set_ps1() {
 
   local pre_ps1="${icon_ps1}${child_ps1}"
 
-  # If root, only use bold `<hostname>:`, otherwise, use `<user>@<hostname>:`
-  if [[ ${EUID} -eq 0 ]] ; then pre_ps1+="${_bold}\h${_reset}:"
-  else                          pre_ps1+='\u@\h:'
-  fi
+  # If root, make the following bold
+  # Show the user and host: `<user>@<host>:`
+  [[ ${EUID} -eq 0 ]] && pre_ps1+="${bold}"
+  pre_ps1+='\u@\h:'
+  [[ ${EUID} -eq 0 ]] && pre_ps1+="${sgr0}"
 
   # Add the current directory (color matched to icon)
   pre_ps1+="${_bold}"
@@ -156,14 +157,14 @@ function __set_ps1() {
   elif [[ -n ${TMUX} ]]           ; then pre_ps1+="${tmux_color}"
   else                                   pre_ps1+="${norm_color}"
   fi
-  pre_ps1+="\W${_reset}"
+  pre_ps1+="\W${sgr0}"
 
   # Set up post_ps1
   local post_ps1
   post_ps1=''
 
   # If nonzero exit code, display it in red
-  [[ ${exit} -ne 0 ]] && post_ps1+="${_red}[${exit}]${_reset}"
+  [[ ${exit} -ne 0 ]] && post_ps1+="${red}[${exit}]${sgr0}"
 
   post_ps1+=' '
 
