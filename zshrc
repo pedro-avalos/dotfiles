@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 [[ ! -d ~/.cache/zsh ]] && mkdir -p ~/.cache/zsh
-
 HISTFILE=~/.cache/zsh/history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -14,7 +13,11 @@ autoload -Uz compinit && compinit
 
 bindkey -v
 
+source ~/.config/zsh/path.zsh
 source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/prompt.zsh
+for f in ~/.config/zsh/extra/*.zsh ; do source $f ; done
+
+[[ -f /opt/conda/etc/profile.d/conda.sh ]] && source /opt/conda/etc/profile.d/conda.sh
 
 # vim: ft=zsh
