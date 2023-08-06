@@ -15,8 +15,16 @@ zstyle ':vcs_info:*' actionformats \
 zstyle ':vcs_info:git:*' patch-format '(%10>...>%p%<<)'
 zstyle ':vcs_info:git:*' stagedstr '%F{green}+%f'
 zstyle ':vcs_info:git:*' unstagedstr '%F{red}*%f'
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 
-function _icon_ps1() {
+function +vi-git-untracked() {
+  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+    git status --porcelain | grep -q '^?? ' 2> /dev/null ; then
+      hook_com[staged]+="%F{red}%%%f"
+  fi
+}
+
+function +icon_ps1() {
     local exit=$?
     local ssh_icon='s'
     local tmux_icon='t'
@@ -38,7 +46,7 @@ function _icon_ps1() {
     return ${exit}
 }
 
-function _child_ps1() {
+function +child_ps1() {
   local exit=$?
   local child_icon='z'
   local -i child_lvl=1
@@ -55,7 +63,7 @@ function _child_ps1() {
   return ${exit}
 }
 
-function _pre_vcs() {
+function +pre_vcs() {
   local root_color='%F{red}'
   local ssh_color='%F{magenta}'
   local tmux_color='%F{green}'
@@ -83,8 +91,8 @@ function _pre_vcs() {
   norm_icon+='%f '
   child_icon+='%f '
 
-  local icon=$(_icon_ps1 "${ssh_icon}" "${tmux_icon}" "${norm_icon}")
-  local child=$(_child_ps1 "${child_icon}")
+  local icon=$(+icon_ps1 "${ssh_icon}" "${tmux_icon}" "${norm_icon}")
+  local child=$(+child_ps1 "${child_icon}")
 
   local out="${icon}${child}"
 
@@ -100,12 +108,12 @@ function _pre_vcs() {
   printf -- '%s' "${out}"
 }
 
-function _post_vcs() {
+function +post_vcs() {
   local code='%(?..%F{red}[%?]%f)'
 
   printf -- '%s' "${code}"
 }
 
-PROMPT='$(_pre_vcs)${vcs_info_msg_0_}$(_post_vcs) %E'
+PROMPT='$(+pre_vcs)${vcs_info_msg_0_}$(+post_vcs) %E'
 
 # vim: ft=zsh
