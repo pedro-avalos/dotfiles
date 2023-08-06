@@ -103,13 +103,13 @@ under the rug...
 
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
-                      :font "IBM Plex Mono"
+                      :font "monospace"
                       :weight 'medium)
   (set-face-attribute 'variable-pitch nil
-                      :font "BlexMono Nerd Font"
+                      :font "monospace"
                       :weight 'medium)
   (set-face-attribute 'fixed-pitch nil
-                      :font "IBM Plex Mono"
+                      :font "monospace"
                       :weight 'medium)
 
   ;; Italicize comments & keywords
