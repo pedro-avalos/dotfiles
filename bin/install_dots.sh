@@ -77,6 +77,7 @@ install_dots "${DOTS_DIR}/config/tmuxp" "${HOME}/.config/tmuxp"
 echo "installing (neo)vim dots..."
 install_dots "${DOTS_DIR}/vim"          "${HOME}/.vim"
 install_dots "${DOTS_DIR}/vim/init.vim" "${HOME}/.vimrc"
+install_dots "${DOTS_DIR}/config/nvim"  "${HOME}/.config/nvim"
 
 echo "installing emacs dots..."
 install_dots "${DOTS_DIR}/config/emacs" "${HOME}/.config/emacs"
