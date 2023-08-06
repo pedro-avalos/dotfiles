@@ -40,6 +40,13 @@ auto-installing new packages.
 
   ;; Install absent modules
   (setq use-package-always-ensure t)
+
+  ;; Auto-update packages
+  (use-package auto-package-update
+    :config
+    (setq auto-package-update-delete-old-versions t)
+    (setq auto-package-update-hide-results t)
+    (auto-package-update-maybe))
 #+END_SRC
 
 * Startup Performance
