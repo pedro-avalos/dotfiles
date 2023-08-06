@@ -1,8 +1,4 @@
-# Plugins
 elpa/
-
-# Compiled configuration
+eln-cache/
 config.el
-
-# Customization variables
 custom.el
