@@ -115,11 +115,11 @@ under the rug...
 
 *** Icons and Emojis
 
-You will need to install the icons fonts with: ~M-x all-the-icons-install-fonts~.
+You will need to install the icons fonts with: ~M-x nerd-icons-install-fonts~.
 
 #+BEGIN_SrC emacs-lisp
   ;; Icons
-  (use-package all-the-icons)
+  (use-package nerd-icons)
 
   ;; Emojis
   (use-package emojify
@@ -201,12 +201,14 @@ I like a nice and pretty startup screen.
   ;; Install and enable the dashboard
   (use-package dashboard
     :init
-    (setq dashboard-set-heading-icons t)  ;; Use all-the-icons font
-    (setq dashboard-set-file-icons t)     ;; Use all-the-icons font
-    (setq dashboard-startup-banner 'logo) ;; Standard emacs logo
-    (setq dashboard-center-content nil)   ;; Don't center content
-    (setq dashboard-set-navigator t)      ;; Show navigator below the banner
-    (setq dashboard-set-init-info t)      ;; Show info about the packages and init time
+    (setq dashboard-display-icons-p t)     ;; Display icons on GUI and terminal
+    (setq dashboard-icon-type 'nerd-icons) ;; Use nerd-icons
+    (setq dashboard-set-heading-icons t)   ;; Add icons to the headings
+    (setq dashboard-set-file-icons t)      ;; Add icons to the items
+    (setq dashboard-startup-banner 'logo)  ;; Standard emacs logo
+    (setq dashboard-center-content nil)    ;; Don't center content
+    (setq dashboard-set-navigator t)       ;; Show navigator below the banner
+    (setq dashboard-set-init-info t)       ;; Show packages info and init time
     :config
     (dashboard-setup-startup-hook))
 
