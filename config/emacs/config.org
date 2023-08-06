@@ -7,7 +7,7 @@
 Move customization variables to a separate file. Keeps ~init.el~ nice and clean.
 
 #+BEGIN_SRC emacs-lisp
-  (setq custom-file "~/.emacs.d/custom.el")
+  (setq custom-file "~/.config/emacs/custom.el")
 #+END_SRC
 
 * Package Management
@@ -78,7 +78,7 @@ I dislike the Emacs clutter in my directories. This swipes the clutter neatly
 under the rug...
 
 #+BEGIN_SRC emacs-lisp
-  ;; Move everything out of the ~/.emacs.d folder
+  ;; Move everything out of the ~/.config/emacs folder
   (setq user-emacs-directory "~/.cache/emacs")
 
   (use-package no-littering)
@@ -177,7 +177,7 @@ on the neovim theme [[https://github.com/nyoom-engineering/oxocarbon.nvim][oxoca
 
 #+BEGIN_SRC emacs-lisp
   (use-package autothemer) ;; Dependency for the oxocarbon-emacs theme
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
   (load-theme 'oxocarbon t)
 #+END_SRC
 
@@ -394,7 +394,7 @@ Use ~SPC~ as the prefix key.
     "SPC" '(counsel-M-x :which-key "M-x")
     "c c" '(compile :which-key "Compile")
     "c C" '(recompile :which-key "Recompile")
-    "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+    "h r r" '((lambda () (interactive) (load-file "~/.config/emacs/init.el")) :which-key "Reload emacs config")
     "t t" '(toggle-truncate-lines :which-key "Toggle truncate lines"))
 
   (nvmap :keymaps 'override :prefix "SPC"
