@@ -79,7 +79,7 @@ install_dots "${DOTS_DIR}/vim"          "${HOME}/.vim"
 install_dots "${DOTS_DIR}/vim/init.vim" "${HOME}/.vimrc"
 
 echo "installing emacs dots..."
-install_dots "${DOTS_DIR}/emacs.d"  "${HOME}/.emacs.d"
+install_dots "${DOTS_DIR}/config/emacs" "${HOME}/.config/emacs"
 
 echo "installing window manager dots..."
 install_dots "${DOTS_DIR}/config/qtile" "${HOME}/.config/qtile"
