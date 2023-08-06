@@ -19,8 +19,8 @@ These are the sources for the package manager.
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("org" . "https://orgmode.org/elpa/")
-                           ("elpa" . "https://elpa.gnu.org/packages/")))
+                           ("org"   . "https://orgmode.org/elpa/")
+                           ("elpa"  . "https://elpa.gnu.org/packages/")))
 
   (package-initialize)
   (unless package-archive-contents
@@ -33,10 +33,12 @@ Emacs has a package manager, but ~use-package~ has some nice-to-haves like
 auto-installing new packages.
 
 #+BEGIN_SRC emacs-lisp
+  ;; Install use-package
   (unless (package-installed-p 'use-package)
     (package-install 'use-package))
-
   (require 'use-package)
+
+  ;; Install absent modules
   (setq use-package-always-ensure t)
 #+END_SRC
 
@@ -201,14 +203,13 @@ I like a nice and pretty startup screen.
   ;; Install and enable the dashboard
   (use-package dashboard
     :init
-    (setq dashboard-display-icons-p t)     ;; Display icons on GUI and terminal
-    (setq dashboard-icon-type 'nerd-icons) ;; Use nerd-icons
-    (setq dashboard-set-heading-icons t)   ;; Add icons to the headings
-    (setq dashboard-set-file-icons t)      ;; Add icons to the items
-    (setq dashboard-startup-banner 'logo)  ;; Standard emacs logo
-    (setq dashboard-center-content nil)    ;; Don't center content
-    (setq dashboard-set-navigator t)       ;; Show navigator below the banner
-    (setq dashboard-set-init-info t)       ;; Show packages info and init time
+    (setq dashboard-display-icons-p t)        ;; Display icons on GUI and terminal
+    (setq dashboard-icon-type 'nerd-icons)    ;; Use nerd-icons
+    (setq dashboard-set-heading-icons t)      ;; Add icons to the headings
+    (setq dashboard-set-file-icons t)         ;; Add icons to the items
+    (setq dashboard-startup-banner 'official) ;; Standard emacs logo
+    (setq dashboard-set-navigator t)          ;; Show navigator below the banner
+    (setq dashboard-set-init-info t)          ;; Show packages info and init time
     :config
     (dashboard-setup-startup-hook))
 
@@ -352,7 +353,7 @@ I prefer vim keybindings, sorry not sorry.
 #+BEGIN_SRC emacs-lisp
   ;; Set up evil mode
   (use-package evil
-    :init ;; Tweak evil before loading it
+    :init
     (setq evil-want-keybinding nil)
     (setq evil-vsplit-window-right t)
     (setq evil-split-window-below t)
