@@ -8,15 +8,15 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*' formats \
-  '(%{%F{green}%}%b%{%f%}%u%c)'
+  '(%F{green}%b%f%u%c)'
 zstyle ':vcs_info:*' actionformats \
-  '(%{%F{red}%}%m%{%f%}%u%c|%a)'
+  '(%F{red}%m%f%u%c|%a)'
 
 zstyle ':vcs_info:git:*' patch-format '(%10>...>%p%<<)'
-zstyle ':vcs_info:git:*' stagedstr '%{%F{green}%}+%{%f%}'
-zstyle ':vcs_info:git:*' unstagedstr '%{%F{red}%}*%{%f%}'
+zstyle ':vcs_info:git:*' stagedstr '%F{green}+%f'
+zstyle ':vcs_info:git:*' unstagedstr '%F{red}*%f'
 
-function __icon_ps1() {
+function _icon_ps1() {
     local exit=$?
     local ssh_icon='s'
     local tmux_icon='t'
@@ -38,7 +38,7 @@ function __icon_ps1() {
     return ${exit}
 }
 
-function __child_ps1() {
+function _child_ps1() {
   local exit=$?
   local child_icon='z'
   local -i child_lvl=1
@@ -55,12 +55,12 @@ function __child_ps1() {
   return ${exit}
 }
 
-function pre_vcs() {
-  local root_color='%{%F{red}%}'
-  local ssh_color='%{%F{magenta}%}'
-  local tmux_color='%{%F{green}%}'
-  local norm_color='%{%F{blue}%}'
-  local child_color='%{%F{cyan}%}'
+function _pre_vcs() {
+  local root_color='%F{red}'
+  local ssh_color='%F{magenta}'
+  local tmux_color='%F{green}'
+  local norm_color='%F{blue}'
+  local child_color='%F{cyan}'
 
   local ssh_icon=''
   local tmux_icon=''
@@ -78,13 +78,13 @@ function pre_vcs() {
     norm_icon+="${norm_color}λ"
     child_icon+="${child_color}ζ"
   fi
-  ssh_icon+='%{%f%} '
-  tmux_icon+='%{%f%} '
-  norm_icon+='%{%f%} '
-  child_icon+='%{%f%} '
+  ssh_icon+='%f '
+  tmux_icon+='%f '
+  norm_icon+='%f '
+  child_icon+='%f '
 
-  local icon=$(__icon_ps1 "${ssh_icon}" "${tmux_icon}" "${norm_icon}")
-  local child=$(__child_ps1 "${child_icon}")
+  local icon=$(_icon_ps1 "${ssh_icon}" "${tmux_icon}" "${norm_icon}")
+  local child=$(_child_ps1 "${child_icon}")
 
   local out="${icon}${child}"
 
@@ -95,17 +95,17 @@ function pre_vcs() {
   elif [[ -n ${TMUX} ]]           ; then out+="${tmux_color}"
   else                                   out+="${norm_color}"
   fi
-  out+='%1~%{%f%}'
+  out+='%1~%f'
 
   printf -- '%s' "${out}"
 }
 
-function post_vcs() {
-  local code='%(?..%{%F{red}%}[%?]%{%f%})'
+function _post_vcs() {
+  local code='%(?..%F{red}[%?]%f)'
 
   printf -- '%s' "${code}"
 }
 
-PROMPT='$(pre_vcs)${vcs_info_msg_0_}$(post_vcs) %{%f%E%}'
+PROMPT='$(_pre_vcs)${vcs_info_msg_0_}$(_post_vcs) %E'
 
 # vim: ft=zsh
