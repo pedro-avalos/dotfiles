@@ -345,19 +345,6 @@ Language Server Protocol.
 
 * Keybindings
 
-** Zoom
-
-Use ~CTRL~ plus ~=~ or ~-~ for controlling zoom level. Additionally, use ~CTRL~
-plus mouse wheel.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Zoom control
-  (global-set-key (kbd "C-=") 'text-scale-increase)
-  (global-set-key (kbd "C--") 'text-scale-decrease)
-  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
-#+END_SRC
-
 ** Evil Mode
 
 I prefer vim keybindings, sorry not sorry.
