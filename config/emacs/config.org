@@ -196,8 +196,7 @@ I like using [[https://github.com/seagle0128/doom-modeline][doom-modeline]] (a f
 
 #+BEGIN_SRC emacs-lisp
   (use-package doom-modeline
-    :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 15)))
+    :init (doom-modeline-mode 1))
 #+END_SRC
 
 ** Dashboard
