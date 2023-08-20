@@ -19,4 +19,4 @@ The following dotfiles are complex enough to warrant further documentation:
 
 The following dotfiles warranted having their own repository:
 
-- [pavalos6401/nvim](https://gitlab.com/pavalos6401/nvim)
+- (neo)vim dotfiles: [pedro-avalos/nvim](https://gitlab.com/pedro-avalos/nvim)
