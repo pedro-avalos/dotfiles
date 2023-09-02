@@ -162,15 +162,15 @@ For further reading, see:
 + [[https://www.emacswiki.org/emacs/EightyColumnRule][Eighty Column Rule (EmacsWiki)]]
 
 #+BEGIN_SRC emacs-lisp
-	(setq-default display-fill-column-indicator-column 79)
+	(setq-default display-fill-column-indicator-column 80)
 	(global-display-fill-column-indicator-mode 1)
 #+END_SRC
 
 ** Column and Line Numbers
 
 #+BEGIN_SRC emacs-lisp
-	(column-number-mode)                 ;; Show column numbers
-	(global-display-line-numbers-mode 1) ;; Show line numbers
+	(setq column-number-mode t)
+	(global-display-line-numbers-mode t)
 
 	(global-visual-line-mode t) ;; Word wrap
 
@@ -184,13 +184,38 @@ For further reading, see:
 
 ** Theme
 
-I like the [[https://carbondesignsystem.com/guidelines/color/usage/][carbon design system]] color scheme. The theme I use in emacs is based
-on the neovim theme [[https://github.com/nyoom-engineering/oxocarbon.nvim][oxocarbon]] (which is based on the carbon design system).
+#+BEGIN_SRC emacs-lisp
+	(use-package doom-themes
+		:config
+		(setq doom-themes-enable-bold t
+					doom-themes-enable-italics t)
+		(load-theme 'doom-dark+ t)
+		(doom-themes-visual-bell-config)
+		(setq doom-themes-treemacs-theme "doom-colors")
+		(doom-themes-treemacs-config)
+		(doom-themes-org-config))
+#+END_SRC
+
+** Tree
 
 #+BEGIN_SRC emacs-lisp
-	(use-package autothemer) ;; Dependency for the oxocarbon-emacs theme
-	(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-	(load-theme 'oxocarbon t)
+	(use-package treemacs
+		:defer t
+		:bind
+		(:map global-map
+					("M-0" . treemacs-select-window)
+					("C-x t 1" . treemacs-delete-other-window)
+					("C-x t t" . treemacs)
+					("C-x t d" . treemacs-select-directory)
+					("C-x t B" . treemacs-bookmark)
+					("C-x t C-t" . treemacs-find-file)
+					("C-x t M-t" . treemacs-find-tag)))
+
+	(use-package treemacs-evil
+		:after (treemacs evil))
+
+	(use-package treemacs-icons-dired
+		:hook (dired-mode . treemacs-icons-dired-enable-once))
 #+END_SRC
 
 ** Modeline
@@ -232,7 +257,7 @@ is required.
 #+BEGIN_SRC emacs-lisp
 	;; Enable dashboard for emacsclient
 	(if (< (length command-line-args) 2)
-		(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*"))))
+			(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*"))))
 #+END_SRC
 
 * Ivy (Counsel/Swiper)
