@@ -119,7 +119,7 @@ under the rug...
 											:slant 'italic)
 
 	;; Make certtain keywords symbols
-	(setq global-prettify-symbols-mode t)
+	(global-prettify-symbols-mode t)
 #+END_SRC
 
 *** Icons and Emojis
