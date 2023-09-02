@@ -18,6 +18,6 @@ source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/prompt.zsh
 for f in ~/.config/zsh/extra/*.zsh ; do source $f ; done
 
-[[ -f /opt/conda/etc/profile.d/conda.sh ]] && source /opt/conda/etc/profile.d/conda.sh
+if [[ -f /opt/conda/etc/profile.d/conda.sh ]] ; then . /opt/conda/etc/profile.d/conda.sh ; fi
 
 # vim: ft=zsh
