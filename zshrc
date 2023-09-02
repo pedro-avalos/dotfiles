@@ -13,7 +13,6 @@ autoload -Uz compinit && compinit
 
 bindkey -v
 
-source ~/.config/zsh/path.zsh
 source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/prompt.zsh
 for f in ~/.config/zsh/extra/*.zsh ; do source $f ; done
