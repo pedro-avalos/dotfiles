@@ -192,8 +192,6 @@ For further reading, see:
 					doom-themes-enable-italics t)
 		(load-theme 'doom-dark+ t)
 		(doom-themes-visual-bell-config)
-		(setq doom-themes-treemacs-theme "doom-colors")
-		(doom-themes-treemacs-config)
 		(doom-themes-org-config))
 #+END_SRC
 
@@ -215,8 +213,9 @@ For further reading, see:
 	(use-package treemacs-evil
 		:after (treemacs evil))
 
-	(use-package treemacs-icons-dired
-		:hook (dired-mode . treemacs-icons-dired-enable-once))
+	(use-package treemacs-nerd-icons
+		:config
+		(treemacs-load-theme "nerd-icons"))
 #+END_SRC
 
 ** Modeline
