@@ -102,6 +102,7 @@ under the rug...
 ** Fonts
 
 #+BEGIN_SRC emacs-lisp
+	;; Default fonts
 	(set-face-attribute 'default nil
 											:font "monospace"
 											:weight 'medium)
@@ -168,6 +169,8 @@ For further reading, see:
 
 ** Column and Line Numbers
 
+Display the column and line numbers.
+
 #+BEGIN_SRC emacs-lisp
 	(setq column-number-mode t)
 	(global-display-line-numbers-mode t)
@@ -185,6 +188,11 @@ For further reading, see:
 
 ** Theme
 
+I like the themes included with ~doom-themes~, especially ~doom-dark+~.
+
+I don't enable the treemacs configuration because it uses ~all-the-icons~
+instead of ~nerd-icons~. It is also a bit too much for my taste.
+
 #+BEGIN_SRC emacs-lisp
 	(use-package doom-themes
 		:config
@@ -195,7 +203,9 @@ For further reading, see:
 		(doom-themes-org-config))
 #+END_SRC
 
-** Tree
+** Treemacs
+
+I like to have a file explorer.
 
 #+BEGIN_SRC emacs-lisp
 	(use-package treemacs
