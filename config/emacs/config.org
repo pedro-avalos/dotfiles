@@ -126,7 +126,7 @@ under the rug...
 
 You will need to install the icons fonts with: ~M-x nerd-icons-install-fonts~.
 
-#+BEGIN_SrC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 	;; Icons
 	(use-package nerd-icons)
 
