@@ -118,9 +118,6 @@ under the rug...
 											:slant 'italic)
 	(set-face-attribute 'font-lock-keyword-face nil
 											:slant 'italic)
-
-	;; Make certtain keywords symbols
-	(global-prettify-symbols-mode t)
 #+END_SRC
 
 *** Icons and Emojis
@@ -134,6 +131,45 @@ You will need to install the icons fonts with: ~M-x nerd-icons-install-fonts~.
 	;; Emojis
 	(use-package emojify
 		:hook (after-init . global-emojify-mode))
+#+END_SRC
+
+*** Pretty Symbols
+
+Replace some keywords with pretty symbols.
+
+#+BEGIN_SRC emacs-lisp
+	;; Use symbols everywhere
+	(global-prettify-symbols-mode t)
+
+	;; Symbols for org-mode
+	(defun org-icons ()
+		"Turn org-mode keywords into symbols."
+		(setq prettify-symbols-alist '(("TODO" . ?)
+																	 ("WAIT" . ?)
+																	 ("NOPE" . ?)
+																	 ("DONE" . ?)
+																	 ("[ ]" . ?)
+																	 ("[X]" . ?)
+																	 ("[-]" . ?)
+																	 ("#+BEGIN_SRC" . ?)
+																	 ("#+END_SRC" . ?―)
+																	 (":PROPERTIES:" . ?)
+																	 (":END:" . ?―)
+																	 ("#+STARTUP:" . ?)
+																	 ("#+TITLE:" . "")
+																	 ("#+SUBTITLE:" . ?)
+																	 ("#+AUTHOR:" . ?)
+																	 ("#+DESCRIPTION:" . ?)
+																	 ("#+RESULTS:" . ?)
+																	 ("#+NAME:" . ?)
+																	 ("#+ROAM_TAGS:" . ?)
+																	 ("#+FILETAGS:" . ?)
+																	 ("#+HTML_HEAD:" . ?)
+																	 (":EFFORT:" . ?)
+																	 ("SCHEDULED:" . ?)
+																	 ("DEADLINE:" . ?))))
+	(setq org-ellipsis ?)
+	(add-hook 'org-mode-hook 'org-icons)
 #+END_SRC
 
 ** Disable Unnecessary Elements
