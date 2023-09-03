@@ -142,34 +142,46 @@ Replace some keywords with pretty symbols.
 	(global-prettify-symbols-mode t)
 
 	;; Symbols for org-mode
-	(defun org-icons ()
-		"Turn org-mode keywords into symbols."
-		(setq prettify-symbols-alist '(("TODO" . ?)
-																	 ("WAIT" . ?)
-																	 ("NOPE" . ?)
-																	 ("DONE" . ?)
-																	 ("[ ]" . ?)
-																	 ("[X]" . ?)
-																	 ("[-]" . ?)
-																	 ("#+BEGIN_SRC" . ?)
-																	 ("#+END_SRC" . ?―)
-																	 (":PROPERTIES:" . ?)
-																	 (":END:" . ?―)
-																	 ("#+STARTUP:" . ?)
-																	 ("#+TITLE:" . "")
-																	 ("#+SUBTITLE:" . ?)
-																	 ("#+AUTHOR:" . ?)
-																	 ("#+DESCRIPTION:" . ?)
-																	 ("#+RESULTS:" . ?)
-																	 ("#+NAME:" . ?)
-																	 ("#+ROAM_TAGS:" . ?)
-																	 ("#+FILETAGS:" . ?)
-																	 ("#+HTML_HEAD:" . ?)
-																	 (":EFFORT:" . ?)
-																	 ("SCHEDULED:" . ?)
-																	 ("DEADLINE:" . ?))))
+	(add-hook 'org-mode-hook (lambda ()
+														 "Turn org mode keywords into symbols."
+														 (push '("TODO" . ?) prettify-symbols-alist)
+														 (push '("WAIT" . ?) prettify-symbols-alist)
+														 (push '("NOPE" . ?) prettify-symbols-alist)
+														 (push '("DONE" . ?) prettify-symbols-alist)
+														 (push '("[ ]" . ?) prettify-symbols-alist)
+														 (push '("[X]" . ?) prettify-symbols-alist)
+														 (push '("[-]" . ?) prettify-symbols-alist)
+														 (push '("#+BEGIN_SRC" . ?) prettify-symbols-alist)
+														 (push '("#+END_SRC" . ?―) prettify-symbols-alist)
+														 (push '(":PROPERTIES:" . ?) prettify-symbols-alist)
+														 (push '(":END:" . ?―) prettify-symbols-alist)
+														 (push '("#+STARTUP:" . ?) prettify-symbols-alist)
+														 (push '("#+TITLE:" . "") prettify-symbols-alist)
+														 (push '("#+SUBTITLE:" . ?) prettify-symbols-alist)
+														 (push '("#+AUTHOR:" . ?) prettify-symbols-alist)
+														 (push '("#+DESCRIPTION:" . ?) prettify-symbols-alist)
+														 (push '("#+RESULTS:" . ?) prettify-symbols-alist)
+														 (push '("#+NAME:" . ?) prettify-symbols-alist)
+														 (push '("#+ROAM_TAGS:" . ?) prettify-symbols-alist)
+														 (push '("#+FILETAGS:" . ?) prettify-symbols-alist)
+														 (push '("#+HTML_HEAD:" . ?) prettify-symbols-alist)
+														 (push '(":EFFORT:" . ?) prettify-symbols-alist)
+														 (push '("SCHEDULED:" . ?) prettify-symbols-alist)
+														 (push '("DEADLINE:" . ?) prettify-symbols-alist)))
 	(setq org-ellipsis ?)
-	(add-hook 'org-mode-hook 'org-icons)
+
+	;; Symbols for python
+	(add-hook 'python-mode-hook (lambda ()
+														 "Turn python keywords into symbols."
+														 (push '("lambda" . ?λ) prettify-symbols-alist)
+														 (push '("or" . ?∨) prettify-symbols-alist)
+														 (push '("and" . ?∧) prettify-symbols-alist)
+														 (push '("in" . ?∈) prettify-symbols-alist)
+														 (push '("==" . ?≡) prettify-symbols-alist)
+														 (push '("!=" . ?≠) prettify-symbols-alist)
+														 (push '("<=" . ?≤) prettify-symbols-alist)
+														 (push '(">=" . ?≥) prettify-symbols-alist)
+														 (push '("->" . ?→) prettify-symbols-alist)))
 #+END_SRC
 
 ** Disable Unnecessary Elements
@@ -399,8 +411,7 @@ Language Server Protocol.
 		:init
 		;; set prefix for lsp-command-keymap
 		(setq lsp-keymap-prefix "C-c l")
-		:hook (
-					 (python-mode . lsp)
+		:hook ((python-mode . lsp)
 					 (lsp-mode . lsp-enable-which-key-integration))
 		:commands lsp)
 
@@ -518,8 +529,7 @@ These are useful modes that I like to have with emacs.
 #+BEGIN_SRC emacs-lisp
 	(org-babel-do-load-languages
 	 'org-babel-load-languages
-	 '(
-		 (python . t)))
+	 '((python . t)))
 #+END_SRC
 
 ** Indentation
