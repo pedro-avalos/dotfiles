@@ -61,6 +61,7 @@ auto-installing new packages.
 	(setq gc-cons-threshold 402653184
 				gc-cons-percentage 0.6)
 
+	;; Show me how long it took to start emacs
 	(add-hook 'emacs-startup-hook
 						(lambda ()
 							(message "*** Emacs loaded in %s with %d garbage collections."
@@ -80,21 +81,28 @@ auto-installing new packages.
 	(setq load-prefer-newer noninteractive)
 #+END_SRC
 
-
 * Keep Emacs Tidy
 
 I dislike the Emacs clutter in my directories. This swipes the clutter neatly
 under the rug...
 
 #+BEGIN_SRC emacs-lisp
-	;; Move everything out of the ~/.config/emacs folder
-	(setq user-emacs-directory "~/.cache/emacs")
-
 	(use-package no-littering)
 
+	;; Basic settings
+	(setq
+	 create-lockfiles nil
+	 delete-old-versions t
+	 kept-new-versions 6
+	 kept-old-versions 2
+	 version-control t)
+
 	;; Place auto save files into the same path as it uses for sessions
-	(setq auto-save-file-name-transforms
-				`((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+	(setq
+	 backup-directory-alist
+	 `((".*" . ,(no-littering-expand-var-file-name "backup/")))
+	 auto-save-file-name-transforms
+	 `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 #+END_SRC
 
 * User Interface
@@ -125,10 +133,7 @@ under the rug...
 You will need to install the icons fonts with: ~M-x nerd-icons-install-fonts~.
 
 #+BEGIN_SRC emacs-lisp
-	;; Icons
 	(use-package nerd-icons)
-
-	;; Emojis
 	(use-package emojify
 		:hook (after-init . global-emojify-mode))
 #+END_SRC
@@ -172,16 +177,16 @@ Replace some keywords with pretty symbols.
 
 	;; Symbols for python
 	(add-hook 'python-mode-hook (lambda ()
-														 "Turn python keywords into symbols."
-														 (push '("lambda" . ?λ) prettify-symbols-alist)
-														 (push '("or" . ?∨) prettify-symbols-alist)
-														 (push '("and" . ?∧) prettify-symbols-alist)
-														 (push '("in" . ?∈) prettify-symbols-alist)
-														 (push '("==" . ?≡) prettify-symbols-alist)
-														 (push '("!=" . ?≠) prettify-symbols-alist)
-														 (push '("<=" . ?≤) prettify-symbols-alist)
-														 (push '(">=" . ?≥) prettify-symbols-alist)
-														 (push '("->" . ?→) prettify-symbols-alist)))
+																"Turn python keywords into symbols."
+																(push '("lambda" . ?λ) prettify-symbols-alist)
+																(push '("or" . ?∨) prettify-symbols-alist)
+																(push '("and" . ?∧) prettify-symbols-alist)
+																(push '("in" . ?∈) prettify-symbols-alist)
+																(push '("==" . ?≡) prettify-symbols-alist)
+																(push '("!=" . ?≠) prettify-symbols-alist)
+																(push '("<=" . ?≤) prettify-symbols-alist)
+																(push '(">=" . ?≥) prettify-symbols-alist)
+																(push '("->" . ?→) prettify-symbols-alist)))
 #+END_SRC
 
 ** Disable Unnecessary Elements

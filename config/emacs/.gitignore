@@ -3,3 +3,5 @@ eln-cache/
 config.el
 custom.el
 .last-package-update-day
+etc/
+var/
