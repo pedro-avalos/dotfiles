@@ -1,8 +1,7 @@
 {
-  "files.associations": {
-    "bashrc": "shellscript",
-    "bash_profile": "shellscript",
-    "*.bashrc": "shellscript",
-    "bash_logout": "shellscript"
-  }
+		"files.associations": {
+				"bashrc": "shellscript",
+				"profile": "shellscript",
+				"*.bashrc": "shellscript",
+		}
 }
