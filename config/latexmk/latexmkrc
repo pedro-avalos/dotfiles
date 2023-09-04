@@ -1,3 +1,5 @@
+#!/usr/bin/env perl
+
 # Generate pdf using pdflatex (-pdf)
 $pdf_mode = 1;
 
