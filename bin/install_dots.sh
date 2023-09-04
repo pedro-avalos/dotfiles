@@ -65,7 +65,6 @@ install_dots "${DOTS_DIR}/profile"     "${HOME}/.profile"
 install_dots "${DOTS_DIR}/bashrc"      "${HOME}/.bashrc"
 install_dots "${DOTS_DIR}/config/bash" "${HOME}/.config/bash"
 install_dots "${DOTS_DIR}/zshenv"      "${HOME}/.zshenv"
-install_dots "${DOTS_DIR}/zshrc"       "${HOME}/.zshrc"
 install_dots "${DOTS_DIR}/config/zsh"  "${HOME}/.config/zsh"
 
 echo "installing tmux dots..."

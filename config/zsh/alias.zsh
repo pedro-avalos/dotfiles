@@ -1,5 +1,7 @@
+#!/usr/bin/env zsh
+
 # Reload zsh configuration
-alias resource='source ~/.zshrc'
+alias resource='source $ZDOTDIR/.zshrc'
 
 # Directory-related aliases
 alias ls='ls --color=auto -F'
@@ -15,14 +17,7 @@ alias fgrep='fgrep --color=auto'
 # Editor-related aliases
 alias emacs_tui='emacsclient -ta ""'
 alias emacs_gui='emacsclient -ca emacs'
-if command -v nvim &> /dev/null ; then # neovim is available
-  alias vi='nvim'
-  alias vim='nvim'
-  alias diff='nvim -d'
-elif command -v vim &> /dev/null ; then # vim is available
-  alias vi='vim'
-  alias diff='vim -d'
-fi
+alias vi='vim'
 
 # Fun stuff
 alias tuxsay='cowsay -f tux'
