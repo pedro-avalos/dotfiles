@@ -2,9 +2,9 @@
 
 # Root aliases
 if [[ ${EUID} -eq 0 ]] ; then
-	alias rm='rm -i'
-	alias cp='cp -i'
-	alias mv='mv -i'
+		alias rm='rm -i'
+		alias cp='cp -i'
+		alias mv='mv -i'
 fi
 
 # Reload bash configuration
@@ -25,12 +25,12 @@ alias fgrep='fgrep --color=auto'
 alias emacs_tui='emacsclient -ta ""'
 alias emacs_gui='emacsclient -ca emacs'
 if command -v nvim &> /dev/null ; then # neovim is available
-  alias vi='nvim'
-  alias vim='nvim'
-  alias diff='nvim -d'
+		alias vi='nvim'
+		alias vim='nvim'
+		alias diff='nvim -d'
 elif command -v vim &> /dev/null ; then # vim is available
-  alias vi='vim'
-  alias diff='vim -d'
+		alias vi='vim'
+		alias diff='vim -d'
 fi
 
 # Fun stuff
