@@ -7,7 +7,7 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:=$HOME/.local/state}"
 
 typeset -U path PATH
 path+=($HOME/bin $HOME/.bin $HOME/.local/bin)
-path+=($XDG_CONFIG_HOME/bin $XDG_CONFIG_HOME/emacs/bin)
+path+=($XDG_CONFIG_HOME/nvim/bin $XDG_CONFIG_HOME/emacs/bin)
 export PATH
 
 export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
