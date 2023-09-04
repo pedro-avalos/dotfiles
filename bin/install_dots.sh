@@ -96,7 +96,7 @@ install_dots "${DOTS_DIR}/config/alacritty" "${HOME}/.config/alacritty"
 
 echo "installing misc dots..."
 install_dots "${DOTS_DIR}/inputrc"              "${HOME}/.inputrc"
-install_dots "${DOTS_DIR}/latexmkrc"            "${HOME}/.latexmkrc"
+install_dots "${DOTS_DIR}/config/latexmk"       "${HOME}/.config/latexmk"
 install_dots "${DOTS_DIR}/config/dunst"         "${HOME}/.config/dunst"
 install_dots "${DOTS_DIR}/config/clangd"        "${HOME}/.config/clangd"
 install_dots "${DOTS_DIR}/config/gammastep"     "${HOME}/.config/gammastep"
