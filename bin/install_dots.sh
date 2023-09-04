@@ -4,10 +4,10 @@
 
 # Show help menu
 usage () {
-	1>&2 printf -- "Usage: %s [-hf] [-d DOTS_DIR]\n" "$0"
-	1>&2 printf -- "\t-h: Show help menu\n"
-	1>&2 printf -- "\t-d DOTS_DIR: Path to dotfiles directory\n"
-	1>&2 printf -- "\t-f: Force install\n"
+		1>&2 printf -- "Usage: %s [-hf] [-d DOTS_DIR]\n" "$0"
+		1>&2 printf -- "\t-h: Show help menu\n"
+		1>&2 printf -- "\t-d DOTS_DIR: Path to dotfiles directory\n"
+		1>&2 printf -- "\t-f: Force install\n"
 }
 
 # Default option values
@@ -16,34 +16,34 @@ DOTS_DIR="${HOME}/.dotfiles" # Default path to dotfiles
 
 # Parse options
 while getopts "hfd:" opt ; do
-	case "${opt}" in
-		f)
-			FORCE=1
-			;;
-		d)
-			DOTS_DIR="${OPTARG}"
-			;;
-		h)
-			usage
-			exit 0
-			;;
-		*)
-			usage
-			exit 1
-			;;
-	esac
+		case "${opt}" in
+				f)
+						FORCE=1
+						;;
+				d)
+						DOTS_DIR="${OPTARG}"
+						;;
+				h)
+						usage
+						exit 0
+						;;
+				*)
+						usage
+						exit 1
+						;;
+		esac
 done
 
 # Helper function to replace existing file/directory with my dotfiles
 # Takes in two parameters: (src, dest)
 install_dots ()
 {
-	if [ "${FORCE}" ] ; then
-		rm -rf  "$2"      2> /dev/null
-		ln -Tsf "$1" "$2" 2> /dev/null
-	else
-		ln -Ts "$1" "$2" 2> /dev/null
-	fi
+		if [ "${FORCE}" ] ; then
+				rm -rf  "$2"      2> /dev/null
+				ln -Tsf "$1" "$2" 2> /dev/null
+		else
+				ln -Ts "$1" "$2" 2> /dev/null
+		fi
 }
 
 # Update dotfiles
@@ -95,9 +95,9 @@ install_dots "${DOTS_DIR}/config/kitty"     "${HOME}/.config/kitty"
 install_dots "${DOTS_DIR}/config/alacritty" "${HOME}/.config/alacritty"
 
 echo "installing misc dots..."
-install_dots "${DOTS_DIR}/inputrc"              "${HOME}/.inputrc"
-install_dots "${DOTS_DIR}/config/latexmk"       "${HOME}/.config/latexmk"
-install_dots "${DOTS_DIR}/config/dunst"         "${HOME}/.config/dunst"
-install_dots "${DOTS_DIR}/config/clangd"        "${HOME}/.config/clangd"
-install_dots "${DOTS_DIR}/config/gammastep"     "${HOME}/.config/gammastep"
-install_dots "${DOTS_DIR}/config/redshift.conf" "${HOME}/.config/redshift.conf"
+install_dots "${DOTS_DIR}/inputrc"          "${HOME}/.inputrc"
+install_dots "${DOTS_DIR}/config/latexmk"   "${HOME}/.config/latexmk"
+install_dots "${DOTS_DIR}/config/dunst"     "${HOME}/.config/dunst"
+install_dots "${DOTS_DIR}/config/clangd"    "${HOME}/.config/clangd"
+install_dots "${DOTS_DIR}/config/gammastep" "${HOME}/.config/gammastep"
+install_dots "${DOTS_DIR}/config/redshift"  "${HOME}/.config/redshift"
