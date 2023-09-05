@@ -1,5 +1,2 @@
 #!/usr/bin/env sh
-# File: update_dots.sh
-
-# Update dotfiles
-git -C ~/.dotfiles pull
+git -C ~/.dotfiles pull --recurse-submodules

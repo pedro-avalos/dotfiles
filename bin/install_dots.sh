@@ -1,6 +1,4 @@
 #!/usr/bin/env sh
-# File: install_dots.sh
-# Author: Pedro Avalos
 
 # Show help menu
 usage () {
