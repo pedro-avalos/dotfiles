@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# File: pulse_volume.sh
 
 pulse_volume() {
 	STATUS=$( pamixer --get-mute )
@@ -15,5 +14,3 @@ pulse_volume() {
 }
 
 pulse_volume
-
-# vim: ft=sh

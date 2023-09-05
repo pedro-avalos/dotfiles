@@ -1,19 +1,16 @@
 #!/usr/bin/env sh
-# File: alsa_volume.sh
 
 alsa_volume() {
-	STATUS=$( amixer sget Master | tail -n1 | sed -r "s/.*\[(.*)\]/\1/" )
-	VOL=$( amixer sget Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/" )
+		STATUS=$( amixer sget Master | tail -n1 | sed -r "s/.*\[(.*)\]/\1/" )
+		VOL=$( amixer sget Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/" )
 
-	printf -- "%s" "${SEPL}"
-	if [ "${STATUS}" = "off" ] ; then 
-		printf -- "MUTE"
-	else
-		printf -- "VOL %s%%" "${VOL}"
-	fi
-	printf -- "%s" "${SEPR}"
+		printf -- "%s" "${SEPL}"
+		if [ "${STATUS}" = "off" ] ; then 
+				printf -- "MUTE"
+		else
+				printf -- "VOL %s%%" "${VOL}"
+		fi
+		printf -- "%s" "${SEPR}"
 }
 
 alsa_volume
-
-# vim: ft=sh

@@ -6,5 +6,3 @@ light-locker --lock-on-lid &
 ~/.dwm/bar.sh &
 redshift &
 picom -b &
-
-# vim: ft=sh

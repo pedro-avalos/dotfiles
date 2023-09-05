@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# bar.sh
 # Heavily inspired by: https://github.com/joestandring/dwm-bar
 
 LOC=$( readlink -f "$0" )
@@ -13,33 +12,29 @@ export SEPR="] "
 . "${DIR}/modules/nm_network.sh"
 . "${DIR}/modules/datetime.sh"
 . "${DIR}/modules/alsa_volume.sh"
-# . "${DIR}/modules/pulse_volume.sh"
 
 # Run these updates in parallel
 parallelize() {
-	while true; do
-		nm_network &
-		sleep 5s
-	done
+		while true; do
+				nm_network &
+				sleep 5s
+		done
 }
 parallelize &
 
 # Update status bar
 while true ; do
-	top=""
+		top=""
 
-	BATT=$( battery )
-	if [ -n "${BATT}" ] ; then
-		top="${top}${BATT}"
-	fi
+		BATT=$( battery )
+		if [ -n "${BATT}" ] ; then
+				top="${top}${BATT}"
+		fi
 
-	top="${top}$( alsa_volume )"
-	# top="${top}$( pulse_volume )"
-	top="${top}$( datetime )"
-	top="${top}${__NM_NETWORK__}"
+		top="${top}$( alsa_volume )"
+		top="${top}$( datetime )"
+		top="${top}${__NM_NETWORK__}"
 
-	xsetroot -name "${top}"
-	sleep 1s
+		xsetroot -name "${top}"
+		sleep 1s
 done
-
-# vim: ft=sh
