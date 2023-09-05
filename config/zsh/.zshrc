@@ -13,9 +13,9 @@ autoload -Uz compinit && compinit
 
 bindkey -v
 
-export EDITOR=emacs
-export SUDOEDITOR=emacs
 export VISUAL=emacs
+export EDITOR=vim
+export SUDO_EDITOR=vim
 
 source $ZDOTDIR/alias.zsh
 source $ZDOTDIR/prompt.zsh
