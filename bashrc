@@ -19,16 +19,23 @@ export HISTCONTROL=ignoreboth
 
 shopt -s histappend autocd checkwinsize
 
-# Source some of my extra configurations scripts
-[[ -f ~/.config/bash/alias.bashrc ]]  && . ~/.config/bash/alias.bashrc
-[[ -f ~/.config/bash/path.bashrc ]]   && . ~/.config/bash/path.bashrc
-[[ -f ~/.config/bash/prompt.bashrc ]] && . ~/.config/bash/prompt.bashrc
-if [[ -d ~/.config/bash/extra ]] ; then
-		for file in ~/.config/bash/extra/*.bashrc ; do source "${file}" ; done
+if [[ -f "${XDG_CONFIG_HOME}/bash/alias.bashrc" ]] ; then
+	source "${XDG_CONFIG_HOME}/bash/alias.bashrc"
+fi
+if [[ -f "${XDG_CONFIG_HOME}/bash/path.bashrc" ]] ; then
+	source "${XDG_CONFIG_HOME}/bash/path.bashrc"
+fi
+if [[ -f "${XDG_CONFIG_HOME}/bash/prompt.bashrc" ]] ; then
+	source "${XDG_CONFIG_HOME}/bash/prompt.bashrc"
+fi
+if [[ -d "${XDG_CONFIG_HOME}/bash/extra" ]] ; then
+		for file in ${XDG_CONFIG_HOME}/bash/extra/*.bashrc ; do
+			source "${file}"
+		done
 fi
 
 # Use bash-completion, if available
-if [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] ; then
+if [[ ${PS1} && -f /usr/share/bash-completion/bash_completion ]] ; then
 		source /usr/share/bash-completion/bash_completion
 fi
 
