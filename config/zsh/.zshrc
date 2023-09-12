@@ -13,10 +13,6 @@ autoload -Uz compinit && compinit
 
 bindkey -v
 
-export VISUAL=emacs
-export EDITOR=vim
-export SUDO_EDITOR=vim
-
 source $ZDOTDIR/alias.zsh
 source $ZDOTDIR/prompt.zsh
 for f in $ZDOTDIR/extra/*.zsh ; do source $f ; done

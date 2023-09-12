@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:=$HOME/.local/share}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:=$HOME/.cache}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:=$HOME/.local/state}"
 export VISUAL='emacs'
 export EDITOR='vim'
 export SUDO_EDITOR='vim'
@@ -24,7 +28,8 @@ if [[ -d ~/.config/bash/extra ]] ; then
 fi
 
 # Use bash-completion, if available
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    source /usr/share/bash-completion/bash_completion
+if [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] ; then
+		source /usr/share/bash-completion/bash_completion
+fi
 
 # vim: ft=bash
