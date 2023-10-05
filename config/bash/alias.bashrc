@@ -24,14 +24,6 @@ alias fgrep='fgrep --color=auto'
 # Editor-related aliases
 alias emacs_tui='emacsclient -ta ""'
 alias emacs_gui='emacsclient -ca emacs'
-if command -v nvim &> /dev/null ; then # neovim is available
-		alias vi='nvim'
-		alias vim='nvim'
-		alias diff='nvim -d'
-elif command -v vim &> /dev/null ; then # vim is available
-		alias vi='vim'
-		alias diff='vim -d'
-fi
 
 # Fun stuff
 alias tuxsay='cowsay -f tux'
