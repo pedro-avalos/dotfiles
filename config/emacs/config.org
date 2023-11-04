@@ -105,6 +105,126 @@ under the rug...
 	 `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 #+END_SRC
 
+* Ivy (Counsel/Swiper)
+
+Ivy, counsel, and swiper are generic completion mechanisms. Ivy-rich allows us
+to add descriptions alongside the commands in ~M-x~.
+
+** Installation
+
+#+BEGIN_SRC emacs-lisp
+	(use-package counsel
+		:after ivy
+		:config (counsel-mode))
+
+	(use-package ivy
+		:defer 0.1
+		:diminish
+		:bind
+		(("C-c C-r" . ivy-resume)
+		 ("C-x B" . ivy-switch-buffer-other-window))
+		:custom
+		(setq ivy-count-format "(%d/%d) ")
+		(setq ivy-use-virtual-buffers t)
+		(setq enable-recursive-minibuffers t)
+		:config
+		(ivy-mode))
+
+	(use-package ivy-rich
+		:after ivy
+		:custom
+		(ivy-virtual-abbreviate 'full
+														ivy-rich-switch-buffer-align-virtual-buffer t
+														ivy-rich-path-style 'abbrev)
+		:config
+		(ivy-set-display-transformer 'ivy-switch-buffer
+																 'ivy-rich-switch-buffer-transformer)
+		(ivy-rich-mode 1))
+
+	(use-package swiper
+		:after ivy
+		:bind (("C-s" . swiper)
+					 ("C-r" . swiper)))
+#+END_SRC
+
+** Improve Searching
+
+Removes the ~^~ in prompts. The default string means that searches will match
+the start of the string. I want to be able to search without knowing the start.
+
+#+BEGIN_SRC emacs-lisp
+	(setq ivy-initial-inputs-alist nil)
+#+END_SRC
+
+** Search History
+
+The smex package allows ~M-x~ to remember our history.
+
+#+BEGIN_SRC emacs-lisp
+	(use-package smex)
+	(smex-initialize)
+#+END_SRC
+
+** Ivy-posframe
+
+#+BEGIN_SRC emacs-lisp
+	(use-package ivy-posframe
+		:init
+		(setq ivy-posframe-display-functions-alist
+					'((swiper . ivy-posframe-display-at-point)
+						(complete-symbol . ivy-posframe-display-at-point)
+						(counsel-M-x . ivy-display-function-fallback)
+						(counsel-esh-history . ivy-posframe-display-at-window-center)
+						(counsel-describe-function . ivy-display-funciton-fallback)
+						(counsel-describe-variable . ivy-display-function-fallback)
+						(counsel-find-file . ivy-display-function-fallback)
+						(counsel-recentf . ivy-display-function-fallback)
+						(dmenu . ivy-posframe-display-at-fram-top-center)
+						(nil . ivy-posframe-display))
+					ivy-posframe-height-alist
+					'((swiper . 20)
+						(dmenu . 20)
+						(t . 10)))
+		:config
+		(ivy-posframe-mode 1 ))
+#+END_SRC
+
+* LSP
+
+Language Server Protocol.
+
+#+BEGIN_SRC emacs-lisp
+	(use-package lsp-mode
+		:init
+		;; set prefix for lsp-command-keymap
+		(setq lsp-keymap-prefix "C-c l")
+		;; lsp configuration
+		(setq lsp-pylsp-plugins-pydocstyle-ignore ["D101", "D107"])
+		:hook ((python-mode . lsp)
+					 (lsp-mode . lsp-enable-which-key-integration))
+		:commands lsp)
+
+	(use-package lsp-ui :commands lsp-ui-mode)
+	(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+	(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+	(use-package dap-mode)
+
+	(use-package which-key
+		:config
+		(which-key-mode))
+#+END_SRC
+
+** C/C++
+
+#+BEGIN_SRC emacs-lisp
+	(add-hook 'c-mode-hook 'lsp)
+	(add-hook 'c++-mode-hook 'lsp)
+
+	(setq gc-cons-threshold (* 100 1024 1024)
+				read-process-output-max (* 1024 1024)
+				treemacs-space-between-root-nodes nil)
+#+END_SRC
+
 * User Interface
 
 ** Fonts
@@ -321,124 +441,6 @@ is required.
 	;; Enable dashboard for emacsclient
 	(if (< (length command-line-args) 2)
 			(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*"))))
-#+END_SRC
-
-* Ivy (Counsel/Swiper)
-
-Ivy, counsel, and swiper are generic completion mechanisms. Ivy-rich allows us
-to add descriptions alongside the commands in ~M-x~.
-
-** Installation
-
-#+BEGIN_SRC emacs-lisp
-	(use-package counsel
-		:after ivy
-		:config (counsel-mode))
-
-	(use-package ivy
-		:defer 0.1
-		:diminish
-		:bind
-		(("C-c C-r" . ivy-resume)
-		 ("C-x B" . ivy-switch-buffer-other-window))
-		:custom
-		(setq ivy-count-format "(%d/%d) ")
-		(setq ivy-use-virtual-buffers t)
-		(setq enable-recursive-minibuffers t)
-		:config
-		(ivy-mode))
-
-	(use-package ivy-rich
-		:after ivy
-		:custom
-		(ivy-virtual-abbreviate 'full
-														ivy-rich-switch-buffer-align-virtual-buffer t
-														ivy-rich-path-style 'abbrev)
-		:config
-		(ivy-set-display-transformer 'ivy-switch-buffer
-																 'ivy-rich-switch-buffer-transformer)
-		(ivy-rich-mode 1))
-
-	(use-package swiper
-		:after ivy
-		:bind (("C-s" . swiper)
-					 ("C-r" . swiper)))
-#+END_SRC
-
-** Improve Searching
-
-Removes the ~^~ in prompts. The default string means that searches will match
-the start of the string. I want to be able to search without knowing the start.
-
-#+BEGIN_SRC emacs-lisp
-	(setq ivy-initial-inputs-alist nil)
-#+END_SRC
-
-** Search History
-
-The smex package allows ~M-x~ to remember our history.
-
-#+BEGIN_SRC emacs-lisp
-	(use-package smex)
-	(smex-initialize)
-#+END_SRC
-
-** Ivy-posframe
-
-#+BEGIN_SRC emacs-lisp
-	(use-package ivy-posframe
-		:init
-		(setq ivy-posframe-display-functions-alist
-					'((swiper . ivy-posframe-display-at-point)
-						(complete-symbol . ivy-posframe-display-at-point)
-						(counsel-M-x . ivy-display-function-fallback)
-						(counsel-esh-history . ivy-posframe-display-at-window-center)
-						(counsel-describe-function . ivy-display-funciton-fallback)
-						(counsel-describe-variable . ivy-display-function-fallback)
-						(counsel-find-file . ivy-display-function-fallback)
-						(counsel-recentf . ivy-display-function-fallback)
-						(dmenu . ivy-posframe-display-at-fram-top-center)
-						(nil . ivy-posframe-display))
-					ivy-posframe-height-alist
-					'((swiper . 20)
-						(dmenu . 20)
-						(t . 10)))
-		:config
-		(ivy-posframe-mode 1 ))
-#+END_SRC
-
-* LSP
-
-Language Server Protocol.
-
-#+BEGIN_SRC emacs-lisp
-	(use-package lsp-mode
-		:init
-		;; set prefix for lsp-command-keymap
-		(setq lsp-keymap-prefix "C-c l")
-		:hook ((python-mode . lsp)
-					 (lsp-mode . lsp-enable-which-key-integration))
-		:commands lsp)
-
-	(use-package lsp-ui :commands lsp-ui-mode)
-	(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-	(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-	(use-package dap-mode)
-
-	(use-package which-key
-		:config
-		(which-key-mode))
-#+END_SRC
-
-** C/C++
-
-#+BEGIN_SRC emacs-lisp
-	(add-hook 'c-mode-hook 'lsp)
-	(add-hook 'c++-mode-hook 'lsp)
-
-	(setq gc-cons-threshold (* 100 1024 1024)
-				read-process-output-max (* 1024 1024)
-				treemacs-space-between-root-nodes nil)
 #+END_SRC
 
 * Keybindings
