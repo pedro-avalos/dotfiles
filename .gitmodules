@@ -5,3 +5,4 @@
 [submodule "config/nvim"]
 	path = config/nvim
 	url = gitlab.com:pedro-avalos/nvim.git
+	branch = lua
