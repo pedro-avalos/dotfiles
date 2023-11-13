@@ -18,8 +18,8 @@ alias ll='ls --color=auto -lha'
 
 # Grep-related aliases
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias egrep='grep --color=auto -E'
+alias fgrep='grep --color=auto -F'
 
 # Editor-related aliases
 alias emacs_tui='emacsclient -ta ""'
