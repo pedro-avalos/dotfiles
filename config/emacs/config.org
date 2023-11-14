@@ -200,6 +200,7 @@ Language Server Protocol.
 		(setq lsp-keymap-prefix "C-c l")
 		;; lsp configuration
 		(setq lsp-pylsp-plugins-pydocstyle-ignore ["D101", "D107"])
+		(setq lsp-pylsp-plugins-flake8-ignore ["E501", "W503"])
 		:hook ((python-mode . lsp)
 					 (lsp-mode . lsp-enable-which-key-integration))
 		:commands lsp)
