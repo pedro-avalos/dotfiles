@@ -1,30 +1,39 @@
-# File: oxocarbon.yaml
+# Modified oxocarbon theme from
+# https://github.com/nyoom-engineering/oxocarbon-alacritty
 
 colors:
   primary:
-    foreground: "#DDE1E6"
+    foreground: "#ffffff"
     background: "#161616"
 
+  search:
+    matches:
+      foreground: CellBackground
+      background: "#ee5396"
+    footer_bar:
+      foreground: "#262626"
+      background: "#ffffff"
+
   selection:
-    text:       "#F2F4F8"
-    background: "#525252"
+    text:       "#161616"
+    background: "#8d8d8d"
 
   normal:
     black:   "#262626"
-    red:     "#FF7EB6"
-    green:   "#42BE65"
-    yellow:  "#82CFFF"
-    blue:    "#33B1FF"
-    magenta: "#EE5396"
-    cyan:    "#3DDBD9"
-    white:   "#DDE1E6"
+    magenta: "#ff7eb6"
+    green:   "#42be65"
+    yellow:  "#ffe97b"
+    blue:    "#33b1ff"
+    red:     "#ee5396"
+    cyan:    "#3ddbd9"
+    white:   "#dde1e6"
 
   bright:
-    black:   "#393939"
-    red:     "#FF7EB6"
-    green:   "#42BE65"
-    yellow:  "#82CFFF"
-    blue:    "#33B1FF"
-    magenta: "#EE5396"
-    cyan:    "#3DDBD9"
-    white:   "#FFFFFF"
+    black: "#393939"
+    magenta: "#ff7eb6"
+    green: "#42be65"
+    yellow: "#ffe97b"
+    blue: "#33b1ff"
+    red: "#ee5396"
+    cyan: "#3ddbd9"
+    white: "#ffffff"
