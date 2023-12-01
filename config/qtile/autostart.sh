@@ -4,6 +4,7 @@ light-locker --lock-on-lid &
 nm-applet --indicator &
 blueman-applet &
 dunst &
+udiskie --appindicator &
 xfce4-clipman &
 
 if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
