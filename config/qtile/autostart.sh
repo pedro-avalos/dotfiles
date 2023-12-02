@@ -10,8 +10,6 @@ if [ "${XDG_SESSION_TYPE}" = "x11" ] ; then
     redshift-gtk &
     mkdir -p "${HOME}/.local/share/picom"
     picom --daemon --log-file "${HOME}/.local/share/picom"
-    udiskie --tray --appindicator &
 elif [ "${XDG_SESSION_TYPE}" = "wayland" ] ; then
     gammastep-indicator &
-    udiskie --tray --appindicator --menu-update-workaround &
 fi
