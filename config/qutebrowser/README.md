@@ -3,6 +3,8 @@
 ## Requirements
 
 - `python-adblock`
+- `mpv`
+- `yt-dlp`
 
 For spell checking,
 ```sh

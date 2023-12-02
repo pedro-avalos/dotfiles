@@ -41,3 +41,7 @@ c.url.searchengines = {
     "gh": "https://github.com/search?q={}&type=repositories",
     "gl": "https://gitlab.com/explore/projects?name={}&sort=stars_desc",
 }
+
+# Bindings
+config.bind("<Ctrl+/>", "hint links spawn --detach mpv {hint-url}")
+config.bind("M", "hint links spawn mpv {hint-url}")
