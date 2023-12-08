@@ -1,7 +1,6 @@
 import os.path
 
 from libqtile import qtile, widget
-from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.bar import Bar
 from libqtile.config import Rule, Screen
 from libqtile.lazy import lazy
@@ -228,7 +227,10 @@ auto_fullscreen = True
 auto_minimize = True
 reconfigure_screns = True
 focus_on_window_activation = "smart"
-wl_input_rules = {
-    "type:pointer": InputConfig(tap=True),
-}
+if compositor == "wayland":
+    from libqtile.backend.wayland.inputs import InputConfig
+
+    wl_input_rules = {
+        "type:pointer": InputConfig(tap=True),
+    }
 wmname = "LG3D"
