@@ -13,6 +13,7 @@ exec --no-startup-id picom --daemon
 exec --no-startup-id light-locker &
 exec --no-startup-id dunst &
 exec --no-startup-id nm-applet
+exec_always --no-startup-id feh --bg-scale ~/.wallpapers/carbon-dark.png
 exec --no-startup-id dex --autostart --environment i3
 
 # Use pactl to adjust volume in PulseAudio.
@@ -194,7 +195,7 @@ bar {
         workspace_buttons yes
 
         colors {
-                background #161616
+                background #262626
                 statusline #f4f4f4
                 separator  #c6c6c6
 

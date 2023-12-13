@@ -81,6 +81,7 @@ echo "installing window manager dots..."
 install_dots "${DOTS_DIR}/config/i3"    "${HOME}/.config/i3"
 install_dots "${DOTS_DIR}/config/qtile" "${HOME}/.config/qtile"
 install_dots "${DOTS_DIR}/dwm"          "${HOME}/.dwm"
+install_dots "${DOTS_DIR}/wallpapers"   "${HOME}/.wallpapers"
 
 echo "installing qutebrowser dots..."
 install_dots "${DOTS_DIR}/config/qutebrowser" "${HOME}/.config/qutebrowser"
