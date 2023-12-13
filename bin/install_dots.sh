@@ -78,6 +78,7 @@ echo "installing emacs dots..."
 install_dots "${DOTS_DIR}/config/emacs" "${HOME}/.config/emacs"
 
 echo "installing window manager dots..."
+install_dots "${DOTS_DIR}/config/i3"    "${HOME}/.config/i3"
 install_dots "${DOTS_DIR}/config/qtile" "${HOME}/.config/qtile"
 install_dots "${DOTS_DIR}/dwm"          "${HOME}/.dwm"
 
