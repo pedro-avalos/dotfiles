@@ -154,7 +154,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # screen locker
-set $cmd_lock "light-locker-command --lock && sleep 1"
+set $cmd_lock light-locker-command --lock && sleep 1
 
 # shutdown, reboot, lock screen
 set $mode_system System: [l]ock, [e]xit, [s]uspend, [h]ibernate, [r]eboot, [Shift+s]hutdown
