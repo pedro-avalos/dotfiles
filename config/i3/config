@@ -10,7 +10,7 @@ font pango:DejaVu Sans Mono 8
 
 # startup programs
 exec --no-startup-id picom --daemon
-exec --no-startup-id light-locker &
+exec --no-startup-id light-locker --lock-on-lid &
 exec --no-startup-id redshift-gtk &
 exec --no-startup-id dunst &
 exec --no-startup-id nm-applet
