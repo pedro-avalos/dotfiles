@@ -7,6 +7,9 @@
 [[ -d ~/.config/nvim/bin ]] && PATH="${PATH}:~/.config/nvim/bin"
 [[ -d ~/.emacs.d/bin ]] && PATH="${PATH}:~/.emacs.d/bin"
 
+[[ -d ~/.meteor ]] && PATH="${PATH}:~/.meteor"
+[[ -d /opt/android-studio/bin ]] && PATH="${PATH}:/opt/android-studio/bin"
+
 export PATH
 
 # vim: ft=bash
