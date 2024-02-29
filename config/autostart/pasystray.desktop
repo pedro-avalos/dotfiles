@@ -7,5 +7,5 @@ Exec=pasystray
 StartupNotify=true
 OnlyShowIn=i3;
 Hidden=false
-Categories=AudioVideo;Audio;
+Categories=AudioVideo;Audio;GTK;Utility;TrayIcon;
 Keywords=pulseaudio;tray;system tray;applet;volume;

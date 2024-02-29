@@ -7,4 +7,5 @@ Exec=nm-applet
 Terminal=false
 NoDisplay=true
 NotShowIn=KDE;GNOME;
+Categories=GTK;Utility;TrayIcon;
 X-GNOME-UsesNotifications=true
