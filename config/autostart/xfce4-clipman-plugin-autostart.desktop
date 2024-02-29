@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=XFCE Clipman
+GenericName=Clipboard Manager
+Icon=xfce4-clipman
+TryExec=xfce4-clipman
+Exec=xfce4-clipman
+RunHook=0
+StartupNotify=false
+OnlyShowIn=XFCE;i3;
+Terminal=false
+Hidden=false

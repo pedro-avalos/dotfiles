@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Network
+Comment=Manage your network connections
+Icon=nm-device-wireless
+Exec=nm-applet
+Terminal=false
+NoDisplay=true
+NotShowIn=KDE;GNOME;
+X-GNOME-UsesNotifications=true

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=PulseAudio System Tray
+Comment=An Applet for PulseAudio
+Icon=pasystray
+Exec=pasystray
+StartupNotify=true
+OnlyShowIn=i3;
+Hidden=false
+Categories=AudioVideo;Audio;
+Keywords=pulseaudio;tray;system tray;applet;volume;
