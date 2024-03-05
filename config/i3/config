@@ -10,7 +10,6 @@ font pango:DejaVu Sans Mono 8
 
 # startup programs
 exec --no-startup-id picom --daemon
-exec --no-startup-id light-locker --lock-on-lid &
 exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 exec_always --no-startup-id feh --bg-scale ~/.wallpapers/carbon-dark.png
