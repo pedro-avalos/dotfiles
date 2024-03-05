@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Proton VPN
+GenericName=VPN Client
 Comment=Proton VPN GUI client
 Exec=protonvpn-app
 Icon=proton-vpn-logo
