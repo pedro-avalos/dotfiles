@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=XFCE Clipman
+Comment=Clipboard history utility
 GenericName=Clipboard Manager
 Icon=xfce4-clipman-plugin
 TryExec=xfce4-clipman
