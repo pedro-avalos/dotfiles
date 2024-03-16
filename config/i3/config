@@ -12,8 +12,9 @@ font pango:IBM Plex Mono 8
 exec --no-startup-id picom --daemon
 exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id gnome-keyring-daemon --start --components=secrets
-exec_always --no-startup-id feh --bg-scale ~/.wallpapers/carbon-dark.png
 exec --no-startup-id dex --autostart --environment i3
+exec_always --no-startup-id feh --bg-scale ~/.wallpapers/carbon-dark.png
+exec_always --no-startup-id setxkbmap -layout us
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -173,6 +174,20 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
+# language/keyboard change
+set $mode_lang Lang: [e]nglish, e[s]pañol, [n]orsk
+mode "$mode_lang" {
+        bindsym e exec --no-startup-id setxkbmap -layout us, mode "default"
+        bindsym s exec --no-startup-id setxkbmap -layout es, mode "default"
+        bindsym n exec --no-startup-id setxkbmap -layout no, mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+m mode "$mode_lang"
+
 # border, no titlebar
 default_border pixel 1
 default_floating_border pixel 1
@@ -189,7 +204,7 @@ client.background       #161616
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command         i3status
+        status_command         ~/.config/i3/i3script.sh
         position               bottom
         mode                   dock
         workspace_buttons      yes
