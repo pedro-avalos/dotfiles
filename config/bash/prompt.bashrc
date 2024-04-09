@@ -144,6 +144,18 @@ function __set_ps1() {
 
 		local pre_ps1="${icon_ps1}${child_ps1}"
 
+		# Check for a virtual environment
+		if [[ -n "${VIRTUAL_ENV}" ]] && [[ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]]
+		then
+			if [[ "`basename \"${VIRTUAL_ENV}\"`" = "__" ]] ; then
+				# Aspen magic directories, whatever these are...
+				# See http://www.zetadev.com/software/aspen/
+				pre_ps1="[`basename \`dirname \"${VIRTUAL_ENV}\"\``] ${pre_ps1}"
+			else
+				pre_ps1="(`basename \"${VIRTUAL_ENV}\"`) ${pre_ps1}"
+			fi
+		fi
+
 		# If root, make the following bold
 		# Show the user and host: `<user>@<host>:`
 		[[ ${EUID} -eq 0 ]] && pre_ps1+="${bold}"
