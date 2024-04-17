@@ -13,6 +13,10 @@ path+=($HOME/bin $HOME/.bin $HOME/.local/bin)
 path+=($XDG_CONFIG_HOME/nvim/bin $XDG_CONFIG_HOME/emacs/bin)
 export PATH
 
+typeset -U xdg_data_dirs XDG_DATA_DIRS
+path+=(/var/lib/snapd/desktop)
+export XDG_DATA_DIRS
+
 export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
 
 # vim: ft=zsh
