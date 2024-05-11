@@ -4,7 +4,6 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:=$HOME/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:=$HOME/.cache}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:=$HOME/.local/state}"
-export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/snapd/desktop/"
 export VISUAL='vim'
 export EDITOR='vim'
 export SUDO_EDITOR='vim'
@@ -14,8 +13,8 @@ export SUDO_EDITOR='vim'
 
 [[ ! -d "${XDG_CACHE_HOME}/bash" ]] && mkdir -p "${XDG_CACHE_HOME}/bash"
 export HISTFILE="${XDG_CACHE_HOME}/bash/history"
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=1000
+export HISTFILESIZE=2000
 export HISTCONTROL=ignoreboth
 
 shopt -s histappend autocd checkwinsize
@@ -36,8 +35,12 @@ if [[ -d "${XDG_CONFIG_HOME}/bash/extra" ]] ; then
 fi
 
 # Use bash-completion, if available
-if [[ ${PS1} && -f /usr/share/bash-completion/bash_completion ]] ; then
-		source /usr/share/bash-completion/bash_completion
+if ! shopt -oq posix; then
+  if [[ -f /usr/share/bash-completion/bash_completion ]] ; then
+    source /usr/share/bash-completion/bash_completion
+  elif [[ -f /etc/bash_completion ]] ; then
+    source /etc/bash_completion
+  fi
 fi
 
 # vim: ft=bash
