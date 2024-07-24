@@ -1,0 +1,38 @@
+# Color scheme based on the Carbon Design System (Gray 100)
+# https://ibm.com/design/language/color
+
+[colors.bright]
+black = "#000000"
+blue = "#0f62fe"
+cyan = "#33b1ff"
+green = "#24a148"
+magenta = "#d12771"
+red = "#da1e28"
+white = "#ffffff"
+yellow = "#f1c21b"
+
+[colors.footer_bar]
+background = "#262626"
+foreground = "#f4f4f4"
+
+[colors.normal]
+black = "#161616"
+blue = "#4589ff"
+cyan = "#bae6ff"
+green = "#42be65"
+magenta = "#ff7eb6"
+red = "#fa4d56"
+white = "#f4f4f4"
+yellow = "#f1c21b"
+
+[colors.primary]
+background = "#161616"
+foreground = "#f4f4f4"
+
+[colors.search.matches]
+background = "#8d8d8d"
+foreground = "CellBackground"
+
+[colors.selection]
+background = "#8d8d8d"
+text = "#161616"

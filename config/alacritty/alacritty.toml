@@ -1,0 +1,12 @@
+import = ["/home/pavalos/.config/alacritty/themes/carbon-dark.toml"]
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1.66"
+
+[font]
+size = 11
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control|Shift"
