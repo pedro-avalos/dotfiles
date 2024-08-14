@@ -1,5 +1,6 @@
 # File: .inputrc
 
+set colored-stats on
 set editing-mode vi
 
 $if mode=vi
