@@ -34,6 +34,7 @@ rsync_dots ()
 {
     rsync --exclude ".git/" \
         --exclude ".gitmodules/" \
+        --exclude ".gitlab-ci.yml" \
         --exclude ".vscode/" \
         --exclude ".mypy_cache/" \
         --exclude "bootstrap.sh" \
