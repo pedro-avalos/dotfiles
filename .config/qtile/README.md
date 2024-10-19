@@ -7,35 +7,34 @@ This is my qtile configuration.
 Some of the requirements are optional depending on whether you will use my
 configuration for xorg or wayland.
 
-- `xorg` &/or `wayland`
-- `qtile`
-- `python-pywlroots` (wayland)
-- `python-dbus-next`
-- `python-pyxdg`
-- FONTS:
-    - `ttf-ibm-plex`
-    - `ttf-ibmplex-mono-nerd`
-- TERMINAL: `kitty`
-- LOCKER: `light-locker`
-- LAUNCHER: `rofi` (xorg) &/or `wofi` (wayland)
-- SCREENSHOTS: `xfce4-screenshooter`
-- VOLUME:
-    - `pamixer`
-    - `pavucontrol`
-- STARTUP:
-    - `gnome-keyring`
-    - `network-manager-applet`
-    - `blueman`
-    - `dunst`
-    - `emacs`
-    - `redshift` (xorg) &/or `gammastep` (wayland)
-    - `picom` (xorg)
-    - `xfce4-clipman-plugin`
+| Package                  | Required in Xorg | Required in Wayland | Note                       |
+| ------------------------ | :--------------: | :-----------------: | -------------------------- |
+| `qtile`                  |        ✅        |         ✅          |                            |
+| `pywlroots`              |                  |         ✅          |                            |
+| `python3-dbus-next`      |        ✅        |         ✅          |                            |
+| `python3-xdg`            |        ✅        |         ✅          |                            |
+| `fonts-ibm-plex`         |        ✅        |         ✅          | Default font               |
+| IBM Plex Mono            |        ✅        |         ✅          | Default icons fonts        |
+| `kitty`                  |        ✅        |         ✅          | Terminal                   |
+| `light-locker`           |        ✅        |         ✅          | Lock screen functionality  |
+| `rofi`                   |        ✅        |                     | Application launcher       |
+| `wofi`                   |                  |         ✅          | Application launcher       |
+| `xfce4-screenshooter`    |        ✅        |         ✅          | Screenshots utility        |
+| `xfce4-clipman`          |        ✅        |         ✅          | Clipboard utility          |
+| `pamixer`                |        ✅        |         ✅          | Volume management utility  |
+| `pavucontrol`            |        ✅        |         ✅          | Volume management GUI      |
+| `gnome-keyring`          |        ✅        |         ✅          | Keyring                    |
+| `network-manager-applet` |        ✅        |         ✅          | Network management utility |
+| `blueman`                |        ✅        |         ✅          | Bluetooth utility          |
+| `dunst`                  |        ✅        |         ✅          | Notifications daemon       |
+| `redshift`               |        ✅        |                     | Blue light filter          |
+| `gammastep`              |                  |         ✅          | Blue light filter          |
+| `picom`                  |        ✅        |                     | X11 compositor             |
 
 ## Keybindings
 
 | Keybinding          | Action                               |
-|---------------------|--------------------------------------|
+| ------------------- | ------------------------------------ |
 | `SUPER+CTRL+Q`      | Close focused window                 |
 | `SUPER+F`           | Toggle fullscreen for focused window |
 | `SUPER+SPACE`       | Toggle floating for focused window   |
