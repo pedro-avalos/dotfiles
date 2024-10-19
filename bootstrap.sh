@@ -38,6 +38,7 @@ rsync_dots ()
         --exclude ".mypy_cache/" \
         --exclude "bootstrap.sh" \
         --exclude "README.md" \
+        --exclude "LICENSE" \
         -avgh --no-perms . "${HOME}"
         
     source "${HOME}/.bash_profile"
