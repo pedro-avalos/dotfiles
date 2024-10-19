@@ -10,6 +10,7 @@ include:
       shellcheck-opts: -e SC2034 -e SC1091
   - component: $CI_SERVER_FQDN/to-be-continuous/python/gitlab-ci-python@7.3.0
     inputs:
+      image: registry.hub.docker.com/library/python:3-bookworm
       project-dir: .config/qtile
       ruff-enabled: true
       sbom-disabled: true
