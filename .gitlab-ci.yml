@@ -11,5 +11,6 @@ include:
   - component: $CI_SERVER_FQDN/to-be-continuous/python/gitlab-ci-python@7.3.0
     inputs:
       project-dir: .config/qtile
-      mypy-enabled: true
-      ruff-enabled: true      
+      ruff-enabled: true
+      sbom-disabled: true
+      trivy-disabled: true

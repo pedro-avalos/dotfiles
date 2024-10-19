@@ -9,7 +9,7 @@ from libqtile.config import Rule, Screen
 from libqtile.lazy import lazy
 from src.bindings import make_keys, make_mouse
 from src.groups import make_groups
-from src.hooks import start_once  # pyright: ignore
+from src.hooks import start_once  # noqa: F401
 from src.layouts import make_floating_layout, make_layouts
 from src.utils import paths
 
