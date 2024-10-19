@@ -4,10 +4,11 @@ Some configuration files I use in my Linux installations.
 
 ## Installation
 
-1. Clone repository to `~/.dotfiles`.
-2. Run `~/.dotfiles/bin/install_dots.sh`.
-3. If there are any errors (i.e. folders already existing, you may delete
-    existing folders and re-run step 2 to ensure dotfiles are installed).
+```shell
+git clone --recurse-submodules https://gitlab.com/pedro-avalos/dotfiles.git
+cd dotfiles
+./bootstrap.sh
+```
 
 ## Documentation
 

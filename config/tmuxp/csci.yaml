@@ -1,7 +1,0 @@
-# General tmux configuration for Comp Sci work
-session_name: csci
-
-windows:
-  - window_name: local
-  - window_name: cslab
-  - window_name: man

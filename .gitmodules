@@ -1,8 +1,8 @@
 [submodule "vim"]
-	path = vim
+	path = .vim
 	url = https://gitlab.com/pedro-avalos/nvim.git
 	branch = vimscript
-[submodule "config/nvim"]
-	path = config/nvim
+[submodule "nvim"]
+	path = .config/nvim
 	url = https://gitlab.com/pedro-avalos/nvim.git
 	branch = lua
