@@ -1,0 +1,14 @@
+include:
+  - component: gitlab.com/dependabot-gitlab/dependabot-standalone/template@3.27.0
+    inputs:
+      gitlab_access_token: $DEPENDABOT_GITLAB_ACCESS_TOKEN
+  - component: $CI_SERVER_FQDN/components/secret-detection/secret-detection@1.1.2
+  - component: $CI_SERVER_FQDN/to-be-continuous/bash/gitlab-ci-bash@3.5.2
+    inputs:
+      bats-enabled: false
+      shellcheck-files: .bashrc .bash_profile .bash_aliases **/*.bashrc **/*.sh
+  - component: $CI_SERVER_FQDN/to-be-continuous/python/gitlab-ci-python@7.3.0
+    inputs:
+      project-dir: .config/qtile
+      mypy-enabled: true
+      ruff-enabled: true      
