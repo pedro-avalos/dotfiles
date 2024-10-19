@@ -1,4 +1,3 @@
 qtile
-pywlroots
 dbus-next
 pyxdg
