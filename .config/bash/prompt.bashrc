@@ -147,12 +147,12 @@ function __set_ps1() {
 		# Check for a virtual environment
 		if [[ -n "${VIRTUAL_ENV}" ]] && [[ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]]
 		then
-			if [[ "`basename \"${VIRTUAL_ENV}\"`" = "__" ]] ; then
+			if [[ "$(basename "${VIRTUAL_ENV}")" = "__" ]] ; then
 				# Aspen magic directories, whatever these are...
 				# See http://www.zetadev.com/software/aspen/
-				pre_ps1="[`basename \`dirname \"${VIRTUAL_ENV}\"\``] ${pre_ps1}"
+				pre_ps1="[$(basename "$(dirname "${VIRTUAL_ENV}")")] ${pre_ps1}"
 			else
-				pre_ps1="(`basename \"${VIRTUAL_ENV}\"`) ${pre_ps1}"
+				pre_ps1="($(basename "${VIRTUAL_ENV}")) ${pre_ps1}"
 			fi
 		fi
 
@@ -163,7 +163,7 @@ function __set_ps1() {
 		[[ ${EUID} -eq 0 ]] && pre_ps1+="${sgr0}"
 
 		# Add the current directory (color matched to icon)
-		pre_ps1+="${_bold}"
+		pre_ps1+="${bold}"
 		if   [[ ${EUID} -eq 0 ]]        ; then pre_ps1+="${root_color}"
 		elif [[ -n ${SSH_CONNECTION} ]] ; then pre_ps1+="${ssh_color}"
 		elif [[ -n ${TMUX} ]]           ; then pre_ps1+="${tmux_color}"

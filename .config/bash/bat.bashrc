@@ -8,6 +8,7 @@ if [[ -f "/etc/debian_version" ]] ; then
 fi
 
 # Check if bat exists in the first place
+# shellcheck disable=SC2139
 ! command -v "${bat_cmd}" &> /dev/null && return
 
 # Use bat for man pages
@@ -15,6 +16,7 @@ export MANROFFOPT='-c'
 export MANPAGER="sh -c 'col -bx | ${bat_cmd} --language=man --plain'"
 
 # Interprets stdin as a help menu; displays it with highlighting
+# shellcheck disable=SC2139
 alias bathelp="${bat_cmd} --plain --language=help"
 
 # Runs a command with the `--help` option and displays it using `bathelp`

@@ -6,7 +6,8 @@ include:
   - component: $CI_SERVER_FQDN/to-be-continuous/bash/gitlab-ci-bash@3.5.2
     inputs:
       bats-enabled: false
-      shellcheck-files: .bashrc .bash_profile .bash_aliases **/*.bashrc **/*.sh
+      shellcheck-files: bootstrap.sh .bashrc .bash_profile .bash_aliases .config/bash/*.bashrc
+      shellcheck-opts: -e SC2034 -e SC1091
   - component: $CI_SERVER_FQDN/to-be-continuous/python/gitlab-ci-python@7.3.0
     inputs:
       project-dir: .config/qtile

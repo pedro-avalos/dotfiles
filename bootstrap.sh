@@ -10,7 +10,8 @@ usage ()
 
 # Default option values
 unset FORCE
-cd "$(dirname "${BASH_SOURCE}")"
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+pwd
 
 # Parse command-line options
 while getopts "hfd:" opt ; do
@@ -33,7 +34,8 @@ done
 rsync_dots ()
 {
     rsync --exclude ".git/" \
-        --exclude ".gitmodules/" \
+        --exclude ".gitmodules" \
+        --exclude ".gitignore" \
         --exclude ".gitlab-ci.yml" \
         --exclude ".vscode/" \
         --exclude ".mypy_cache/" \
@@ -51,9 +53,9 @@ git pull --recurse-submodules
 if [[ "${FORCE}" ]] ; then
     rsync_dots
 else
-    read -p "This may overwrite the existing configuration. Are you sure? [y/N] " -n 1
+    read -r -p "This may overwrite the existing configuration. Are you sure? [y/N] " -n 1
     echo
-    if [[ REPLY =~ ^[Yy]$ ]] ; then
+    if [[ "${REPLY}" =~ ^[Yy]$ ]] ; then
         rsync_dots
     else
         exit 1
