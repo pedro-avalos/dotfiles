@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Bootstraps my dotfiles
+# Inspired by https://github.com/mathiasbynens/dotfiles
 
 # Show help menu
 usage ()
@@ -33,15 +35,17 @@ done
 # Helper function to sync dotfiles
 rsync_dots ()
 {
-    rsync --exclude ".git/" \
-        --exclude ".gitmodules" \
-        --exclude ".gitignore" \
-        --exclude ".gitlab-ci.yml" \
-        --exclude ".vscode/" \
-        --exclude ".mypy_cache/" \
+    rsync --exclude "**/.git/" \
+        --exclude "**/.gitmodules" \
+        --exclude "**/.git" \
+        --exclude "**/.gitignore" \
+        --exclude "**/.gitlab-ci.yml" \
+        --exclude "**/.vscode/" \
+        --exclude "**/README.md" \
+        --exclude "**/LICENSE" \
+        --exclude "**/.mypy_cache" \
+        --exclude "**/.ruff_cache" \
         --exclude "bootstrap.sh" \
-        --exclude "README.md" \
-        --exclude "LICENSE" \
         -avgh --no-perms . "${HOME}"
         
     source "${HOME}/.bash_profile"
