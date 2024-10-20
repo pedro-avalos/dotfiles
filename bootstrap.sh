@@ -46,8 +46,18 @@ rsync_dots ()
         --exclude "**/.mypy_cache" \
         --exclude "**/.ruff_cache" \
         --exclude "bootstrap.sh" \
+        --exclude ".config/VSCodium/extensions.txt" \
         -avgh --no-perms . "${HOME}"
-        
+
+    if command -v codium > /dev/null ; then
+        echo -e "\nInstalling VSCodium extensions"
+        while IFS= read -r line ; do
+            echo "${line}"
+            codium --install-extension "${line}" > /dev/null
+        done < <(grep -v '^ *#' < .config/VSCodium/extensions.txt)
+    fi
+
+    # shellcheck source=.bash_profile
     source "${HOME}/.bash_profile"
 }
 
