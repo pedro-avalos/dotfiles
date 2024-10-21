@@ -1,3 +1,4 @@
+3timeslazy.vscodium-devpodcontainers
 charliermarsh.ruff
 chrisjsewell.myst-tml-syntax
 dawidd6.debian-vscode
