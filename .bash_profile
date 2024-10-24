@@ -21,4 +21,11 @@ export HISTCONTROL=ignoreboth
 
 export PATH
 
+# Source bashrc if in interactive shell
+if [[ -n "${BASH_VERSION}" && -n "${PS1}" ]] ; then
+	if [[ -f "${HOME}/.bashrc" ]] ; then
+		source "${HOME}/.bashrc"
+	fi
+fi
+
 # vim: ft=bash
