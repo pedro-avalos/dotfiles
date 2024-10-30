@@ -11,6 +11,9 @@ fi
 # Reload bash configuration
 alias resource='source ~/.bashrc'
 
+# Snapcraft
+alias lxc-snapcraft='lxc --project snapcraft'
+
 # Commands
 alias ls='ls --color=auto -F'
 alias l='ls --color=auto -CF'
