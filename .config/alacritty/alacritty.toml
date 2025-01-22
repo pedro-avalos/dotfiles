@@ -1,4 +1,3 @@
-[general]
 import = ["/home/pavalos/.config/alacritty/themes/carbon-dark.toml"]
 
 [env]
