@@ -40,6 +40,7 @@ rsync_dots ()
         --exclude "**/.git" \
         --exclude "**/.gitignore" \
         --exclude "**/.gitlab-ci.yml" \
+        --exclude "**/.pre-commit-config.yaml" \
         --exclude "**/.vscode/" \
         --exclude "**/README.md" \
         --exclude "**/LICENSE" \
