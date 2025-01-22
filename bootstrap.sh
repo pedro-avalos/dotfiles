@@ -5,21 +5,25 @@
 # Show help menu
 usage ()
 {
-    1>&2 printf -- "Usage: %s [-hf]\n" "$0"
+    1>&2 printf -- "Usage: %s [-hfx]\n" "$0"
     1>&2 printf -- "\t-h: Show help menu\n"
     1>&2 printf -- "\t-f: Force install\n"
+    1>&2 printf -- "\t-x: Install codium extensions\n"
 }
 
 # Default option values
-unset FORCE
+unset FORCE CODIUM_EXTENSIONS
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 pwd
 
 # Parse command-line options
-while getopts "hfd:" opt ; do
+while getopts "hfx" opt ; do
     case "${opt}" in
         f)
             FORCE=1
+            ;;
+        x)
+            CODIUM_EXTENSIONS=1
             ;;
         h)
             usage
@@ -50,12 +54,16 @@ rsync_dots ()
         --exclude ".config/VSCodium/extensions.txt" \
         -avgh --no-perms . "${HOME}"
 
-    if command -v codium > /dev/null ; then
-        echo -e "\nInstalling VSCodium extensions"
-        while IFS= read -r line ; do
-            echo "${line}"
-            codium --install-extension "${line}" > /dev/null
-        done < <(grep -v '^ *#' < .config/VSCodium/extensions.txt)
+    if [[ "${CODIUM_EXTENSIONS}" ]] ; then
+        if command -v codium > /dev/null ; then
+            echo -e "\nInstalling VSCodium extensions"
+            while IFS= read -r line ; do
+                echo "${line}"
+                codium --install-extension "${line}" > /dev/null
+            done < <(grep -v '^ *#' < .config/VSCodium/extensions.txt)
+        else
+            echo -e "\nVSCodium is not installed"
+        fi
     fi
 
     # shellcheck source=.bash_profile
@@ -77,7 +85,6 @@ else
     fi
 fi
 
-unset FORCE
-unset rsync_dots
+unset CODIUM_EXTENSIONS FORCE rsync_dots
 
 # vim: ft=bash
