@@ -5,7 +5,7 @@ pulse_volume() {
 		VOL=$( pamixer --get-volume )
 
 		printf -- "%s" "${SEPL}"
-		if [ "${STATUS}" = "true" ] ; then 
+		if [ "${STATUS}" = "true" ] ; then
 				printf -- "MUTE"
 		else
 				printf -- "VOL %s%%" "${VOL}"

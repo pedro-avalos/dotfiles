@@ -548,6 +548,6 @@ I prefer to use a tab width of 2 character.
 	(setq-default indent-tabs-mode t)
 	(setq-default tab-width 2)
 	(setq indent-line-function 'insert-tab)
-	(setq org-src-preserve-indentation nil 
+	(setq org-src-preserve-indentation nil
 				org-src-tab-acts-natively t)
 #+END_SRC

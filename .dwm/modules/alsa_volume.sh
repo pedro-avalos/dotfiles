@@ -5,7 +5,7 @@ alsa_volume() {
 		VOL=$( amixer sget Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/" )
 
 		printf -- "%s" "${SEPL}"
-		if [ "${STATUS}" = "off" ] ; then 
+		if [ "${STATUS}" = "off" ] ; then
 				printf -- "MUTE"
 		else
 				printf -- "VOL %s%%" "${VOL}"

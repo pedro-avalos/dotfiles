@@ -18,7 +18,7 @@
     (oxocarbon-base06 "#ffffff")
     (oxocarbon-base07 "#08bdba")
     (oxocarbon-base08 "#3ddbd9")
-    (oxocarbon-base09 "#78a9ff") 
+    (oxocarbon-base09 "#78a9ff")
     (oxocarbon-base10 "#ee5396")
     (oxocarbon-base11 "#33b1ff")
     (oxocarbon-base12 "#ff7eb6")
@@ -27,7 +27,7 @@
     (oxocarbon-base15 "#82cfff"))
 
     ;; Specifications for Emacs faces.
-    ;; Simpler than deftheme, just specify a face name and 
+    ;; Simpler than deftheme, just specify a face name and
     ;; a plist of face definitions (nested for :underline, :box etc.)
    (
     (default (:foreground oxocarbon-fg :background oxocarbon-bg)) ;; background and foreground
@@ -45,9 +45,9 @@
     (font-lock-function-name-face (:foreground oxocarbon-base08)) ;; function names
     (font-lock-preprocessor-face (:foreground oxocarbon-base09))
     (font-lock-doc-face (:foreground oxocarbon-base14))
-    
+
     (corfu-current (:background oxocarbon-base02 :foreground oxocarbon-base08))
-    
+
     ;; END ;;
 
     ;; General ;;
@@ -80,7 +80,7 @@
     (ivy-minibuffer-match-face-4 (:foreground oxocarbon-base08))
     ;; END ;;
 
-    
+
     )
 
 
@@ -103,8 +103,8 @@
    ;; 				   ,oxocarbon-base14
    ;; 				   ,oxocarbon-base15
    ;; 				   ]))
-   
-   
+
+
     )
 
 (provide-theme 'oxocarbon) ;; theme ends here

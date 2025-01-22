@@ -20,3 +20,4 @@ repos:
     hooks:
       - id: shellcheck
         args: [ -x ]
+        files: '^.*\.(sh|bashrc|bash_profile|bash_aliases)$'
