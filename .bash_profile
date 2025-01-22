@@ -11,7 +11,6 @@ eval "$(gh completion -s bash)"
 # Source bashrc if in interactive shell
 if [[ -n "${BASH_VERSION}" && -n "${PS1}" ]] ; then
 	if [[ -f "${HOME}/.bashrc" ]] ; then
-		# shellcheck source=.bashrc
 		source "${HOME}/.bashrc"
 	fi
 fi

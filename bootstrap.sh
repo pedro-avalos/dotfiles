@@ -66,7 +66,6 @@ rsync_dots ()
         fi
     fi
 
-    # shellcheck source=.bash_profile
     source "${HOME}/.bash_profile"
 }
 

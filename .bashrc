@@ -23,25 +23,16 @@ export PATH
 
 shopt -s histappend autocd checkwinsize
 
-# shellcheck source=.bash_aliases
 source "${HOME}/.bash_aliases"
-
-# shellcheck source=.config/bash/bat.bashrc
 source "${XDG_CONFIG_HOME}/bash/bat.bashrc"
-
-# shellcheck source=.config/bash/pacman.bashrc
 source "${XDG_CONFIG_HOME}/bash/pacman.bashrc"
-
-# shellcheck source=.config/bash/prompt.bashrc
 source "${XDG_CONFIG_HOME}/bash/prompt.bashrc"
 
 # Use bash-completion, if available
 if ! shopt -oq posix; then
 	if [[ -f /usr/share/bash-completion/bash_completion ]] ; then
-		# shellcheck disable=SC1091
 		source /usr/share/bash-completion/bash_completion
 	elif [[ -f /etc/bash_completion ]] ; then
-		# shellcheck disable=SC1091
 		source /etc/bash_completion
 	fi
 fi
