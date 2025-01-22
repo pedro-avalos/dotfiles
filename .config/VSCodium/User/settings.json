@@ -1,28 +1,35 @@
 {
-  "git.autofetch": true,
-  "editor.rulers": [80, 120],
-  "debug.console.fontSize": 12,
-  "terminal.integrated.fontSize": 12,
-  "githubPullRequests.pullBranch": "never",
-  "redhat.telemetry.enabled": false,
-  "workbench.iconTheme": "vscode-icons",
-  "notebook.formatOnSave.enabled": true,
-  "notebook.codeActionsOnSave": {
-    "notebook.source.fixAll": "explicit",
-    "notebook.source.organizeImports": "explicit"
-  },
-  "[python]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
-      "source.organizeImports": "explicit"
-    }
-  },
-  "[jsonc]": {
+  "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  },
+  "debug.console.fontSize": 12,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "git.autofetch": true,
+  "githubPullRequests.pullBranch": "never",
+  "notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": "explicit",
+    "notebook.source.organizeImports": "explicit"
+  },
+  "notebook.formatOnSave.enabled": true,
+  "redhat.telemetry.enabled": false,
+  "ruff.showNotifications": "onError",
+  "terminal.integrated.fontSize": 12,
+  "workbench.iconTheme": "vscode-icons"
 }
