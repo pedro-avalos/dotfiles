@@ -8,6 +8,7 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:=$HOME/.local/state}"
 # Source bashrc if in interactive shell
 if [[ -n "${BASH_VERSION}" && -n "${PS1}" ]] ; then
 	if [[ -f "${HOME}/.bashrc" ]] ; then
+		# shellcheck source=.bashrc
 		source "${HOME}/.bashrc"
 	fi
 fi

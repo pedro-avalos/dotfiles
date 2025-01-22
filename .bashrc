@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:=$HOME/.local/share}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:=$HOME/.cache}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:=$HOME/.local/state}"
 
 export VISUAL='vim'
 export EDITOR='vim'
@@ -19,16 +23,25 @@ export PATH
 
 shopt -s histappend autocd checkwinsize
 
+# shellcheck source=.bash_aliases
 source "${HOME}/.bash_aliases"
+
+# shellcheck source=.config/bash/bat.bashrc
 source "${XDG_CONFIG_HOME}/bash/bat.bashrc"
+
+# shellcheck source=.config/bash/pacman.bashrc
 source "${XDG_CONFIG_HOME}/bash/pacman.bashrc"
+
+# shellcheck source=.config/bash/prompt.bashrc
 source "${XDG_CONFIG_HOME}/bash/prompt.bashrc"
 
 # Use bash-completion, if available
 if ! shopt -oq posix; then
 	if [[ -f /usr/share/bash-completion/bash_completion ]] ; then
+		# shellcheck disable=SC1091
 		source /usr/share/bash-completion/bash_completion
 	elif [[ -f /etc/bash_completion ]] ; then
+		# shellcheck disable=SC1091
 		source /etc/bash_completion
 	fi
 fi
