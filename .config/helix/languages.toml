@@ -5,6 +5,8 @@ args = ["server"]
 [[language]]
 name = "bash"
 indent = { tab-width = 4, unit = "\t" }
+formatter = { command = "shfmt" }
+auto-format = true
 
 [[language]]
 name = "c"
