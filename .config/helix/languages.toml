@@ -1,0 +1,24 @@
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "\t" }
+
+[[language]]
+name = "c"
+file-types = ["c", "h"]
+formatter = { command = "clang-format" }
+auto-format = true
+
+[[language]]
+name = "python"
+language-servers = ["ruff"]
+formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
+auto-format = true
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+auto-format = true

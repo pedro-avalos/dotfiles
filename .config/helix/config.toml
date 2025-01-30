@@ -1,0 +1,26 @@
+theme = "adwaita-dark"
+
+[editor]
+mouse = true
+rulers = [80, 120]
+cursorline = true
+bufferline = "always"
+
+[editor.file-picker]
+hidden = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+character = "⸽"
+render = true
+
+[editor.soft-wrap]
+enable = true
+wrap-indicator = "↩ "
+
+[editor.statusline]
+center = ["version-control"]
