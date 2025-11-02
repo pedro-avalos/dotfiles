@@ -1,4 +1,2 @@
 mypy
 ruff
-black
-isort
