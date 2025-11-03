@@ -7,6 +7,7 @@ from libqtile import qtile, widget
 from libqtile.bar import Bar
 from libqtile.config import Rule, Screen
 from libqtile.lazy import lazy
+
 from src.bindings import make_keys, make_mouse
 from src.groups import make_groups
 from src.hooks import start_once  # noqa: F401
