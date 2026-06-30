@@ -1,0 +1,43 @@
+name: Test Shell
+permissions:
+  contents: read
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/test_shell.yml
+      - .bash_aliases
+      - .bash_profile
+      - .bashrc
+      - .config/bash/*.bashrc
+      - bootstrap.sh
+  pull_request:
+    paths:
+      - .github/workflows/test_shell.yml
+      - .bash_aliases
+      - .bash_profile
+      - .bashrc
+      - .config/bash/*.bashrc
+      - bootstrap.sh
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install shellcheck
+        run: sudo apt-get -q install -y shellcheck
+      - name: Run shellcheck
+        run: |
+          shellcheck -e SC2034 -e SC1091 \
+            .bash_aliases \
+            .bash_profile \
+            .bashrc \
+            .config/bash/*.bashrc \
+            bootstrap.sh

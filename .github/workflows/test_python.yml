@@ -1,0 +1,46 @@
+name: Test Python
+permissions:
+  contents: read
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/test_python.yml
+      - .config/qtile/**
+  pull_request:
+    paths:
+      - .github/workflows/test_python.yml
+      - .config/qtile/**
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  qtile:
+    name: Qtile
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.12, 3.13]
+    defaults:
+      run:
+        working-directory: .config/qtile
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+      - name: Linting
+        run: ruff check .
+      - name: Formatting
+        run: ruff format --check .
+      - name: Typing
+        run: mypy .
