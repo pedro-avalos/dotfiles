@@ -1,5 +1,9 @@
 import = ["/home/pavalos/.config/alacritty/themes/carbon-dark.toml"]
 
+[shell]
+program = "/usr/bin/tmux"
+args = ["-l"]
+
 [env]
 WINIT_X11_SCALE_FACTOR = "1.66"
 
