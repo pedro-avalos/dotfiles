@@ -24,6 +24,7 @@ alias egrep='grep --color=auto -E'
 alias fgrep='grep --color=auto -F'
 alias diff='diff --color=auto'
 alias ip='ip --color=auto'
+alias sshp='sshpass -e ssh'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
