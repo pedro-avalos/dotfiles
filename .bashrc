@@ -19,6 +19,7 @@ export HISTCONTROL=ignoreboth
 [[ -d "${HOME}/.bin" ]] && PATH="${PATH}:${HOME}/.bin"
 [[ -d "${HOME}/.local/bin" ]] && PATH="${PATH}:${HOME}/.local/bin"
 [[ -d "${HOME}/.meteor" ]] && PATH="${PATH}:${HOME}/.meteor"
+[[ -d "${HOME}/.gem/bin" ]] && PATH="${PATH}:${HOME}/.gem/bin"
 export PATH
 
 shopt -s histappend autocd checkwinsize
